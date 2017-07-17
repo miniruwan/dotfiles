@@ -1,38 +1,54 @@
 # Avoid printing name in prompt
 DEFAULT_USER='miniruwan'
 
-# Some variables to be used later in this file
-PLUGIN_ROOT_DIR='/Users/miniruwan/projects/temasys-webrtc-plugin'
-PLUGIN_BUILD_DIR_NAME='BUILD_AUTO'
+if [[ `uname` == 'Darwin' ]] then
+    PROJECT_DIR='~/projects'
+elif [[ `uname` == 'CYGWIN'* ]] then
+    PROJECT_DIR='/cygdrive/d/projects'
+else
+    echo "Unsupported OS"
+fi
 
 # Alias
-alias tp='cd $PLUGIN_ROOT_DIR/Tests/AdapterJS/tests; karma start --browsers Safari'
-alias cdt='cd $PLUGIN_ROOT_DIR'
-alias cdc='cd $PLUGIN_ROOT_DIR/plugin_src/temasys-webrtcplugin-configs'
-alias cda='cd $PLUGIN_ROOT_DIR/Tests/AdapterJS'
-alias cdp='cd ~/projects/'
-alias cdg='cd ~/projects/Google-WebRTC-Samples/'
-alias cdl='cd ~/Library/Application\ Support/TemWebRTCPlugin/logs'
+alias zshrc='vim $PROJECT_DIR/configs_mini/zshrc.txt'
+alias vimrc='vim $PROJECT_DIR/configs_mini/vimrc.vim'
+alias cdp='cd $PROJECT_DIR/'
+alias cdg='cd $PROJECT_DIR/Google-WebRTC-Samples/'
 alias cdw='cd ~/work'
 alias v='vim'
-alias zshrc='vim ~/projects/configs_mini/zshrc.txt'
-alias vimrc='vim ~/projects/configs_mini/vimrc.vim'
+
+# Some variables to be used later in this file
+PLUGIN_ROOT_DIR='$PROJECT_DIR/temasys-webrtc-plugin'
+PLUGIN_BUILD_DIR_NAME='BUILD_AUTO'
+
+alias tp='cd $PLUGIN_ROOT_DIR/Tests/AdapterJS/tests; karma start --browsers Safari'
+alias cdt='cd $PLUGIN_ROOT_DIR'
+alias cds='cd $PLUGIN_ROOT_DIR/plugin_src'
+alias cdc='cd $PLUGIN_ROOT_DIR/plugin_src/temasys-webrtcplugin-configs'
+alias cda='cd $PLUGIN_ROOT_DIR/Tests/AdapterJS'
 alias rmb='rm -rf $PLUGIN_ROOT_DIR/$PLUGIN_BUILD_DIR_NAME/'
 alias lastconfigure='vim `ls -t $PLUGIN_ROOT_DIR/$PLUGIN_BUILD_DIR_NAME/Testing/Temporary/LastConfigure* | head -1`'
 alias lastbuild='vim `ls -t $PLUGIN_ROOT_DIR/$PLUGIN_BUILD_DIR_NAME/Testing/Temporary/LastBuild* | head -1`'
-alias lsp='\
-    echo "----------------------- ~/Library/Internet Plug-Ins/ --------------------------"; \
-    ls -lt ~/Library/Internet\ Plug-Ins/; \
-    echo "------------------------ /Library/Internet Plug-Ins/ --------------------------"; \
-    ls -lt /Library/Internet\ Plug-Ins/'
-alias rmp='\
-    echo "++++++++++++++++++++++++++++++++ BEFORE ++++++++++++++++++++++++++++++++"; \
-    lsp; \
-    echo "++++++++++++++++++++++++++++++ DELETING... +++++++++++++++++++++++++++++"; \
-    rm -rf ~/Library/Internet\ Plug-Ins/npTemWebRTCPlugin.plugin/; \
-    sudo rm -rf /Library/Internet\ Plug-Ins/npTemWebRTCPlugin.plugin/; \
-    echo "+++++++++++++++++++++++++++++++++ AFTER +++++++++++++++++++++++++++++++"; \
-    lsp'
+
+if [[ `uname` == 'Darwin' ]] then
+    alias cdl='cd ~/Library/Application\ Support/TemWebRTCPlugin/logs'
+    alias lsp='\
+        echo "----------------------- ~/Library/Internet Plug-Ins/ --------------------------"; \
+        ls -lt ~/Library/Internet\ Plug-Ins/; \
+        echo "------------------------ /Library/Internet Plug-Ins/ --------------------------"; \
+        ls -lt /Library/Internet\ Plug-Ins/'
+    # uninstall plugin
+    alias up='\
+        echo "++++++++++++++++++++++++++++++++ BEFORE ++++++++++++++++++++++++++++++++"; \
+        lsp; \
+        echo "++++++++++++++++++++++++++++++ DELETING... +++++++++++++++++++++++++++++"; \
+        rm -rf ~/Library/Internet\ Plug-Ins/npTemWebRTCPlugin.plugin/; \
+        sudo rm -rf /Library/Internet\ Plug-Ins/npTemWebRTCPlugin.plugin/; \
+        echo "+++++++++++++++++++++++++++++++++ AFTER +++++++++++++++++++++++++++++++"; \
+        lsp'
+elif [[ `uname` == 'CYGWIN'* ]] then
+    alias cdl='cd /cygwindrive/c/Users/Miniruwan/AppData/LocalLow/TemWebRTCPlugin/logs'
+fi
 
 # echo plugin build directory (used in other functions in this file)
 function echoBuildProject
@@ -42,7 +58,6 @@ function echoBuildProject
         echo $PLUGIN_ROOT_DIR/$PLUGIN_BUILD_DIR_NAME/build_$1/projects/*
     else
         dirname $(dirname $(dirname $(dirname $(grep YAML_CPP_BINARY_DIR $PLUGIN_ROOT_DIR/$PLUGIN_BUILD_DIR_NAME/CMakeCache.txt | grep -o "\/.*"))))
-        #echo $PLUGIN_ROOT_DIR/$PLUGIN_BUILD_DIR_NAME/build_Temasys-universal-trial/projects/TemWebRTCPlugin
     fi
 }
 
@@ -68,7 +83,7 @@ function gruntpublish
 {
     cda
     grunt publish --pluginInfoRoot=`echoBuildProject $1`/gen/global/
-    cp publish/adapter.screenshare.js ~/projects/Google-WebRTC-Samples/src/js/adapter.screenshare.js && cp publish/adapter.debug.js ~/projects/Google-WebRTC-Samples/src/js/adapter.js
+    cp publish/adapter.screenshare.js $PROJECT_DIR/Google-WebRTC-Samples/src/js/adapter.screenshare.js && cp publish/adapter.debug.js $PROJECT_DIR/Google-WebRTC-Samples/src/js/adapter.js
 }
 
 # build plugin project
@@ -80,7 +95,7 @@ function bp
 }
 
 # install plugin
-function insp
+function ip
 {
     # remove existing plugin first
     rm -rf ~/Library/Internet\ Plug-Ins/npTemWebRTCPlugin.plugin/
