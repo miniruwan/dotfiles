@@ -6,10 +6,7 @@ First Clone the repository to some folder
 Then refer to the cloned files as follows (Append following to your current configuration file)
 #### Vim
 ```vim
-try
 source <pathToClonedDirectory>/vimrc.vim
-catch
-endtry
 ```
 #### zsh
 ```bash
