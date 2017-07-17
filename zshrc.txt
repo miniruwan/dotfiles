@@ -2,7 +2,7 @@
 DEFAULT_USER='miniruwan'
 
 if [[ `uname` == 'Darwin' ]] then
-    PROJECT_DIR='~/projects'
+    PROJECT_DIR='/Users/miniruwan/projects'
 elif [[ `uname` == 'CYGWIN'* ]] then
     PROJECT_DIR='/cygdrive/d/projects'
 else
@@ -17,8 +17,16 @@ alias cdg='cd $PROJECT_DIR/Google-WebRTC-Samples/'
 alias cdw='cd ~/work'
 alias v='vim'
 
+function showWindowsMessageBox
+{
+    # Show notification (only on windows because Mac can use iTerm2 triggers)
+    if [[ `uname` == 'CYGWIN'* ]] then
+        cscript "/cygwindrive/d/projects/configs/MessageBox.vbs" $1
+    fi
+}
+
 # Some variables to be used later in this file
-PLUGIN_ROOT_DIR='$PROJECT_DIR/temasys-webrtc-plugin'
+PLUGIN_ROOT_DIR=$PROJECT_DIR/temasys-webrtc-plugin
 PLUGIN_BUILD_DIR_NAME='BUILD_AUTO'
 
 alias tp='cd $PLUGIN_ROOT_DIR/Tests/AdapterJS/tests; karma start --browsers Safari'
@@ -30,23 +38,15 @@ alias rmb='rm -rf $PLUGIN_ROOT_DIR/$PLUGIN_BUILD_DIR_NAME/'
 alias lastconfigure='vim `ls -t $PLUGIN_ROOT_DIR/$PLUGIN_BUILD_DIR_NAME/Testing/Temporary/LastConfigure* | head -1`'
 alias lastbuild='vim `ls -t $PLUGIN_ROOT_DIR/$PLUGIN_BUILD_DIR_NAME/Testing/Temporary/LastBuild* | head -1`'
 
-if [[ `uname` == 'Darwin' ]] then
+
+if [[ `uname` == 'Darwin' ]] then # Mac
     alias cdl='cd ~/Library/Application\ Support/TemWebRTCPlugin/logs'
     alias lsp='\
         echo "----------------------- ~/Library/Internet Plug-Ins/ --------------------------"; \
         ls -lt ~/Library/Internet\ Plug-Ins/; \
         echo "------------------------ /Library/Internet Plug-Ins/ --------------------------"; \
         ls -lt /Library/Internet\ Plug-Ins/'
-    # uninstall plugin
-    alias up='\
-        echo "++++++++++++++++++++++++++++++++ BEFORE ++++++++++++++++++++++++++++++++"; \
-        lsp; \
-        echo "++++++++++++++++++++++++++++++ DELETING... +++++++++++++++++++++++++++++"; \
-        rm -rf ~/Library/Internet\ Plug-Ins/npTemWebRTCPlugin.plugin/; \
-        sudo rm -rf /Library/Internet\ Plug-Ins/npTemWebRTCPlugin.plugin/; \
-        echo "+++++++++++++++++++++++++++++++++ AFTER +++++++++++++++++++++++++++++++"; \
-        lsp'
-elif [[ `uname` == 'CYGWIN'* ]] then
+elif [[ `uname` == 'CYGWIN'* ]] then # Windows
     alias cdl='cd /cygwindrive/c/Users/Miniruwan/AppData/LocalLow/TemWebRTCPlugin/logs'
 fi
 
@@ -76,6 +76,7 @@ function confp
     else
         ctest -S CTestScript.cmake -DPLUGIN_CONFIG_LIST="Temasys-universal-trial" -DCMAKE_BUILD_TYPE=Debug -V -DNO_TESTS=ON
     fi
+    showWindowsMessageBox "Configure and Build Finished"
 }
 
 # grunt publish adapter.js
@@ -89,19 +90,56 @@ function gruntpublish
 # build plugin project
 function bp
 {
-    cdb $1
-    xcodebuild -target install -project TemWebRTCPlugin.xcodeproj
-    osascript -e 'display notification "Plugin Build done." with title "Build"'
+    if [[ `uname` == 'Darwin' ]] then # Mac
+        cdb $1
+        xcodebuild -target install -project TemWebRTCPlugin.xcodeproj
+        #osascript -e 'display notification "Plugin Build done." with title "Build"'
+    elif [[ `uname` == 'CYGWIN'* ]] then # Windows
+        if (( $# != 0 )) then
+            MSBuild.exe $PLUGIN_ROOT_DIR/$PLUGIN_BUILD_DIR_NAME/plugin.sln "/p:VisualStudioVersion=14.0" "/t:$1" 
+        else
+            MSBuild.exe $PLUGIN_ROOT_DIR/$PLUGIN_BUILD_DIR_NAME/plugin.sln "/p:VisualStudioVersion=14.0" "/t:TemWebRTCPlugin" 
+        fi
+        showWindowsMessageBox "Build Finished"
+    fi
 }
 
 # install plugin
 function ip
 {
-    # remove existing plugin first
-    rm -rf ~/Library/Internet\ Plug-Ins/npTemWebRTCPlugin.plugin/
-    # install new plugin
-    cdb $1
-    cmake -DBUILD_TYPE=Debug -P cmake_install.cmake
+    if [[ `uname` == 'Darwin' ]] then # Mac
+        # remove existing plugin first
+        rm -rf ~/Library/Internet\ Plug-Ins/npTemWebRTCPlugin.plugin/
+        # install new plugin
+        cdb $1
+        cmake -DBUILD_TYPE=Debug -P cmake_install.cmake
+    elif [[ `uname` == 'CYGWIN'* ]] then # Windows
+        if (( $# != 0 )) then
+            regsvr32 `cygwin -d $PLUGIN_ROOT_DIR/$PLUGIN_BUILD_DIR_NAME/build_$1/bin/TemWebRTCPlugin/Debug/npTemWebRTCPlugin`
+        else
+            regsvr32 `cygwin -d $PLUGIN_ROOT_DIR/$PLUGIN_BUILD_DIR_NAME/build_Temasys-universal-trial/bin/TemWebRTCPlugin/Debug/npTemWebRTCPlugin`
+        fi
+    fi
+}
+
+# uninstall plugin
+function up
+{
+    if [[ `uname` == 'Darwin' ]] then # Mac
+        echo "++++++++++++++++++++++++++++++++ BEFORE ++++++++++++++++++++++++++++++++";
+        lsp;
+        echo "++++++++++++++++++++++++++++++ DELETING... +++++++++++++++++++++++++++++";
+        rm -rf ~/Library/Internet\ Plug-Ins/npTemWebRTCPlugin.plugin/;
+        sudo rm -rf /Library/Internet\ Plug-Ins/npTemWebRTCPlugin.plugin/;
+        echo "+++++++++++++++++++++++++++++++++ AFTER +++++++++++++++++++++++++++++++";
+        lsp
+    elif [[ `uname` == 'CYGWIN'* ]] then # Windows
+        if (( $# != 0 )) then
+            regsvr32 /u `cygwin -d $PLUGIN_ROOT_DIR/$PLUGIN_BUILD_DIR_NAME/build_$1/bin/TemWebRTCPlugin/Debug/npTemWebRTCPlugin`
+        else
+            regsvr32 /u `cygwin -d $PLUGIN_ROOT_DIR/$PLUGIN_BUILD_DIR_NAME/build_Temasys-universal-trial/bin/TemWebRTCPlugin/Debug/npTemWebRTCPlugin`
+        fi
+    fi
 }
 
 # grep in plugin excluding some directories
