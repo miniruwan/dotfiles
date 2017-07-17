@@ -70,10 +70,11 @@ function bp
         xcodebuild -target install -project TemWebRTCPlugin.xcodeproj
         #osascript -e 'display notification "Plugin Build done." with title "Build"'
     elif [[ `uname` == 'CYGWIN'* ]] then # Windows
+		cd $PLUGIN_ROOT_DIR/$PLUGIN_BUILD_DIR_NAME
         if (( $# != 0 )) then
-            MSBuild.exe $PLUGIN_ROOT_DIR/$PLUGIN_BUILD_DIR_NAME/plugin.sln "/p:VisualStudioVersion=14.0" "/t:$1" 
+            MSBuild.exe plugin.sln "/p:VisualStudioVersion=14.0" "/t:$1" 
         else
-            MSBuild.exe $PLUGIN_ROOT_DIR/$PLUGIN_BUILD_DIR_NAME/plugin.sln "/p:VisualStudioVersion=14.0" "/t:TemWebRTCPlugin" 
+            MSBuild.exe plugin.sln "/p:VisualStudioVersion=14.0" "/t:TemWebRTCPlugin" 
         fi
         showWindowsMessageBox "Build Finished"
     fi
@@ -90,9 +91,9 @@ function ip
         cmake -DBUILD_TYPE=Debug -P cmake_install.cmake
     elif [[ `uname` == 'CYGWIN'* ]] then # Windows
         if (( $# != 0 )) then
-            regsvr32 `cygwin -d $PLUGIN_ROOT_DIR/$PLUGIN_BUILD_DIR_NAME/build_$1/bin/TemWebRTCPlugin/Debug/npTemWebRTCPlugin`
+            regsvr32 `cygpath -d $PLUGIN_ROOT_DIR/$PLUGIN_BUILD_DIR_NAME/build_$1/bin/TemWebRTCPlugin/Debug/npTemWebRTCPlugin`
         else
-            regsvr32 `cygwin -d $PLUGIN_ROOT_DIR/$PLUGIN_BUILD_DIR_NAME/build_Temasys-universal-trial/bin/TemWebRTCPlugin/Debug/npTemWebRTCPlugin`
+            regsvr32 `cygpath -d $PLUGIN_ROOT_DIR/$PLUGIN_BUILD_DIR_NAME/build_Temasys-universal-trial/bin/TemWebRTCPlugin/Debug/npTemWebRTCPlugin`
         fi
     fi
 }
