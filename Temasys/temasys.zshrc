@@ -1,4 +1,4 @@
-# prerequisite : PROJECT_DIR is defined
+# prerequisite : PROJECT_DIR is defined (It is defined in ../config.zshrc)
 
 # Some variables to be used later in this file
 PLUGIN_ROOT_DIR=$PROJECT_DIR/temasys-webrtc-plugin
