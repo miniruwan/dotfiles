@@ -21,7 +21,7 @@ function showWindowsMessageBox
 {
     # Show notification (only on windows because Mac can use iTerm2 triggers)
     if [[ `uname` == 'CYGWIN'* ]] then
-        cscript `cygpath -d "/cygdrive/d/projects/configs/MessageBox.vbs"` $1
+        cscript `cygpath -d "/cygdrive/d/projects/configs/Helpers/MessageBox.vbs"` $1
     fi
 }
 
