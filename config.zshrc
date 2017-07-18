@@ -10,7 +10,7 @@ else
 fi
 
 # Alias
-alias zshrc='vim $PROJECT_DIR/configs/zshrc.txt'
+alias zshrc='vim $PROJECT_DIR/configs/.zshrc.txt'
 alias vimrc='vim $PROJECT_DIR/configs/vimrc.vim'
 alias cdp='cd $PROJECT_DIR/'
 alias cdg='cd $PROJECT_DIR/Google-WebRTC-Samples/'
@@ -25,4 +25,4 @@ function showWindowsMessageBox
     fi
 }
 
-source $PROJECT_DIR/configs/Temasys/temasys_zshrc.txt
+source $PROJECT_DIR/configs/Temasys/temasys.zshrc

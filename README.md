@@ -6,9 +6,9 @@ First Clone the repository to some folder
 Then refer to the cloned files as follows (Append following to your current configuration file)
 #### Vim
 ```vim
-source <pathToClonedDirectory>/vimrc.vim
+source <pathToClonedDirectory>/config.vim
 ```
 #### zsh
 ```bash
-source <pathToClonedDirectory>/zshrc.txt
+source <pathToClonedDirectory>/config.zshrc
 ```
