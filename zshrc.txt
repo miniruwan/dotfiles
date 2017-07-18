@@ -25,4 +25,4 @@ function showWindowsMessageBox
     fi
 }
 
-source $PROJECT_DIR/configs/zshrc_for_temasys_plugin.txt
+source $PROJECT_DIR/configs/Temasys/temasys_zshrc.txt
