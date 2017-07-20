@@ -4,6 +4,7 @@
 PLUGIN_ROOT_DIR=$PROJECT_DIR/temasys-webrtc-plugin
 PLUGIN_BUILD_DIR_NAME='BUILD_AUTO'
 
+alias zshrcTem='vim $PROJECT_DIR/configs/Temasys/temasys.zshrc'
 alias tp='cd $PLUGIN_ROOT_DIR/Tests/AdapterJS/tests; karma start --browsers Safari'
 alias cdt='cd $PLUGIN_ROOT_DIR'
 alias cds='cd $PLUGIN_ROOT_DIR/plugin_src'
@@ -11,7 +12,7 @@ alias cdc='cd $PLUGIN_ROOT_DIR/plugin_src/temasys-webrtcplugin-configs'
 alias cda='cd $PLUGIN_ROOT_DIR/Tests/AdapterJS'
 alias rmb='rm -rf $PLUGIN_ROOT_DIR/$PLUGIN_BUILD_DIR_NAME/'
 alias lastconfigure='vim `ls -t $PLUGIN_ROOT_DIR/$PLUGIN_BUILD_DIR_NAME/Testing/Temporary/LastConfigure* | head -1`'
-alias lastbuild='vim `ls -t $PLUGIN_ROOT_DIR/$PLUGIN_BUILD_DIR_NAME/Testing/Temporary/LastBuild* | head -1`'
+alias lastbuild='vl $PLUGIN_ROOT_DIR/$PLUGIN_BUILD_DIR_NAME/Testing/Temporary/LastBuild*'
 
 
 if [[ `uname` == 'Darwin' ]] then # Mac
@@ -59,7 +60,7 @@ function gruntpublish
 {
     cda
     grunt publish --pluginInfoRoot=`echoBuildProject $1`/gen/global/
-    cp publish/adapter.screenshare.js $PROJECT_DIR/Google-WebRTC-Samples/src/js/adapter.screenshare.js && cp publish/adapter.debug.js $PROJECT_DIR/Google-WebRTC-Samples/src/js/adapter.js
+    cp publish/adapter.screenshare.js $PROJECT_DIR/Google-WebRTC-Samples/src/js/adapter.js
 }
 
 # build plugin project

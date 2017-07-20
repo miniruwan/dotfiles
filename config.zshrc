@@ -10,12 +10,17 @@ else
 fi
 
 # Alias
-alias zshrc='vim $PROJECT_DIR/configs/.zshrc.txt'
+alias zshrc='vim $PROJECT_DIR/configs/config.zshrc'
 alias vimrc='vim $PROJECT_DIR/configs/vimrc.vim'
 alias cdp='cd $PROJECT_DIR/'
 alias cdg='cd $PROJECT_DIR/Google-WebRTC-Samples/'
 alias cdw='cd ~/work'
 alias v='vim'
+
+function vl
+{
+    vim `ls -t $1 | head -1`
+}
 
 function showWindowsMessageBox
 {
