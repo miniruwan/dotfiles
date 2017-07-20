@@ -1,4 +1,4 @@
-# prerequisite : PROJECT_DIR is defined (It is defined in ../config.zshrc)
+# prerequisite : PROJECT_DIR is defined
 
 # Some variables to be used later in this file
 PLUGIN_ROOT_DIR=$PROJECT_DIR/temasys-webrtc-plugin
@@ -10,6 +10,7 @@ alias cdt='cd $PLUGIN_ROOT_DIR'
 alias cds='cd $PLUGIN_ROOT_DIR/plugin_src'
 alias cdc='cd $PLUGIN_ROOT_DIR/plugin_src/temasys-webrtcplugin-configs'
 alias cda='cd $PLUGIN_ROOT_DIR/Tests/AdapterJS'
+alias cdg='cd $PROJECT_DIR/Google-WebRTC-Samples/'
 alias rmb='rm -rf $PLUGIN_ROOT_DIR/$PLUGIN_BUILD_DIR_NAME/'
 alias lastconfigure='vim `ls -t $PLUGIN_ROOT_DIR/$PLUGIN_BUILD_DIR_NAME/Testing/Temporary/LastConfigure* | head -1`'
 alias lastbuild='vl $PLUGIN_ROOT_DIR/$PLUGIN_BUILD_DIR_NAME/Testing/Temporary/LastBuild*'
