@@ -8,4 +8,4 @@ PROJECT_DIR='/Users/miniruwan/projects'
 source $PROJECT_DIR/configs/config.zshrc
 
 # Source any more custome zshrc files
-source $PROJECT_DIR/configs/Temasys/temasys.zshrc
+source $PROJECT_DIR/configs/Temasys/plugin.zshrc
