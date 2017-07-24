@@ -4,7 +4,7 @@
 PLUGIN_ROOT_DIR=$PROJECT_DIR/temasys-webrtc-plugin
 PLUGIN_BUILD_DIR_NAME='BUILD_AUTO'
 
-alias zshrcTem='vim $PROJECT_DIR/configs/Temasys/temasys.zshrc'
+alias pluginZshrc='vim $PROJECT_DIR/configs/Temasys/plugin.zshrc'
 alias tp='cd $PLUGIN_ROOT_DIR/Tests/AdapterJS/tests; karma start --browsers Safari'
 alias cdt='cd $PLUGIN_ROOT_DIR'
 alias cds='cd $PLUGIN_ROOT_DIR/plugin_src'
@@ -82,24 +82,6 @@ function bp
     fi
 }
 
-# install plugin
-function ip
-{
-    if [[ `uname` == 'Darwin' ]] then # Mac
-        # remove existing plugin first
-        rm -rf ~/Library/Internet\ Plug-Ins/npTemWebRTCPlugin.plugin/
-        # install new plugin
-        cdb $1
-        cmake -DBUILD_TYPE=Debug -P cmake_install.cmake
-    elif [[ `uname` == 'CYGWIN'* ]] then # Windows
-        if (( $# != 0 )) then
-            regsvr32 `cygpath -d $PLUGIN_ROOT_DIR/$PLUGIN_BUILD_DIR_NAME/build_$1/bin/TemWebRTCPlugin/Debug/npTemWebRTCPlugin.dll`
-        else
-            regsvr32 `cygpath -d $PLUGIN_ROOT_DIR/$PLUGIN_BUILD_DIR_NAME/build_Temasys-universal-trial/bin/TemWebRTCPlugin/Debug/npTemWebRTCPlugin.dll`
-        fi
-    fi
-}
-
 # uninstall plugin
 function up
 {
@@ -116,6 +98,24 @@ function up
             regsvr32 /u `cygpath -d $PLUGIN_ROOT_DIR/$PLUGIN_BUILD_DIR_NAME/build_$1/bin/TemWebRTCPlugin/Debug/npTemWebRTCPlugin.dll`
         else
             regsvr32 /u `cygpath -d $PLUGIN_ROOT_DIR/$PLUGIN_BUILD_DIR_NAME/build_Temasys-universal-trial/bin/TemWebRTCPlugin/Debug/npTemWebRTCPlugin.dll`
+        fi
+    fi
+}
+
+# install plugin
+function ip
+{
+    # remove existing plugin first
+    up
+    if [[ `uname` == 'Darwin' ]] then # Mac
+        # install new plugin
+        cdb $1
+        cmake -DBUILD_TYPE=Debug -P cmake_install.cmake
+    elif [[ `uname` == 'CYGWIN'* ]] then # Windows
+        if (( $# != 0 )) then
+            regsvr32 `cygpath -d $PLUGIN_ROOT_DIR/$PLUGIN_BUILD_DIR_NAME/build_$1/bin/TemWebRTCPlugin/Debug/npTemWebRTCPlugin.dll`
+        else
+            regsvr32 `cygpath -d $PLUGIN_ROOT_DIR/$PLUGIN_BUILD_DIR_NAME/build_Temasys-universal-trial/bin/TemWebRTCPlugin/Debug/npTemWebRTCPlugin.dll`
         fi
     fi
 }
