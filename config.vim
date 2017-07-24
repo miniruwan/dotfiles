@@ -22,6 +22,9 @@ noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 20, 2)<CR>
 " paste toggle
 set pastetoggle=<F3>
 
+" do an upward search from the directory containing tags up to the stop directory (~)
+set tags+=tags;~
+
 colorscheme zenburn
 
 " Mouse scroll

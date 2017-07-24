@@ -1,6 +1,6 @@
 # Alias
 alias zshrc='vim $PROJECT_DIR/configs/config.zshrc'
-alias vimrc='vim $PROJECT_DIR/configs/vimrc.vim'
+alias vimrc='vim $PROJECT_DIR/configs/config.vim'
 alias cdp='cd $PROJECT_DIR/'
 alias cdw='cd ~/work'
 alias v='vim'
