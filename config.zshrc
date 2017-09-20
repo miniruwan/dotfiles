@@ -5,6 +5,12 @@ alias cdp='cd $PROJECT_DIR/'
 alias cdw='cd ~/work'
 alias v='vim'
 
+# grep in plugin excluding some directories
+function codegrep 
+{
+    grep -r "$1" * | grep -Ev '(tags|Makefile|CMakeFiles|.cc|Release|cscope|Binary)'
+}
+
 function vl
 {
     vim `ls -t $1 | head -1`
