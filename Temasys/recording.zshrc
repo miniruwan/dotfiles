@@ -4,10 +4,12 @@
 RECORDING_ROOT_DIR=$PROJECT_DIR/recording
 
 alias recZshrc='vim $PROJECT_DIR/configs/Temasys/recording.zshrc'
-alias cdRec='cd $RECORDING_ROOT_DIR'
-alias rmRecLogs='rm $RECORDING_ROOT_DIR/logs/daily/*;rm $RECORDING_ROOT_DIR/logs/global/*';
+alias cdrec='cd $RECORDING_ROOT_DIR'
+alias rmRecLogs='/bin/rm -f $RECORDING_ROOT_DIR/logs/daily/*;/bin/rm -f $RECORDING_ROOT_DIR/logs/global/*';
+alias cdRecRecordings='cd $RECORDING_ROOT_DIR/recordings';
 alias rmRecRecordings='rm -rf $RECORDING_ROOT_DIR/recordings';
-alias recLog='ls -t $RECORDING_ROOT_DIR/logs/daily/* | head -1'
-alias vimRecLog='vim `recLog`'
-alias tailRecLog='tail -f `recLog`'
-alias cdRecLog='cd $RECORDING_ROOT_DIR/logs/daily/'
+alias lsrecLog='ls -t $RECORDING_ROOT_DIR/logs/daily/* | head -1'
+alias reclog='vim `lsrecLog`'
+alias tailreclog='tail -f `lsrecLog`'
+alias cdreclog='cd $RECORDING_ROOT_DIR/logs/daily/'
+alias vimrec='vim $RECORDING_ROOT_DIR/recording.js'

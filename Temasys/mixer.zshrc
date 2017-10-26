@@ -4,8 +4,12 @@
 MIXER_ROOT_DIR=$PROJECT_DIR/mixer
 
 alias mixerZshrc='vim $PROJECT_DIR/configs/Temasys/mixer.zshrc'
-alias cdMixer='cd $MIXER_ROOT_DIR'
+alias cdmix='cd $MIXER_ROOT_DIR'
 alias rmMixerLogs='rm $MIXER_ROOT_DIR/logs/daily/*;rm $MIXER_ROOT_DIR/logs/global/*';
+alias cdMixerRecordings='cd $MIXER_ROOT_DIR/recordings';
 alias rmMixerRecordings='rm -rf $MIXER_ROOT_DIR/recordings';
-alias lastMixerLog='vim `ls -t $MIXER_ROOT_DIR/logs/daily/* | head -1`'
+alias lsMixerLog='ls -t $MIXER_ROOT_DIR/logs/daily/* | head -1'
+alias mixerlog='vim `lsMixerLog`'
+alias tailmixerlog='tail -f `lsMixerLog`'
 alias cdMixerLog='cd $MIXER_ROOT_DIR/logs/daily/'
+alias vimmix='vim $MIXER_ROOT_DIR/mixing.js'

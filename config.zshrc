@@ -8,7 +8,7 @@ alias v='vim'
 # grep in plugin excluding some directories
 function codegrep 
 {
-    grep -r "$1" * | grep -Ev '(tags|Makefile|CMakeFiles|.cc|Release|cscope|Binary)'
+    grep -r "$1" * | grep -Ev '(tags|Makefile|CMakeFiles|.cc|Release|cscope|Binary|logs|node_modules)'
 }
 
 function vl
