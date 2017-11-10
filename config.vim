@@ -11,9 +11,15 @@ vmap <C-c> "+y
 set grepprg=/usr/bin/grep
 
 " change cursor shape between insert and command modes
-let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-let &t_SR = "\<Esc>]50;CursorShape=2\x7"
-let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+if exists('$TMUX')
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+:autocmd InsertEnter * set cul
+:autocmd InsertLeave * set nocul
 
 " do an upward search from the directory containing tags up to the stop directory (~)
 set tags+=tags;~
@@ -44,4 +50,9 @@ let g:ycm_global_ycm_extra_conf = '~/.vim_runtime/sources_non_forked/YouComplete
 " Smooth scroll
 noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 20, 2)<CR>
 noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 20, 2)<CR>
+
+" Use fzf instead Ack by overwriting keymappings from amix ultimateVimConfiguration
+map <leader>g :Ag<CR>
+nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
+
  " ================== End of Plugin Configs ==========================
