@@ -44,8 +44,23 @@ set expandtab        " expand tabs to spaces
  \<CR><CR>
 
 " ================== Start of Plugin Configs ==========================
+" --------- start of vim-plug config ---------
+call plug#begin('~/.vim/plugged')
+
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
+Plug 'rupurt/vim-mql5'
+
+Plug 'terryma/vim-smooth-scroll'
+
+Plug 'Valloric/YouCompleteMe'
+
+call plug#end()
+" --------- End of vim-plug config ---------
+
 " YouCompleteMe
-let g:ycm_global_ycm_extra_conf = '~/.vim_runtime/sources_non_forked/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+"let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 
 " Smooth scroll
 noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 20, 2)<CR>
@@ -53,6 +68,8 @@ noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 20, 2)<CR>
 
 " Use fzf instead Ack by overwriting keymappings from amix ultimateVimConfiguration
 map <leader>g :Ag<CR>
-nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
+" Search word under cursor
+nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR> 
+map <leader>tt :Windows<cr>
 
  " ================== End of Plugin Configs ==========================
