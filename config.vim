@@ -1,5 +1,5 @@
 " unfold everything when opening a file
-"set foldlevelstart=20
+set foldlevelstart=99
 
 set nu
 
@@ -46,16 +46,12 @@ set expandtab        " expand tabs to spaces
 " ================== Start of Plugin Configs ==========================
 " --------- start of vim-plug config ---------
 call plug#begin('~/.vim/plugged')
-
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-
+Plug 'vobornik/vim-mql4'
 Plug 'rupurt/vim-mql5'
-
 Plug 'terryma/vim-smooth-scroll'
-
 Plug 'Valloric/YouCompleteMe'
-
 call plug#end()
 " --------- End of vim-plug config ---------
 
@@ -65,6 +61,10 @@ call plug#end()
 " Smooth scroll
 noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 20, 2)<CR>
 noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 20, 2)<CR>
+
+" yank-stack
+map <leader>v <Plug>yankstack_substitute_older_paste
+map <leader>V <Plug>yankstack_substitute_newer_paste
 
 " Use fzf instead Ack by overwriting keymappings from amix ultimateVimConfiguration
 map <leader>g :Ag<CR>
