@@ -56,7 +56,7 @@ call plug#end()
 " --------- End of vim-plug config ---------
 
 " YouCompleteMe
-"let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 
 " Smooth scroll
 noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 20, 2)<CR>
