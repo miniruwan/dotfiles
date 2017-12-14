@@ -17,12 +17,28 @@ zplug load
 
 # ----- end zplug configuration ----- 
 
+# https://stackoverflow.com/questions/22600259/zsh-autocomplete-from-the-middle-of-filename
+zstyle ':completion:*' completer _complete
+zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' '+l:|=* r:|=*'
+autoload -Uz compinit
+compinit
+
 # Alias
 alias zshrc='vim $PROJECT_DIR/configs/config.zshrc'
 alias vimrc='vim $PROJECT_DIR/configs/config.vim'
 alias cdp='cd $PROJECT_DIR/'
 alias cdw='cd ~/work'
 alias v='vim'
+
+# Sometimes error described in the following link happens and need to do the suggested solution
+# _arguments:450: _vim_files: function definition file not found
+# https://github.com/robbyrussell/oh-my-zsh/issues/518
+function fixCdAutoComplete
+{
+    rm ~/.zcompdump*
+    rm ~/.zplug/zcompdump
+    exec zsh
+}
 
 # grep in plugin excluding some directories
 function codegrep 
