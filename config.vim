@@ -66,6 +66,9 @@ noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 20, 2)<CR>
 map <leader>v <Plug>yankstack_substitute_older_paste
 map <leader>V <Plug>yankstack_substitute_newer_paste
 
+" Use ctrlp.vim instead MRU.vim by overwriting keymappings from amix ultimateVimConfiguration
+map <leader>f :CtrlPMRU<CR>
+
 " Use fzf instead Ack by overwriting keymappings from amix ultimateVimConfiguration
 map <leader>g :Ag<CR>
 " Search word under cursor
