@@ -3,6 +3,11 @@ source ~/packages/zplug/init.zsh
 
 zplug "rupa/z", use:z.sh #Tracks your most used directories, based on 'frecency'
 zplug "changyuheng/fz", defer:1 # The missing fuzzy tab completion feature of z
+# Install zsh-iterm-touchbar only for OS X
+if [[ `uname` == 'Darwin' ]]
+then
+    zplug "iam4x/zsh-iterm-touchbar"
+fi
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
@@ -29,6 +34,9 @@ alias vimrc='vim $PROJECT_DIR/configs/config.vim'
 alias cdp='cd $PROJECT_DIR/'
 alias cdw='cd ~/work'
 alias v='vim'
+
+# set core file size to unlimited
+ulimit -c unlimited
 
 # Sometimes error described in the following link happens and need to do the suggested solution
 # _arguments:450: _vim_files: function definition file not found

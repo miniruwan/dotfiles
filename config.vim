@@ -51,6 +51,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'vobornik/vim-mql4'
 Plug 'rupurt/vim-mql5'
 Plug 'terryma/vim-smooth-scroll'
+Plug 'derekwyatt/vim-fswitch'
 Plug 'Valloric/YouCompleteMe'
 call plug#end()
 " --------- End of vim-plug config ---------
@@ -73,6 +74,17 @@ map <leader>f :CtrlPMRU<CR>
 map <leader>g :Ag<CR>
 " Search word under cursor
 nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR> 
+nnoremap <silent> <Leader>s :Ack <C-R><C-W><CR> 
+
+" derekwyatt/vim-fswitch
+nmap <silent> <Leader>a :FSHere<cr>
+" map .cc files and .h files for vim-fswitch
+augroup mycppfiles
+  au!
+  au BufEnter *.h let b:fswitchdst  = 'cpp,cc,C'
+  au BufEnter *.cc let b:fswitchdst  = 'h'
+augroup END
+
 map <leader>tt :Windows<cr>
 
  " ================== End of Plugin Configs ==========================

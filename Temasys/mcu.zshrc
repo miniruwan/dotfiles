@@ -45,4 +45,11 @@ function gdblicode
     sudo gdb -x ~/gdbconf attach $erizoPID
 }
 
+# grep in webrtc excluding some directories
+function wgrep 
+{
+    cd ~/projects/webrtc/src
+    grep -R --exclude-dir={third_party,sdk} --exclude={tags,\*test\*,\*mock\*,\*android\*,\*fake\*,\*legacy\*} VideoEncoder "$1" .
+}
+
 LD_LIBRARY_PATH=$MCU_ROOT_DIR/licode/erizo//build/erizo
