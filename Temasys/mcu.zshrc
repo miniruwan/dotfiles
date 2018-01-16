@@ -49,7 +49,7 @@ function gdblicode
 function wgrep 
 {
     cd ~/projects/webrtc/src
-    grep -R --exclude-dir={third_party,sdk} --exclude={tags,\*test\*,\*mock\*,\*android\*,\*fake\*,\*legacy\*} "$1" .
+    grep -R --exclude-dir={out,third_party,sdk} --exclude={tags,\*test\*,\*mock\*,\*android\*,\*fake\*,\*legacy\*} "$1" .
 }
 
 LD_LIBRARY_PATH=$MCU_ROOT_DIR/licode/erizo//build/erizo
