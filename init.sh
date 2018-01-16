@@ -10,7 +10,21 @@ elif [[ "$unamestr" == 'FreeBSD' ]]; then
 	  platform='freebsd'
 fi
 
+if [[ $platform == 'linux' ]]; then
+    sudo apt-get update
+fi
+
+
 # ================= Configurations =====================
+
+# Install and configure tmux
+if [[ $platform == 'linux' ]]; then
+    sudo apt-get install tmux
+fi
+cd
+git clone https://github.com/gpakosz/.tmux.git
+ln -s -f .tmux/.tmux.conf
+cp .tmux/.tmux.conf.local .
 
 # Install powerline font
 if [[ $platform == 'linux' ]]; then
