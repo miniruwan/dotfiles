@@ -17,6 +17,13 @@ alias vimex='vim $MCU_ROOT_DIR/licode/erizo/src/erizo/media/ExternalOutput.cpp'
 alias vimmcu='vim $MCU_ROOT_DIR/app/sfu/MCU.js'
 alias bl='cdm; ./licodeCompile.sh; rmm; pm2 restart mcu;'
 
+# New MCU related alias
+NEW_MCU_ROOT_DIR=$PROJECT_DIR/mcu_template/build
+alias cdn='cd $NEW_MCU_ROOT_DIR'
+alias sig='$NEW_MCU_ROOT_DIR/mcu_signal'
+alias ser='$NEW_MCU_ROOT_DIR/mcu_server'
+alias cli='$NEW_MCU_ROOT_DIR/mcu_client'
+
 # tail licode log. If no arguments given, last modified log will be tailed
 function taillicode
 {
@@ -52,4 +59,4 @@ function wgrep
     grep -R --exclude-dir={out,third_party,sdk} --exclude={tags,\*test\*,\*mock\*,\*android\*,\*fake\*,\*legacy\*} "$1" .
 }
 
-LD_LIBRARY_PATH=$MCU_ROOT_DIR/licode/erizo//build/erizo
+export LD_LIBRARY_PATH=$PROJECT_DIR/webrtc/src/out/linux_debug
