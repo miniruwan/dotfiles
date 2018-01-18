@@ -34,6 +34,7 @@ alias vimrc='vim $PROJECT_DIR/configs/config.vim'
 alias cdp='cd $PROJECT_DIR/'
 alias cdw='cd ~/work'
 alias v='vim'
+#alias tmux='tmux -2' #tmux 
 
 # set core file size to unlimited
 ulimit -c unlimited
