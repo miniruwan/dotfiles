@@ -34,7 +34,9 @@ alias vimrc='vim $PROJECT_DIR/configs/config.vim'
 alias cdp='cd $PROJECT_DIR/'
 alias cdw='cd ~/work'
 alias v='vim'
-#alias tmux='tmux -2' #tmux 
+
+# Exports
+export TERM=xterm-256color # Assuming terminal to support 256 colors
 
 # set core file size to unlimited
 ulimit -c unlimited
