@@ -18,11 +18,12 @@ alias vimmcu='vim $MCU_ROOT_DIR/app/sfu/MCU.js'
 alias bl='cdm; ./licodeCompile.sh; rmm; pm2 restart mcu;'
 
 # New MCU related alias
-NEW_MCU_ROOT_DIR=$PROJECT_DIR/mcu_template/build
-alias cdn='cd $NEW_MCU_ROOT_DIR'
-alias sig='$NEW_MCU_ROOT_DIR/mcu_signal'
-alias ser='$NEW_MCU_ROOT_DIR/mcu_server'
-alias cli='$NEW_MCU_ROOT_DIR/mcu_client'
+LIBWEBRTC_ROOT_DIR=$PROJECT_DIR/mcu-libwebrtc/libwebrtc/src
+LIBWEBRTC_BUILD_DIR=$PROJECT_DIR/mcu-libwebrtc/libwebrtc/src/out/Default
+alias cdn='cd $LIBWEBRTC_ROOT_DIR/SymToTemasysCode'
+alias cdl='cd $LIBWEBRTC_ROOT_DIR'
+alias cdo='cd $LIBWEBRTC_BUILD_DIR'
+alias test='$LIBWEBRTC_BUILD_DIR/MCU_TEST'
 
 # tail licode log. If no arguments given, last modified log will be tailed
 function taillicode
@@ -55,8 +56,8 @@ function gdblicode
 # grep in webrtc excluding some directories
 function wgrep 
 {
-    cd ~/projects/webrtc/src
+    cdl
     grep -R --exclude-dir={out,third_party,sdk} --exclude={tags,\*test\*,\*mock\*,\*android\*,\*fake\*,\*legacy\*} "$1" .
 }
 
-export LD_LIBRARY_PATH=$PROJECT_DIR/webrtc/src/out/linux_debug
+export LD_LIBRARY_PATH=$LIBWEBRTC_BUILD_DIR
