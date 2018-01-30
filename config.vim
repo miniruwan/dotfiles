@@ -53,6 +53,8 @@ Plug 'rupurt/vim-mql5'
 Plug 'terryma/vim-smooth-scroll'
 Plug 'derekwyatt/vim-fswitch'
 Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe'
+Plug 'leafgarland/typescript-vim'
 call plug#end()
 " --------- End of vim-plug config ---------
 
