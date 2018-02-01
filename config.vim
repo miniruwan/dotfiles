@@ -78,6 +78,9 @@ map <leader>g :Ag<CR>
 nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR> 
 nnoremap <silent> <Leader>s :Ack <C-R><C-W><CR> 
 
+" Switch to last split
+map <silent> <Leader>w <C-W>w
+
 " derekwyatt/vim-fswitch
 nmap <silent> <Leader>a :FSHere<cr>
 " map .cc files and .h files for vim-fswitch
