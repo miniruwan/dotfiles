@@ -1,5 +1,39 @@
 # prerequisite : PROJECT_DIR is defined
 
+# TODO : This function doesn't belong here
+function startSkylink
+{
+  cd $PROJECT_DIR/SkylinkJS
+  pm2 start server.js --name skylinkJS
+}
+
+# -------------------------------- NEW MCU --------------------------------
+# New MCU related alias
+LIBWEBRTC_ROOT_DIR=$PROJECT_DIR/mcu-libwebrtc/libwebrtc/src
+LIBWEBRTC_BUILD_DIR=$PROJECT_DIR/mcu-libwebrtc/libwebrtc/src/out/Default
+alias cdn='cd $LIBWEBRTC_ROOT_DIR/SymToTemasysCode'
+alias cdl='cd $LIBWEBRTC_ROOT_DIR'
+alias cdo='cd $LIBWEBRTC_BUILD_DIR'
+alias testmcu='$LIBWEBRTC_BUILD_DIR/MCU_TEST'
+
+# grep in webrtc excluding some directories
+function wgrep 
+{
+    cdl
+    grep -R --exclude-dir={out,third_party,sdk} --exclude={tags,\*test\*,\*mock\*,\*android\*,\*fake\*,\*legacy\*} "$1" .
+}
+
+function startMcuDeps
+{
+  pm2 start redis-server
+  startSkylink
+  startSignalling # Depends on sig.zshrc
+}
+
+export LD_LIBRARY_PATH=$LIBWEBRTC_BUILD_DIR
+# -------------------------------- END - NEW MCU --------------------------------
+
+# -------------------------------- OLD MCU --------------------------------
 # Some variables to be used later in this file
 MCU_ROOT_DIR=$PROJECT_DIR/temasys-sfu-mcu
 
@@ -16,14 +50,6 @@ alias cdlicodelog='cd $MCU_ROOT_DIR/logs/erizo-cores/'
 alias vimex='vim $MCU_ROOT_DIR/licode/erizo/src/erizo/media/ExternalOutput.cpp'
 alias vimmcu='vim $MCU_ROOT_DIR/app/sfu/MCU.js'
 alias bl='cdm; ./licodeCompile.sh; rmm; pm2 restart mcu;'
-
-# New MCU related alias
-LIBWEBRTC_ROOT_DIR=$PROJECT_DIR/mcu-libwebrtc/libwebrtc/src
-LIBWEBRTC_BUILD_DIR=$PROJECT_DIR/mcu-libwebrtc/libwebrtc/src/out/Default
-alias cdn='cd $LIBWEBRTC_ROOT_DIR/SymToTemasysCode'
-alias cdl='cd $LIBWEBRTC_ROOT_DIR'
-alias cdo='cd $LIBWEBRTC_BUILD_DIR'
-alias test='$LIBWEBRTC_BUILD_DIR/MCU_TEST'
 
 # tail licode log. If no arguments given, last modified log will be tailed
 function taillicode
@@ -53,11 +79,4 @@ function gdblicode
     sudo gdb -x ~/gdbconf attach $erizoPID
 }
 
-# grep in webrtc excluding some directories
-function wgrep 
-{
-    cdl
-    grep -R --exclude-dir={out,third_party,sdk} --exclude={tags,\*test\*,\*mock\*,\*android\*,\*fake\*,\*legacy\*} "$1" .
-}
-
-export LD_LIBRARY_PATH=$LIBWEBRTC_BUILD_DIR
+# -------------------------------- END - OLD MCU --------------------------------
