@@ -5,7 +5,11 @@
 platform='unknown'
 unamestr=`uname`
 if [[ "$unamestr" == 'Linux' ]]; then
-  platform='linux'
+	if grep -q Microsoft /proc/version; then
+	  platform='wsl' # windows subsystem for linux
+	else
+	  platform='linux' # Native linux
+	fi
 elif [[ "$unamestr" == 'FreeBSD' ]]; then
   platform='freebsd'
 fi
@@ -26,6 +30,16 @@ print_important() {
 }
 
 # ================= functions for each configuration task =====================
+
+configure_zsh() {
+	sudo apt-get install zsh
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+}
+
+configure_fzf() {
+	git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+	~/.fzf/install
+}
 
 configure_powerline_font() {
   if [[ $platform == 'linux' ]]; then

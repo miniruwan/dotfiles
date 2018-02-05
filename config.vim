@@ -1,3 +1,10 @@
+" Detect windows OS
+let uname = system('uname -a')
+let isWindows = 0
+if uname =~ "Microsoft"
+ let isWindows = 1
+endif
+
 " unfold everything when opening a file
 set foldlevelstart=99
 
@@ -24,7 +31,6 @@ endif
 " do an upward search from the directory containing tags up to the stop directory (~)
 set tags+=tags;~
 
-colorscheme zenburn
 
 " Mouse scroll
 set mouse=a
@@ -46,6 +52,10 @@ set expandtab        " expand tabs to spaces
 " ================== Start of Plugin Configs ==========================
 " --------- start of vim-plug config ---------
 call plug#begin('~/.vim/plugged')
+if isWindows
+  Plug 'vim-scripts/Zenburn'
+  Plug 'morhetz/gruvbox'
+endif
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'vobornik/vim-mql4'
@@ -93,3 +103,12 @@ augroup END
 map <leader>tt :Windows<cr>
 
  " ================== End of Plugin Configs ==========================
+
+
+if isWindows
+  set t_Co=16
+  set background=dark
+  colorscheme gruvbox
+else
+  colorscheme zenburn
+endif
