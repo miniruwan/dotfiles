@@ -57,12 +57,10 @@ if isWindows
   Plug 'morhetz/gruvbox'
 endif
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
 Plug 'vobornik/vim-mql4'
 Plug 'rupurt/vim-mql5'
 Plug 'terryma/vim-smooth-scroll'
 Plug 'derekwyatt/vim-fswitch'
-Plug 'Valloric/YouCompleteMe'
 Plug 'Valloric/YouCompleteMe'
 Plug 'leafgarland/typescript-vim'
 call plug#end()
@@ -86,7 +84,7 @@ map <leader>f :CtrlPMRU<CR>
 map <leader>g :Ag<CR>
 " Search word under cursor
 nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR> 
-nnoremap <silent> <Leader>s :Ack <C-R><C-W><CR> 
+nnoremap <silent> <Leader>s :Ack -f <C-R><C-W><CR> 
 
 " Switch to last split
 map <silent> <Leader>w <C-W>w
