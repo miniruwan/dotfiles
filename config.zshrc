@@ -1,6 +1,7 @@
 
 # Some plugins seems not working with windows subsystem for linux.
-if grep -q Microsoft /proc/version; then
+if [[ ( ! `uname` == 'Darwin' ) && ( "$(grep -q Microsoft /proc/version)" ) ]]
+then
 	# See https://github.com/Microsoft/BashOnWindows/issues/1887
 	unsetopt BG_NICE
 
