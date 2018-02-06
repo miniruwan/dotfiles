@@ -1,9 +1,20 @@
+platform='unknown'
+unamestr=`uname`
+if [[ "$unamestr" == 'Linux' ]]; then
+  if ( grep -q Microsoft /proc/version ); then
+    platform='wsl'
+  fi
+  platform='linux'
+elif [[ "$unamestr" == 'Darwin' ]]; then
+   platform='osx'
+elif [[ `uname` == 'CYGWIN'* ]]; then
+   platform='cygwin'
+fi
 
 # Some plugins seems not working with windows subsystem for linux.
-if [[ ( ! `uname` == 'Darwin' ) && ( "$(grep -q Microsoft /proc/version)" ) ]]
-then
-	# See https://github.com/Microsoft/BashOnWindows/issues/1887
-	unsetopt BG_NICE
+if [[ $platform == 'wsl' ]]; then
+  # See https://github.com/Microsoft/BashOnWindows/issues/1887
+  unsetopt BG_NICE
 
   alias open=explorer.exe
   alias git="/mnt/c/Program\ Files/Git/bin/git.exe"
@@ -17,16 +28,15 @@ then
           /usr/lib/command-not-found --no-failure-msg -- ${1+"$1"} && :
       fi
   }
-
 fi
+
 # ----- start zplug configuration ----- 
 source ~/packages/zplug/init.zsh
 
 zplug "rupa/z", use:z.sh #Tracks your most used directories, based on 'frecency'
 zplug "changyuheng/fz", defer:1 # The missing fuzzy tab completion feature of z
 # Install zsh-iterm-touchbar only for OS X
-if [[ `uname` == 'Darwin' ]]
-then
+if [[ $platform == 'osx' ]]; then
     zplug "iam4x/zsh-iterm-touchbar"
 fi
 
@@ -86,7 +96,7 @@ function vl
 function showWindowsMessageBox
 {
     # Show notification (only on windows because Mac can use iTerm2 triggers)
-    if [[ `uname` == 'CYGWIN'* ]] then
+    if [[ $platform == 'cygwin' ]]; then
         cscript `cygpath -d "$PROJECT_DIR/configs/Helpers/MessageBox.vbs"` $1
     fi
 }
