@@ -57,6 +57,7 @@ if isWindows
   Plug 'morhetz/gruvbox'
 endif
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'vobornik/vim-mql4'
 Plug 'rupurt/vim-mql5'
 Plug 'terryma/vim-smooth-scroll'
@@ -78,7 +79,7 @@ map <leader>v <Plug>yankstack_substitute_older_paste
 map <leader>V <Plug>yankstack_substitute_newer_paste
 
 " Use ctrlp.vim instead MRU.vim by overwriting keymappings from amix ultimateVimConfiguration
-map <leader>f :CtrlPMRU<CR>
+map <leader>f :CtrlPMixed<CR>
 
 " Use fzf instead Ack by overwriting keymappings from amix ultimateVimConfiguration
 map <leader>g :Ag<CR>
@@ -98,7 +99,7 @@ augroup mycppfiles
   au BufEnter *.cc let b:fswitchdst  = 'h'
 augroup END
 
-map <leader>tt :Windows<cr>
+map <leader>tt :CtrlPBuffer<cr>
 
  " ================== End of Plugin Configs ==========================
 
