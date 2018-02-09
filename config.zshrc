@@ -3,8 +3,9 @@ unamestr=`uname`
 if [[ "$unamestr" == 'Linux' ]]; then
   if ( grep -q Microsoft /proc/version ); then
     platform='wsl'
+  else 
+    platform='linux'
   fi
-  platform='linux'
 elif [[ "$unamestr" == 'Darwin' ]]; then
    platform='osx'
 elif [[ `uname` == 'CYGWIN'* ]]; then
