@@ -9,8 +9,10 @@ function startSkylink
 
 # -------------------------------- NEW MCU --------------------------------
 # New MCU related alias
-LIBWEBRTC_ROOT_DIR=$PROJECT_DIR/mcu-libwebrtc/libwebrtc/src
-LIBWEBRTC_BUILD_DIR=$PROJECT_DIR/mcu-libwebrtc/libwebrtc/src/out/Default
+NEW_MCU_ROOT_DIR=$PROJECT_DIR/mcu-libwebrtc
+LIBWEBRTC_ROOT_DIR=$NEW_MCU_ROOT_DIR/libwebrtc/src
+LIBWEBRTC_BUILD_DIR=$NEW_MCU_ROOT_DIR/libwebrtc/src/out/Default
+alias cdnn='cd $NEW_MCU_ROOT_DIR'
 alias cdn='cd $LIBWEBRTC_ROOT_DIR/SymToTemasysCode'
 alias cdl='cd $LIBWEBRTC_ROOT_DIR'
 alias cdo='cd $LIBWEBRTC_BUILD_DIR'
