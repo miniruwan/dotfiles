@@ -18,6 +18,15 @@ alias cdl='cd $LIBWEBRTC_ROOT_DIR'
 alias cdo='cd $LIBWEBRTC_BUILD_DIR'
 alias testmcu='$LIBWEBRTC_BUILD_DIR/MCU_TEST'
 
+# Build MCU
+function bm
+{
+  local currentDir=`pwd`
+  cdl
+  ninja -C out/Default/ main
+  cd $currentDir
+}
+
 # grep in webrtc excluding some directories
 function wgrep 
 {
