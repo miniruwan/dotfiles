@@ -14,3 +14,17 @@ source <pathToClonedDirectory>/config.local.zshrc
 ```vim
 source <pathToClonedDirectory>/config.vim
 ```
+#### Vim Plugin Installation
+Step 1: Install awsome vim  
+git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime   
+sh ~/.vim_runtime/install_awesome_vimrc.sh  
+
+Step 2: Create dir to hold vim plugins   
+cd ~   
+mkdir -p .vim   
+
+Step 3: Install vim plugin manager  
+
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim  
+
+Step 4: Open vim and type ":PlugInstall"
