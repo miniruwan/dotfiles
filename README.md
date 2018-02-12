@@ -23,8 +23,7 @@ sh ~/.vim_runtime/install_awesome_vimrc.sh
 
 Step 2: Create dir to hold vim plugins   
 ```vim
-cd ~   
-mkdir -p .vim   
+mkdir -p ~/.vim   
 ```
 
 Step 3: Install vim plugin manager  
