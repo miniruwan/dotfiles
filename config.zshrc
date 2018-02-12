@@ -101,3 +101,6 @@ function showWindowsMessageBox
         cscript `cygpath -d "$PROJECT_DIR/configs/Helpers/MessageBox.vbs"` $1
     fi
 }
+
+# set tab space to 2
+tabs -2
