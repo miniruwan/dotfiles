@@ -16,27 +16,28 @@ alias cdnn='cd $NEW_MCU_ROOT_DIR'
 alias cdn='cd $LIBWEBRTC_ROOT_DIR/SymToTemasysCode'
 alias cdl='cd $LIBWEBRTC_ROOT_DIR'
 alias cdo='cd $LIBWEBRTC_BUILD_DIR'
-alias startMcu='$LIBWEBRTC_BUILD_DIR/main'
 
-function testMcu
+function runMcu
 {
   local currentDir=`pwd`
   cdo
-  ./MCU_TEST
+  if (( $# != 0 )) then
+    ./$1
+  else
+    ./main
+  fi
   cd $currentDir
 }
+alias testMcu='runMcu MCU_TEST'
 
 # Build MCU
 function bm
 {
-  local currentDir=`pwd`
-  cdl
   if (( $# != 0 )) then
-    ninja -C out/Default/ $1
+    ninja -C $LIBWEBRTC_BUILD_DIR $1
   else
-    ninja -C out/Default/ main
+    ninja -C $LIBWEBRTC_BUILD_DIR main
   fi
-  cd $currentDir
 }
 alias bt='bm MCU_TEST'
 
