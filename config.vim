@@ -86,6 +86,8 @@ map <leader>g :Ag<CR>
 " Search word under cursor
 nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR> 
 nnoremap <silent> <Leader>s :Ack -f <C-R><C-W><CR> 
+nnoremap <silent> <Leader>st :Ack --ignore-dir=Test -f <C-R><C-W><CR> 
+nnoremap <silent> <Leader>r :tselect <C-R><C-W><CR> 
 
 " Switch to last split
 map <silent> <Leader>w <C-W>w
