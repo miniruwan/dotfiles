@@ -5,9 +5,6 @@ if uname =~ "Microsoft"
  let isWindows = 1
 endif
 
-" unfold everything when opening a file
-set foldlevelstart=99
-
 set nu
 
 " copying to clipboard
@@ -29,7 +26,7 @@ endif
 :autocmd InsertLeave * set nocul
 
 " do an upward search from the directory containing tags up to the stop directory (~)
-set tags+=tags;~
+set tags+=~/projects/mcu-libwebrtc/libwebrtc/src/tags,tags;~
 
 
 " Mouse scroll
@@ -64,6 +61,7 @@ Plug 'terryma/vim-smooth-scroll'
 Plug 'derekwyatt/vim-fswitch'
 Plug 'Valloric/YouCompleteMe'
 Plug 'leafgarland/typescript-vim'
+Plug 'scrooloose/nerdcommenter'
 call plug#end()
 " --------- End of vim-plug config ---------
 
@@ -89,6 +87,9 @@ nnoremap <silent> <Leader>s :Ack -f <C-R><C-W><CR>
 nnoremap <silent> <Leader>st :Ack --ignore-dir=Test -f <C-R><C-W><CR> 
 nnoremap <silent> <Leader>r :tselect <C-R><C-W><CR> 
 
+" Initiate replace word under cursor
+map <silent> <Leader>h :%s/<C-R><C-W>/
+
 " Switch to last split
 map <silent> <Leader>w <C-W>w
 
@@ -102,6 +103,9 @@ augroup mycppfiles
 augroup END
 
 map <leader>tt :CtrlPBuffer<cr>
+
+" unfold everything when opening a file
+set foldlevelstart=99
 
  " ================== End of Plugin Configs ==========================
 
