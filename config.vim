@@ -87,12 +87,6 @@ nnoremap <silent> <Leader>s :Ack -f <C-R><C-W><CR>
 nnoremap <silent> <Leader>st :Ack --ignore-dir=Test -f <C-R><C-W><CR> 
 nnoremap <silent> <Leader>r :tselect <C-R><C-W><CR> 
 
-" Initiate replace word under cursor
-map <silent> <Leader>h :%s/<C-R><C-W>/
-
-" Switch to last split
-map <silent> <Leader>w <C-W>w
-
 " derekwyatt/vim-fswitch
 nmap <silent> <Leader>a :FSHere<cr>
 " map .cc files and .h files for vim-fswitch
@@ -104,11 +98,19 @@ augroup END
 
 map <leader>tt :CtrlPBuffer<cr>
 
+ " ================== End of Plugin Configs ==========================
+
+" Initiate replace word under cursor
+map <silent> <Leader>h :%s/<C-R><C-W>/
+
+" Switch to last split
+map <silent> <Leader>w <C-W>w
+
 " unfold everything when opening a file
 set foldlevelstart=99
 
- " ================== End of Plugin Configs ==========================
-
+" unfold everything when opening a file
+set foldlevelstart=99
 
 if isWindows
   set t_Co=16
