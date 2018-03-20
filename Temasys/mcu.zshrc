@@ -55,7 +55,7 @@ function startMcuDeps
   startSignalling # Depends on sig.zshrc
 }
 
-export LD_LIBRARY_PATH=$LIBWEBRTC_BUILD_DIR
+export LD_LIBRARY_PATH=$LIBWEBRTC_BUILD_DIR:$LD_LIBRARY_PATH
 # -------------------------------- END - NEW MCU --------------------------------
 
 # -------------------------------- OLD MCU --------------------------------
