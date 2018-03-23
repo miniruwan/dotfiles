@@ -38,14 +38,27 @@ function bm
   else
     ninja -C $LIBWEBRTC_BUILD_DIR main
   fi
+  # Check the output status and print message according to it
+  if (( $? != 0 )) then
+    echo "** BUILD FAILED **"
+  else
+    echo "** BUILD SUCCEEDED **"
+  fi
 }
 alias bt='bm MCU_TEST'
 
-# grep in webrtc excluding some directories
+# grep in webrtc excluding some directories (excluding test directories also)
 function wgrep 
 {
     cdl
     grep -R --exclude-dir={out,third_party,sdk} --exclude={tags,\*test\*,\*mock\*,\*android\*,\*fake\*,\*legacy\*} "$1" .
+}
+
+# grep in webrtc excluding some directories (but not excluding test directories)
+function tgrep 
+{
+    cdl
+    grep -R --exclude-dir={out,third_party,sdk} --exclude={tags,\*android\*,\*legacy\*} "$1" .
 }
 
 function startMcuDeps
