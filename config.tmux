@@ -19,5 +19,8 @@ set -g @plugin 'tmux-plugins/tmux-resurrect'
 
 set-option -g allow-rename off
 
+# Performance_Note : Setting this ends up using much more memory
+set-option -g history-limit 20000
+
 bind r source-file ~/.tmux.conf \; display-message "Config reloaded..."
 
