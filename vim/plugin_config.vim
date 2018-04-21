@@ -5,6 +5,8 @@ Plug 'mileszs/ack.vim'
 if isWindows
   Plug 'vim-scripts/Zenburn'
   Plug 'morhetz/gruvbox'
+else
+  Plug 'jnurmine/zenburn'
 endif
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
