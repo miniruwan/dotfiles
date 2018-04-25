@@ -63,7 +63,7 @@ function tgrep
 
 function startMcuDeps
 {
-  pm2 start redis-server
+  pm2 start redis-server -- --save ""
   startSkylink
   startSignalling # Depends on sig.zshrc
 }

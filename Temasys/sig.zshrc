@@ -15,3 +15,10 @@ function startSignalling
   pm2 start main.js --name sig-main
   pm2 start service.js --name sig-service
 }
+
+# grep in webrtc excluding some directories (excluding test directories also)
+function siggrep 
+{
+    cds
+    grep -R --exclude-dir={deploy,key,logs,node_modules,patch,ssl_certs} "$1" .
+}

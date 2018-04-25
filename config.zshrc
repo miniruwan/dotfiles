@@ -102,5 +102,10 @@ function showWindowsMessageBox
     fi
 }
 
+
+if [[ $platform == 'osx' ]]; then
+  export PATH="/usr/local/opt/openssl/bin:$PATH"
+fi
+
 # set tab space to 2
 tabs -2
