@@ -9,7 +9,9 @@ function startSkylink
 
 # -------------------------------- NEW MCU --------------------------------
 # New MCU related alias
-NEW_MCU_ROOT_DIR=$PROJECT_DIR/mcu-libwebrtc
+if [[ -z "${NEW_MCU_ROOT_DIR}" ]]; then
+  NEW_MCU_ROOT_DIR=$PROJECT_DIR/mcu-libwebrtc
+fi
 LIBWEBRTC_ROOT_DIR=$NEW_MCU_ROOT_DIR/libwebrtc/src
 LIBWEBRTC_BUILD_DIR=$NEW_MCU_ROOT_DIR/libwebrtc/src/out/Default
 alias cdnn='cd $NEW_MCU_ROOT_DIR'
