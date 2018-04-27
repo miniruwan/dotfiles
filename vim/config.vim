@@ -63,6 +63,8 @@ map <silent> <Leader>w <C-W>w
 " unfold everything when opening a file
 set foldlevelstart=99
 
+map <leader>et :tabe ~/temp/temp.txt<CR>
+
 if isWindows
   set t_Co=16
   set background=dark
