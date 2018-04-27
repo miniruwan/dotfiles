@@ -102,6 +102,14 @@ function showWindowsMessageBox
     fi
 }
 
+# arg1 : Environment variable name
+# arg2 : Value to be set for the  environment variable if not set
+function setEnvVariableIfNotSet
+{
+  if ! [[ -v $1 ]]; then
+    export "$1"="$2"
+  fi
+}
 
 if [[ $platform == 'osx' ]]; then
   export PATH="/usr/local/opt/openssl/bin:$PATH"

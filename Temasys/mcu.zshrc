@@ -1,17 +1,9 @@
 # prerequisite : PROJECT_DIR is defined
 
-# TODO : This function doesn't belong here
-function startSkylink
-{
-  cd $PROJECT_DIR/SkylinkJS
-  pm2 start server.js --name skylinkJS
-}
-
 # -------------------------------- NEW MCU --------------------------------
 # New MCU related alias
-if [[ -z "${NEW_MCU_ROOT_DIR}" ]]; then
-  NEW_MCU_ROOT_DIR=$PROJECT_DIR/mcu-libwebrtc
-fi
+setEnvVariableIfNotSet NEW_MCU_ROOT_DIR $PROJECT_DIR/mcu-libwebrtc
+
 LIBWEBRTC_ROOT_DIR=$NEW_MCU_ROOT_DIR/libwebrtc/src
 LIBWEBRTC_BUILD_DIR=$NEW_MCU_ROOT_DIR/libwebrtc/src/out/Default
 alias cdnn='cd $NEW_MCU_ROOT_DIR'
@@ -66,7 +58,7 @@ function tgrep
 function startMcuDeps
 {
   pm2 start redis-server -- --save ""
-  startSkylink
+  startSkylink # Depends on skylink.zshrc
   startSignalling # Depends on sig.zshrc
 }
 

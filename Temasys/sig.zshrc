@@ -1,7 +1,7 @@
 # prerequisite : PROJECT_DIR is defined
 
 # Some variables to be used later in this file
-SIG_ROOT_DIR=$PROJECT_DIR/temasys-signaling
+setEnvVariableIfNotSet SIG_ROOT_DIR $PROJECT_DIR/temasys-signaling
 
 alias sigZshrc='vim $PROJECT_DIR/configs/Temasys/sig.zshrc'
 alias cds='cd $SIG_ROOT_DIR'
