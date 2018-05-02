@@ -3,9 +3,9 @@
 call plug#begin('~/.vim/plugged')
 Plug 'mileszs/ack.vim'
 if isWindows
-  Plug 'vim-scripts/Zenburn'
   Plug 'morhetz/gruvbox'
 endif
+Plug 'jnurmine/Zenburn'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'

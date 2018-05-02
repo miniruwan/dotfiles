@@ -8,4 +8,4 @@ PROJECT_DIR=${0:a:h:h}
 source $PROJECT_DIR/configs/config.zshrc
 
 # Source any more custome zshrc files
-source $PROJECT_DIR/configs/Temasys/plugin.zshrc
+source $PROJECT_DIR/configs/Temasys/mcu.zshrc
