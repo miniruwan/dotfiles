@@ -3,5 +3,7 @@
         "<C-d>": true
     },
     "window.zoomLevel": 0,
+    "telemetry.enableTelemetry": false,
+    "telemetry.enableCrashReporter": false,
     "keyboard.dispatch": "keyCode"
 }
