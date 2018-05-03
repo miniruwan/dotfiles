@@ -17,4 +17,4 @@ if [[ $platform == 'wsl' ]]; then
 fi
 
 # Source any more custome zshrc files
-source $PROJECT_DIR/configs/Temasys/plugin.zshrc
+source $PROJECT_DIR/configs/Temasys/mcu.zshrc

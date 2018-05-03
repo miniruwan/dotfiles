@@ -19,6 +19,9 @@ set -g @plugin 'tmux-plugins/tmux-resurrect'
 
 set-option -g allow-rename off
 
+# Ctrl-l will clear the console together with the tmux scroll back buffer
+bind -n C-l send-keys C-l \; clear-history
+
 # Performance_Note : Setting this ends up using much more memory
 set-option -g history-limit 20000
 

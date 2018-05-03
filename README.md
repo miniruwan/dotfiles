@@ -11,24 +11,28 @@ This repository includes the configuration files like vimrc, bashrc, zshrc
 source <pathToClonedDirectory>/config.local.zshrc
 ```
 #### Vim
-```vim
-source <pathToClonedDirectory>/config.vim
-```
-#### Vim Plugin Installation
-Step 1: Install awsome vim  
+Step 1: Install awsome vimrc
 ```vim
 git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime   
-sh ~/.vim_runtime/install_awesome_vimrc.sh  
+" Add the following line to ~/.vimrc file
+source ~/.vim_runtime/vimrcs/basic.vim
 ```
-
-Step 2: Create dir to hold vim plugins   
-```vim
-mkdir -p ~/.vim   
-```
-
-Step 3: Install vim plugin manager  
+Step 2: Install vim plugin manager  
 ```vim
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim  
 ```
-
+Step 3: Source this repo's vimrc
+```vim
+let $MY_VIM_CONFIG_DIR='<pathToClonedDirectory>/vim'
+source $MY_VIM_CONFIG_DIR/config.vim
+```
 Step 4: Open vim and type ":PlugInstall"
+
+#### Other configurations
+Refer init.sh for other configurations including,
+
+ - tmux
+ - vscode
+
+ Enjoy!
+ ![alt text](https://scontent-sin6-1.xx.fbcdn.net/v/t31.0-1/c1105.233.223.223/s160x160/28337662_10216090704568247_617738601527671289_o.jpg?_nc_cat=0&oh=6e2a57b1076e0dbcde6c92a67d6eb18f&oe=5B530E37)

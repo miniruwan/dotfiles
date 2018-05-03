@@ -3,11 +3,11 @@
 call plug#begin('~/.vim/plugged')
 Plug 'mileszs/ack.vim'
 if isWindows
-  Plug 'vim-scripts/Zenburn'
   Plug 'morhetz/gruvbox'
 else
   Plug 'jnurmine/zenburn'
 endif
+Plug 'jnurmine/Zenburn'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
@@ -89,6 +89,7 @@ augroup END
 " => nerd tree
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <leader>nn :NERDTreeToggle<cr>
+map <leader>nf :NERDTreeFind<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => tagbar
@@ -99,7 +100,7 @@ nmap <leader>c :TagbarToggle<CR>
 " YankRing
 """"""""""""""""""""""""""""""
 let g:yankring_map_dot = 0
-
+nnoremap <leader>ps :YRShow<CR>
 
 """"""""""""""""""""""""""""""
 " UltiSnips
