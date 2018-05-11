@@ -62,6 +62,14 @@ function startMcuDeps
   startSignalling # Depends on sig.zshrc
 }
 
+# Clean MCU logs, recordings, core
+function cm
+{
+  rm -r $LIBWEBRTC_BUILD_DIR/Recordings/*
+  rm $LIBWEBRTC_BUILD_DIR/core
+  rm  $LIBWEBRTC_BUILD_DIR/Logs/*
+}
+
 export LD_LIBRARY_PATH=$LIBWEBRTC_BUILD_DIR:$LD_LIBRARY_PATH
 # -------------------------------- END - NEW MCU --------------------------------
 
