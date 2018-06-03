@@ -69,6 +69,7 @@ alias v='vim'
 
 # Exports
 export TERM=xterm-256color # Assuming terminal to support 256 colors
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 # set core file size to unlimited
 ulimit -c unlimited
@@ -117,3 +118,7 @@ fi
 
 # set tab space to 2
 tabs -2
+
+# https://unix.stackexchange.com/questions/241726/fix-ls-colors-for-directories-with-777-permission
+[ -e ~/.dircolors ] && eval $(dircolors -b ~/.dircolors) ||
+    eval $(dircolors -b)
