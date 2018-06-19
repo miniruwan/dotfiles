@@ -45,7 +45,7 @@ alias bt='bm MCU_TEST'
 function wgrep 
 {
     cdl
-    grep -R --exclude-dir={out,third_party,sdk} --exclude={tags,\*test\*,\*mock\*,\*android\*,\*fake\*,\*legacy\*} "$1" .
+    grep -R --exclude-dir={out,third_party,sdk,tools,buildtools,build,examples} --exclude={tags,\*test\*,\*mock\*,\*android\*,\*fake\*,\*legacy\*} "$1" .
 }
 
 # grep in webrtc excluding some directories (but not excluding test directories)
@@ -57,7 +57,7 @@ function tgrep
 
 function startMcuDeps
 {
-  pm2 start redis-server -- --save ""
+  pm2 start redis-server -- --save "900 1" --dir "/var"
   startSkylink # Depends on skylink.zshrc
   startSignalling # Depends on sig.zshrc
 }
@@ -68,6 +68,12 @@ function cm
   rm -r $LIBWEBRTC_BUILD_DIR/Recordings/*
   rm $LIBWEBRTC_BUILD_DIR/core
   rm  $LIBWEBRTC_BUILD_DIR/Logs/*
+}
+
+function generateCtags
+{
+  cdl
+  ctags --links=yes -R --exclude="third_party" --exclude="**test*" --exclude="**Test*" api/* audio/* base/* call/* common_audio/* common_video/* data/* examples/* infra/* logging/* media/* modules/* ortc/* p2p/* pc/* rtc_base/* rtc_tools/* sdk/* stats/* system_wrappers/* voice_engine/* video/* SymToTemasysCode/*
 }
 
 export LD_LIBRARY_PATH=$LIBWEBRTC_BUILD_DIR:$LD_LIBRARY_PATH

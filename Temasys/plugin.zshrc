@@ -13,7 +13,9 @@ alias cda='cd $PLUGIN_ROOT_DIR/Tests/AdapterJS'
 alias cdg='cd $PROJECT_DIR/Google-WebRTC-Samples/'
 alias rmb='rm -rf $PLUGIN_ROOT_DIR/$PLUGIN_BUILD_DIR_NAME/'
 alias lastconfigure='vim `ls -t $PLUGIN_ROOT_DIR/$PLUGIN_BUILD_DIR_NAME/Testing/Temporary/LastConfigure* | head -1`'
-alias lastbuild='vl $PLUGIN_ROOT_DIR/$PLUGIN_BUILD_DIR_NAME/Testing/Temporary/LastBuild*'
+alias taillastconfigure='tail -f `ls -t $PLUGIN_ROOT_DIR/$PLUGIN_BUILD_DIR_NAME/Testing/Temporary/LastConfigure* | head -1`'
+alias lastbuild='vim `ls -t $PLUGIN_ROOT_DIR/$PLUGIN_BUILD_DIR_NAME/Testing/Temporary/LastBuild* | head -1`'
+alias taillastbuild='tail -f `ls -t $PLUGIN_ROOT_DIR/$PLUGIN_BUILD_DIR_NAME/Testing/Temporary/LastBuild* | head -1`'
 
 
 if [[ `uname` == 'Darwin' ]] then # Mac

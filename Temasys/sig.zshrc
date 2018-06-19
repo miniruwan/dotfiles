@@ -16,7 +16,7 @@ function startSignalling
   pm2 start service.js --name sig-service
 }
 
-# grep in webrtc excluding some directories (excluding test directories also)
+# grep in signalling code excluding some directories
 function siggrep 
 {
     cds

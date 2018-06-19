@@ -120,5 +120,7 @@ fi
 tabs -2
 
 # https://unix.stackexchange.com/questions/241726/fix-ls-colors-for-directories-with-777-permission
+if ! [[ $platform == 'osx' ]]; then
 [ -e ~/.dircolors ] && eval $(dircolors -b ~/.dircolors) ||
     eval $(dircolors -b)
+fi
