@@ -1,9 +1,3 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Assumptions:
-"       $MY_VIM_CONFIG_DIR environment variable is set
-"
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 " Detect windows OS
 let uname = system('uname -a')
 let isWindows = 0
@@ -11,8 +5,7 @@ if uname =~ "Microsoft"
  let isWindows = 1
 endif
 
-" Assumption: $MY_VIM_CONFIG_DIR environment variable is set
-source $MY_VIM_CONFIG_DIR/plugin_config.vim
+execute 'source ' . expand('<sfile>:p:h') . '/plugin_config.vim'
 
 set nu
 

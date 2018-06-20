@@ -23,8 +23,7 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.c
 ```
 Step 3: Source this repo's vimrc
 ```vim
-let $MY_VIM_CONFIG_DIR='<pathToClonedDirectory>/vim'
-source $MY_VIM_CONFIG_DIR/config.vim
+source <pathToClonedDirectory>/vim/config.vim
 ```
 Step 4: Open vim and type ":PlugInstall"
 
