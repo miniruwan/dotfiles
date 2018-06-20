@@ -1,4 +1,3 @@
-
 " --------- start of vim-plug config ---------
 call plug#begin('~/.vim/plugged')
 Plug 'mileszs/ack.vim'
@@ -106,6 +105,8 @@ nnoremap <leader>ps :YRShow<CR>
 " UltiSnips
 """"""""""""""""""""""""""""""
 let g:UltiSnipsExpandTrigger="<c-j>"
+let g:snips_author=$USER
+let g:UltiSnipsSnippetDirectories = [expand('<sfile>:p:h').'/UltiSnips', 'UltiSnips']
 
 """"""""""""""""""""""""""""""
 " => FZF
