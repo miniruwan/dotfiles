@@ -57,11 +57,11 @@ map <leader>o :CtrlPMRU<CR>
 """"""""""""""""""""""""""""""
 " Ack
 " ---
-let g:ack_default_options = " --ignore-file=tags"
-nnoremap <silent> <Leader>s :Ack! <C-R><C-W><CR> 
-xnoremap <silent> <Leader>s y:Ack! --literal "<C-R>""<CR> 
-nnoremap <silent> <Leader>st :Ack! --ignore-dir=Test <C-R><C-W><CR> 
-xnoremap <silent> <Leader>st y:Ack! --ignore-dir=Test --literal "<C-R>""<CR> 
+let g:ack_default_options = ' -s -H --nopager --nocolor --nogroup --column --ignore-file=is:tags'
+nnoremap <silent> <Leader>st :Ack! <C-R><C-W><CR> 
+xnoremap <silent> <Leader>st y:Ack! --literal "<C-R>""<CR> 
+nnoremap <silent> <Leader>s :Ack! --ignore-dir=Test <C-R><C-W><CR> 
+xnoremap <silent> <Leader>s y:Ack! --ignore-dir=Test --literal "<C-R>""<CR> 
 " Avoid opening in a new tab because switchbuf current value (switchbuf=useopen,usetab,newtab) includes newtab
 " Reference : https://github.com/mileszs/ack.vim/issues/213
 set switchbuf=useopen,usetab
