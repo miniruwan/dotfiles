@@ -20,5 +20,5 @@ function startSignalling
 function siggrep 
 {
     cds
-    grep -R --exclude-dir={deploy,key,logs,node_modules,patch,ssl_certs} "$1" .
+    grep  --recursive --exclude-dir={deploy,key,logs,node_modules,patch,ssl_certs} "$1" .
 }

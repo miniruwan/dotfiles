@@ -12,5 +12,5 @@ function startSkylink
 function skygrep 
 {
     cdsky
-    grep -R --exclude-dir={publish,certificates,doc,doc-style,tests,node_modules,demo} "$1" .
+    grep  --recursive --exclude-dir={publish,certificates,doc,doc-style,tests,node_modules,demo} "$1" .
 }

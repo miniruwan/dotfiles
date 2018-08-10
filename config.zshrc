@@ -84,12 +84,6 @@ function fixCdAutoComplete
     exec zsh
 }
 
-# grep in plugin excluding some directories
-function codegrep 
-{
-    grep -r "$1" * | grep -Ev '(tags|Makefile|CMakeFiles|.cc|Release|cscope|Binary|logs|node_modules)'
-}
-
 function vl
 {
     vim `ls -t $1 | head -1`

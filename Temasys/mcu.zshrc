@@ -41,18 +41,26 @@ function bm
 }
 alias bt='bm MCU_TEST'
 
+
+function cleanBuildMcu
+{
+  cdnn
+  ./init.sh --patch-only
+  bm
+}
+
 # grep in webrtc excluding some directories (excluding test directories also)
 function wgrep 
 {
     cdl
-    grep -R --exclude-dir={out,third_party,sdk,tools,buildtools,build,examples} --exclude={tags,\*test\*,\*mock\*,\*android\*,\*fake\*,\*legacy\*} "$1" .
+    grep --recursive --ignore-case --exclude-dir={out,third_party,sdk,tools,buildtools,build,examples} --exclude={tags,\*test\*,\*mock\*,\*android\*,\*fake\*,\*legacy\*} "$1" .
 }
 
 # grep in webrtc excluding some directories (but not excluding test directories)
 function tgrep 
 {
     cdl
-    grep -R --exclude-dir={out,third_party,sdk} --exclude={tags,\*android\*,\*legacy\*} "$1" .
+    grep --recursive --ignore-case --exclude-dir={out,third_party,sdk} --exclude={tags,\*android\*,\*legacy\*} "$1" .
 }
 
 function startMcuDeps

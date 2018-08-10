@@ -36,7 +36,7 @@ function echoBuildProject
         # Only one project is there inside projects directory. So, * will match it.
         echo $PLUGIN_ROOT_DIR/$PLUGIN_BUILD_DIR_NAME/build_$1/projects/*
     else
-        dirname $(dirname $(dirname $(dirname $(grep YAML_CPP_BINARY_DIR $PLUGIN_ROOT_DIR/$PLUGIN_BUILD_DIR_NAME/CMakeCache.txt | grep -o "\/.*"))))
+        dirname $(dirname $(dirname $(dirname $(grep YAML_CPP_BINARY_DIR $PLUGIN_ROOT_DIR/$PLUGIN_BUILD_DIR_NAME/CMakeCache.txt | grep --only-matching "\/.*"))))
     fi
 }
 
@@ -123,8 +123,14 @@ function ip
 }
 
 # grep in plugin excluding some directories
+function pluginCodeGrep
+{
+    grep -r "$1" * | grep -Ev '(tags|Makefile|CMakeFiles|.cc|Release|cscope|Binary|logs|node_modules)'
+}
+
+# grep in plugin excluding some directories
 function exgrep 
 {
     cdt
-    grep -R --exclude-dir={$PLUGIN_BUILD_DIR_NAME,WebRTC,ThirdParty,firebreath,LogServer,AutoBuildServer,Tests} "$1" .
+    grep --recursive --exclude-dir={$PLUGIN_BUILD_DIR_NAME,WebRTC,ThirdParty,firebreath,LogServer,AutoBuildServer,Tests} "$1" .
 }
