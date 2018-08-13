@@ -18,7 +18,7 @@ function runMcu
   if (( $# != 0 )) then
     ./$1
   else
-    ./main
+    ./MCU
   fi
   cd $currentDir
 }
@@ -30,7 +30,7 @@ function bm
   if (( $# != 0 )) then
     ninja -C $LIBWEBRTC_BUILD_DIR $1
   else
-    ninja -C $LIBWEBRTC_BUILD_DIR main
+    ninja -C $LIBWEBRTC_BUILD_DIR MCU
   fi
   # Check the output status and print message according to it
   if (( $? != 0 )) then
