@@ -106,8 +106,13 @@ function setEnvVariableIfNotSet
   fi
 }
 
+# Some Exports
 if [[ $platform == 'osx' ]]; then
-  export PATH="/usr/local/opt/openssl/bin:$PATH"
+  export PATH=/usr/local/opt/openssl/bin:$PATH
+fi
+
+if [[ $platform == 'linux' ]]; then
+  export PATH=$HOME/.local/bin:$PATH
 fi
 
 # set tab space to 2
