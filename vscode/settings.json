@@ -5,5 +5,7 @@
     "window.zoomLevel": 0,
     "telemetry.enableTelemetry": false,
     "telemetry.enableCrashReporter": false,
-    "keyboard.dispatch": "keyCode"
+    "keyboard.dispatch": "keyCode",
+    // TODO : Add the installation of font in the init.sh
+    "terminal.integrated.fontFamily": "'Source Code Pro for Powerline'"
 }
