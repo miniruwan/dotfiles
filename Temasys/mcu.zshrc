@@ -6,6 +6,7 @@ setEnvVariableIfNotSet NEW_MCU_ROOT_DIR $PROJECT_DIR/mcu-libwebrtc
 
 LIBWEBRTC_ROOT_DIR=$NEW_MCU_ROOT_DIR/libwebrtc/src
 LIBWEBRTC_BUILD_DIR=$NEW_MCU_ROOT_DIR/libwebrtc/src/out/Default
+MCU_BINARY_NAME=MCU
 alias cdnn='cd $NEW_MCU_ROOT_DIR'
 alias cdn='cd $LIBWEBRTC_ROOT_DIR/SymToTemasysCode'
 alias cdl='cd $LIBWEBRTC_ROOT_DIR'
@@ -18,7 +19,7 @@ function runMcu
   if (( $# != 0 )) then
     ./$1
   else
-    ./MCU
+    ./$MCU_BINARY_NAME
   fi
   cd $currentDir
 }
@@ -30,7 +31,7 @@ function bm
   if (( $# != 0 )) then
     ninja -C $LIBWEBRTC_BUILD_DIR $1
   else
-    ninja -C $LIBWEBRTC_BUILD_DIR MCU
+    ninja -C $LIBWEBRTC_BUILD_DIR $MCU_BINARY_NAME
   fi
   # Check the output status and print message according to it
   if (( $? != 0 )) then
@@ -81,7 +82,13 @@ function cm
 function generateCtags
 {
   cdl
-  ctags --links=yes -R --exclude="third_party" --exclude="**test*" --exclude="**Test*" api/* audio/* base/* call/* common_audio/* common_video/* data/* examples/* infra/* logging/* media/* modules/* ortc/* p2p/* pc/* rtc_base/* rtc_tools/* sdk/* stats/* system_wrappers/* voice_engine/* video/* SymToTemasysCode/*
+
+  # Having any argument means to exclude test directories
+  if (( $# != 0 )) then
+    ctags --links=yes -R --exclude="*.java" --exclude="*.js" --exclude="**node_modules*" --exclude="third_party" --exclude="**test*" --exclude="**Test*" api/* audio/* base/* call/* common_audio/* common_video/* data/* examples/* infra/* logging/* media/* modules/* ortc/* p2p/* pc/* rtc_base/* rtc_tools/* sdk/* stats/* system_wrappers/* voice_engine/* video/* SymToTemasysCode/*
+  else
+    ctags --links=yes -R --exclude="*.java" --exclude="*.js" --exclude="**node_modules*" --exclude="third_party" --exclude="**test*" api/* audio/* base/* call/* common_audio/* common_video/* data/* examples/* infra/* logging/* media/* modules/* ortc/* p2p/* pc/* rtc_base/* rtc_tools/* sdk/* stats/* system_wrappers/* voice_engine/* video/* SymToTemasysCode/*
+  fi
 }
 
 export LD_LIBRARY_PATH=$LIBWEBRTC_BUILD_DIR:$LD_LIBRARY_PATH
