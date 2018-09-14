@@ -41,6 +41,7 @@ function bm
   fi
 }
 alias bt='bm MCU_TEST'
+alias btt='bm MCU_TEST_CLIENTS'
 
 
 function cleanBuildMcu
@@ -106,7 +107,7 @@ alias rmm='rm $MCU_ROOT_DIR/logs/erizo-cores/*.log;rm $MCU_ROOT_DIR/logs/*.log*'
 alias lsLastLicodeLog='ls -t $MCU_ROOT_DIR/logs/erizo-cores/*.log | head -1'
 alias licodelog='vim `lsLastLicodeLog`'
 alias mculog='vim $MCU_ROOT_DIR/logs/skylink-mcu-node.log'
-alias tailmculog='tail -f $MCU_ROOT_DIR/logs/skylink-mcu-node.log'
+alias tailmculog='tail -F $LIBWEBRTC_BUILD_DIR/Logs/FullLog_0'
 alias cdlicodelog='cd $MCU_ROOT_DIR/logs/erizo-cores/'
 alias vimex='vim $MCU_ROOT_DIR/licode/erizo/src/erizo/media/ExternalOutput.cpp'
 alias vimmcu='vim $MCU_ROOT_DIR/app/sfu/MCU.js'
