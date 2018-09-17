@@ -24,6 +24,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'vobornik/vim-mql4'
 Plug 'rupurt/vim-mql5'
 Plug 'leafgarland/typescript-vim'
+Plug 'godlygeek/tabular'
 call plug#end()
 " --------- End of vim-plug config ---------
 
@@ -34,7 +35,7 @@ call plug#end()
 """"""""""""""""""""""""""""""
 " => YouCompleteMe
 """"""""""""""""""""""""""""""
-let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/projects/configs/vim/ycm_extra_conf.py'
 
 """"""""""""""""""""""""""""""
 " => Smooth scroll
