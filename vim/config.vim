@@ -27,9 +27,6 @@ endif
 :autocmd InsertEnter * set cul
 :autocmd InsertLeave * set nocul
 
-" do an upward search from the directory containing tags up to the stop directory (~)
-set tags+=~/projects/mcu-libwebrtc/libwebrtc/src/tags,tags;~
-
 " Mouse scroll
 set mouse=a
 map <ScrollWheelUp> <C-Y>
