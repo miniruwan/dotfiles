@@ -41,6 +41,8 @@ zplug "zsh-users/zsh-autosuggestions"
 if [[ $platform == 'osx' ]]; then
     zplug "iam4x/zsh-iterm-touchbar"
 fi
+# Note that zsh-syntax-highlighting must be the last plugin sourced
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
