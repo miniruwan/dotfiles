@@ -1,3 +1,5 @@
+" https://superuser.com/questions/179164/vim-complains-about-a-temporary-file-when-opening-syntax-highlighted-files-on-ma
+set shell=/bin/zsh
 " Detect windows OS
 let uname = system('uname -a')
 let isWindows = 0

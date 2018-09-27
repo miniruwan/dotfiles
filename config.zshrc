@@ -36,6 +36,7 @@ source ~/.zplug/init.zsh
 
 zplug "rupa/z", use:z.sh #Tracks your most used directories, based on 'frecency'
 zplug "changyuheng/fz", defer:1 # The missing fuzzy tab completion feature of z
+zplug "zsh-users/zsh-autosuggestions"
 # Install zsh-iterm-touchbar only for OS X
 if [[ $platform == 'osx' ]]; then
     zplug "iam4x/zsh-iterm-touchbar"
