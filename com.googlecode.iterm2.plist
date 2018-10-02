@@ -1056,17 +1056,17 @@
 	<key>NSWindow Frame SUStatusFrame</key>
 	<string>972 435 400 129 0 0 1680 1027 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>530 496 620 392 0 0 1680 1027 </string>
+	<string>530 494 620 392 0 0 1680 1027 </string>
 	<key>NSWindow Frame SessionsPreferences</key>
-	<string>213 1156 606 469 -116 1050 1920 1057 </string>
+	<string>269 101 606 469 0 0 1680 1027 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>682 256 796 486 0 0 1680 1027 </string>
+	<string>681 1166 796 486 -116 1050 1920 1057 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>127 443 592 584 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>-116 1073 1920 1034 -116 1050 1920 1057 </string>
-	<key>NSWindow Frame iTerm Window 1</key>
 	<string>-116 1050 1920 1057 -116 1050 1920 1057 </string>
+	<key>NSWindow Frame iTerm Window 1</key>
+	<string>0 94 1680 933 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>-996 1680 650 427 -996 1050 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
@@ -1787,33 +1787,25 @@
 			<array>
 				<dict>
 					<key>action</key>
-					<string>GrowlTrigger</string>
+					<string>iTermUserNotificationTrigger</string>
 					<key>parameter</key>
-					<string>Build Succeeded</string>
-					<key>regex</key>
-					<string>\*\* BUILD FAILED \*\*</string>
-				</dict>
-				<dict>
-					<key>action</key>
-					<string>GrowlTrigger</string>
-					<key>parameter</key>
-					<string>Build Failed</string>
+					<string>Compile errors</string>
 					<key>regex</key>
 					<string>[^0] Compiler errors</string>
 				</dict>
 				<dict>
 					<key>action</key>
-					<string>GrowlTrigger</string>
+					<string>iTermUserNotificationTrigger</string>
 					<key>parameter</key>
-					<string>BUILD SUCCEEDED</string>
+					<string>Build Succeeded</string>
 					<key>regex</key>
 					<string>\*\* BUILD SUCCEEDED \*\*</string>
 				</dict>
 				<dict>
 					<key>action</key>
-					<string>GrowlTrigger</string>
+					<string>iTermUserNotificationTrigger</string>
 					<key>parameter</key>
-					<string>BUILD FAILED</string>
+					<string>Build Failed</string>
 					<key>regex</key>
 					<string>\*\* BUILD FAILED \*\*</string>
 				</dict>
@@ -1851,9 +1843,9 @@
 				</dict>
 				<dict>
 					<key>action</key>
-					<string>GrowlTrigger</string>
+					<string>iTermUserNotificationTrigger</string>
 					<key>parameter</key>
-					<string>Tests Passed</string>
+					<string>Tests completed</string>
 					<key>regex</key>
 					<string>\[  PASSED  \]</string>
 				</dict>
@@ -2018,7 +2010,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-09-13T03:18:31Z</date>
+	<date>2018-09-27T07:30:20Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowFullScreenTabBar</key>
@@ -2036,7 +2028,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.2.0</string>
+	<string>3.2.1</string>
 	<key>kCPFavoritesUserDefaultsKey</key>
 	<array>
 		<data>

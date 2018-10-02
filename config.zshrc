@@ -64,8 +64,8 @@ autoload -Uz compinit
 compinit
 
 # Alias
-alias zshrc='vim $PROJECT_DIR/configs/config.zshrc'
-alias vimrc='vim $PROJECT_DIR/configs/vim/config.vim'
+alias zshrc='vim $CONFIG_DIR/config.zshrc'
+alias vimrc='vim $CONFIG_DIR/vim/config.vim'
 alias cdp='cd $PROJECT_DIR/'
 alias cdw='cd ~/work'
 alias v='vim'
@@ -96,7 +96,7 @@ function showWindowsMessageBox
 {
     # Show notification (only on windows because Mac can use iTerm2 triggers)
     if [[ $platform == 'cygwin' ]]; then
-        cscript `cygpath -d "$PROJECT_DIR/configs/Helpers/MessageBox.vbs"` $1
+        cscript `cygpath -d "$CONFIG_DIR/Helpers/MessageBox.vbs"` $1
     fi
 }
 

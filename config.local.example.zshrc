@@ -1,18 +1,20 @@
-# To Avoid printing name in the prompt
-if [[ $platform != 'wsl' ]]; then
-  DEFAULT_USER='miniruwan'
-fi
-
+# The place where the config files are located
+CONFIG_DIR=${0:a:h}
 # The place where projects (including this project itself) are cloned
 PROJECT_DIR=${0:a:h:h}
 
 # Source the config.zshrc
 source $PROJECT_DIR/configs/config.zshrc
 
-# Any platform specific custom configurations
-if [[ $platform == 'wsl' ]]; then
-  alias cdr='cd /mnt/c/Users/Miniruwan/AppData/Roaming/MetaQuotes/Terminal/D6A64B03CC8608512E2306E65B4C1A54/MQL4/Experts/Miniruwan'
-fi
-
 # Source any more custom zshrc files
+source $CONFIG_DIR/Temasys/plugin.zshrc
+source $CONFIG_DIR/Temasys/sig.zshrc
 source $PROJECT_DIR/mcu-libwebrtc/dotfiles/config.example.zshrc
+source $CONFIG_DIR/Temasys/skylink.zshrc
+
+function startMcuDeps
+{
+  pm2 start redis-server -- --save "900 1" --dir "/var"
+  startSkylink # Depends on skylink.zshrc
+  startSignalling # Depends on sig.zshrc
+}

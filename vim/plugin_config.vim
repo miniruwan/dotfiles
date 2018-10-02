@@ -35,7 +35,7 @@ call plug#end()
 """"""""""""""""""""""""""""""
 " => YouCompleteMe
 """"""""""""""""""""""""""""""
-let g:ycm_global_ycm_extra_conf = '~/projects/configs/vim/ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = expand('<sfile>:p:h') . '/ycm_extra_conf.py'
 
 """"""""""""""""""""""""""""""
 " => Smooth scroll
