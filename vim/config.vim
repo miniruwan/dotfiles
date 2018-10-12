@@ -47,7 +47,7 @@ set expandtab        " expand tabs to spaces
  \<CR><CR>
 
 " Initiate replace word under cursor
-map <silent> <Leader>h :%s/<C-R><C-W>/
+map <silent> <Leader>h :%s/<C-R><C-W>
 
 " Switch to last split
 map <silent> <Leader>w <C-W>w

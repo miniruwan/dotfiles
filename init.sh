@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Warning : This is not completely tested yet
+# TODO : Remove hardcoding projects and configs directory
+
 # ========== General script ==========
 # Detect platform
 platform='unknown'
@@ -12,6 +15,8 @@ if [[ "$unamestr" == 'Linux' ]]; then
 	fi
 elif [[ "$unamestr" == 'FreeBSD' ]]; then
   platform='freebsd'
+elif [[ "$unamestr" == 'Darwin' ]]; then
+  platform='osx'
 fi
 
 if [[ $platform == 'linux' ]]; then
@@ -154,6 +159,12 @@ configure_vim() {
   sudo apt-get install python-dev python3-dev
   cd ~/.vim/plugged/YouCompleteMe
   ./install.py --clang-completer --cs-completer ---js-completer
+}
+
+configure_iterm() {
+  if [[ $platform == 'osx' ]]; then
+    ln -s -f ~/projects/configs/com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
+  fi
 }
 
 run_all_configurations() {
