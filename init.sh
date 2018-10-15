@@ -4,6 +4,8 @@
 # TODO : Remove hardcoding projects and configs directory
 
 # ========== General script ==========
+CONFIG_DIR=${0:a:h}
+
 # Detect platform
 platform='unknown'
 unamestr=`uname`
@@ -77,12 +79,9 @@ configure_tmux() {
   if [[ $platform == 'linux' ]]; then
     sudo apt-get install tmux
   fi
-  cd
-  git clone https://github.com/gpakosz/.tmux.git
-  ln -s -f .tmux/.tmux.conf
-  cp .tmux/.tmux.conf.local .
-  # Assumption : ~/projects/configs is the place where this file is located
-  echo "source-file ~/projects/configs/config.tmux" >> ~/.tmux.conf.local
+  pip install --user powerline-status
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+  echo "source-file $CONFIG_DIR/config.tmux" >> ~/.tmux.conf.local
 }
 
 configure_zenburn() {
