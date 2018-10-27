@@ -166,6 +166,27 @@ configure_iterm() {
   fi
 }
 
+# https://github.com/nvbn/thefuck
+configure_theFuck() {
+  if [[ $platform == 'linux' ]]; then
+    sudo apt update
+    sudo apt install python3-dev python3-pip
+    sudo pip3 install thefuck
+  elif [[ $platform == 'osx' ]]; then
+    brew install thefuck
+  fi
+}
+
+configure_copyQ() {
+  if [[ $platform == 'linux' ]]; then
+    sudo add-apt-repository -y ppa:hluk/copyq
+    sudo apt update
+    sudo apt install -y copyq
+  elif [[ $platform == 'osx' ]]; then
+    brew cask install copyq
+  fi
+}
+
 run_all_configurations() {
   configure_powerline_font
   configure_tmux
