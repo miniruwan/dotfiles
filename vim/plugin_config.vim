@@ -36,6 +36,7 @@ call plug#end()
 " => YouCompleteMe
 """"""""""""""""""""""""""""""
 let g:ycm_global_ycm_extra_conf = expand('<sfile>:p:h') . '/ycm_extra_conf.py'
+map <leader>y :YcmCompleter FixIt<CR>
 
 """"""""""""""""""""""""""""""
 " => Smooth scroll

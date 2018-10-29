@@ -74,9 +74,6 @@ alias v='vim'
 export TERM=xterm-256color # Assuming terminal to support 256 colors
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
-# set core file size to unlimited
-ulimit -c unlimited
-
 # Sometimes error described in the following link happens and need to do the suggested solution
 # _arguments:450: _vim_files: function definition file not found
 # https://github.com/robbyrussell/oh-my-zsh/issues/518
