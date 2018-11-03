@@ -1,10 +1,9 @@
 #!/bin/bash
 
 # Warning : This is not completely tested yet
-# TODO : Remove hardcoding projects and configs directory
 
 # ========== General script ==========
-CONFIG_DIR=${0:a:h}
+CONFIG_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 
 # Detect platform
 platform='unknown'
@@ -21,11 +20,17 @@ elif [[ "$unamestr" == 'Darwin' ]]; then
   platform='osx'
 fi
 
-if [[ $platform == 'linux' ]]; then
-  sudo apt-get update
-fi
-
 # ---------- Helper functions -----------
+print_info() {
+  # Printing message in the console.
+  GREEN_BLINK_BOLD='\e[5m\e[32m\e[1m'
+  NC='\033[0m' # No Color
+  echo ""
+  echo "------------------------------"
+  echo -e "${GREEN_BLINK_BOLD}$1${NC}"
+  echo "------------------------------"
+}
+
 print_important() {
   # Printing message in the console.
   RED='\033[0;31m'
@@ -39,16 +44,18 @@ print_important() {
 # ================= functions for each configuration task =====================
 
 configure_zsh() {
+  print_info "Installing Zsh"
 	sudo apt-get install zsh
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
+  # zplug
+	git clone https://github.com/zplug/zplug ~/packages/zplug
 	echo "#" >> ~/.zshrc
 	echo "# Mini's configs" >> ~/.zshrc
-	echo "source ~/projects/configs/config.local.zshrc" >> ~/.zshrc
+	echo "source ~/packages/zplug/init.zsh" >> ~/.zshrc
 
-	git clone https://github.com/zplug/zplug ~/packages/zplug
-	cp ~/projects/configs/config.local.example.zshrc ~/projects/configs/config.local.zshrc
-
+	cp $CONFIG_DIR/config.local.example.zshrc $CONFIG_DIR/config.local.zshrc
+	echo "source $CONFIG_DIR/config.local.zshrc" >> ~/.zshrc
 }
 
 configure_mono() {
@@ -60,33 +67,47 @@ configure_mono() {
 }
 
 configure_node() {
-	curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+	curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 	sudo apt-get install -y nodejs
 }
 
 configure_fzf() {
+  print_info "Installing fzf"
 	git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 	~/.fzf/install
 }
 
+configure_python() {
+  if [[ $platform == 'linux' ]]; then
+    sudo apt install python-pip
+    sudo apt install python-setuptools
+    pip install wheel
+  fi
+}
+
 configure_powerline_font() {
   if [[ $platform == 'linux' ]]; then
+    print_info "Installing powerline font"
     sudo apt-get install fonts-powerline
+    configure_python
+    pip install --user powerline-status
   fi
 }
 
 configure_tmux() {
+  print_info "Installing tmux"
   if [[ $platform == 'linux' ]]; then
-    sudo apt-get install tmux
+    sudo apt-get install -y tmux
   fi
-  pip install --user powerline-status
+  configure_powerline_font
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-  echo "source-file $CONFIG_DIR/config.tmux" >> ~/.tmux.conf.local
+  echo "source-file $CONFIG_DIR/config.tmux" >> ~/.tmux.conf
 }
 
 configure_zenburn() {
-  # Install Zenburn-for-Terminator
   if [[ $platform == 'linux' ]]; then
+    print_info "Installing Zenburn-for-Terminator"
+    print_info "Installing Zenburn"
     mkdir -p ~/.config/terminator/
     wget -O ~/.config/terminator/config https://raw.githubusercontent.com/alinmindroc/Zenburn-for-Terminator/master/config
   fi
@@ -145,11 +166,7 @@ configure_vim() {
   sudo update-alternatives --install /usr/bin/vi vi /usr/local/bin/vim 1
   sudo update-alternatives --set vi /usr/local/bin/vim
 
-  git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
-
-  echo "source ~/.vim_runtime/vimrcs/basic.vim" >> ~/.vimrc
-  echo "let \$MY_VIM_CONFIG_DIR='~/projects/configs/vim'" >> ~/.vimrc
-  echo "source \$MY_VIM_CONFIG_DIR/config.vim" >> ~/.vimrc
+  echo "source $CONFIG_DIR/vim/config.vim" >> ~/.vimrc
 
   curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
@@ -162,7 +179,7 @@ configure_vim() {
 
 configure_iterm() {
   if [[ $platform == 'osx' ]]; then
-    ln -s -f ~/projects/configs/com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
+    ln -s -f $CONFIG_DIR/com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
   fi
 }
 
@@ -178,6 +195,7 @@ configure_theFuck() {
 }
 
 configure_copyQ() {
+  print_info "Installing CopyQ"
   if [[ $platform == 'linux' ]]; then
     sudo add-apt-repository -y ppa:hluk/copyq
     sudo apt update
@@ -188,14 +206,51 @@ configure_copyQ() {
 }
 
 run_all_configurations() {
+
+  if [[ $platform == 'linux' ]]; then
+    sudo apt-get update
+  fi
+  configure_zsh
+  configure_fzf
   configure_powerline_font
   configure_tmux
   configure_zenburn
   configure_gitkraken
   configure_vscode
 }
+usage="Usage : 
+$(basename "$0") [--<option>]
+
+where <option>:
+    --help      show this help text
+    --all       run all initialization scripts
+    --zsh       install zsh with oh-my-zsh
+    --fzf       install fzf
+    --python    install pip
+    --font      install powerline font
+    --zenburn   install Zenburn-for-Terminator
+    --copy      install CopyQ
+    --tmux      install tmux"
 
 # ======================== main ========================
 if [[ $# -eq 0 ]] ; then # No arguments supplied.
+  echo "$usage"
+elif [[ $* == *--help* ]] ; then
+  echo "$usage"
+elif [[ $* == *--all* ]] ; then
   run_all_configurations
+elif [[ $* == *--zsh* ]] ; then
+  configure_zsh
+elif [[ $* == *--fzf* ]] ; then
+  configure_fzf
+elif [[ $* == *--python* ]] ; then
+  configure_python
+elif [[ $* == *--font* ]] ; then
+  configure_powerline_font
+elif [[ $* == *--zenburn* ]] ; then
+  configure_zenburn
+elif [[ $* == *--copy* ]] ; then
+  configure_copyQ
+elif [[ $* == *--tmux* ]] ; then
+  configure_tmux
 fi

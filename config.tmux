@@ -43,6 +43,9 @@ bind -n C-l send-keys C-l \; clear-history
 # Performance_Note : Setting this ends up using much more memory
 set-option -g history-limit 20000
 
+# Reduce the repeat time
+set-option -g repeat-time 200
+
 setw -g mode-keys vi
 
 bind r source-file ~/.tmux.conf \; display-message "Config reloaded..."

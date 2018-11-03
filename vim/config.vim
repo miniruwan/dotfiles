@@ -7,9 +7,12 @@ if uname =~ "Microsoft"
  let isWindows = 1
 endif
 
+let mapleader=","
+
 execute 'source ' . expand('<sfile>:p:h') . '/plugin_config.vim'
 
 set nu
+set noswapfile
 
 " copying to clipboard
 vmap <C-x> :!pbcopy<CR>  
