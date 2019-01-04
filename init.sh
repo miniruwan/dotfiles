@@ -174,7 +174,7 @@ configure_vim() {
   sudo apt-get install build-essential cmake
   sudo apt-get install python-dev python3-dev
   cd ~/.vim/plugged/YouCompleteMe
-  ./install.py --clang-completer --cs-completer ---js-completer
+  ./install.py --clang-completer --cs-completer --js-completer
 }
 
 configure_iterm() {
