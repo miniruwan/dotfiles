@@ -205,6 +205,17 @@ configure_copyQ() {
   fi
 }
 
+configure_thefuck() {
+  print_info "Installing thefuck"
+  if [[ $platform == 'linux' ]]; then
+    sudo apt update
+    sudo apt install python3-dev python3-pip python3-setuptools
+    sudo pip3 install thefuck
+  elif [[ $platform == 'osx' ]]; then
+    brew install thefuck
+  fi
+}
+
 run_all_configurations() {
 
   if [[ $platform == 'linux' ]]; then
@@ -217,8 +228,9 @@ run_all_configurations() {
   configure_zenburn
   configure_gitkraken
   configure_vscode
+  configure_thefuck
 }
-usage="Usage : 
+usage="Usage :
 $(basename "$0") [--<option>]
 
 where <option>:
@@ -230,7 +242,8 @@ where <option>:
     --font      install powerline font
     --zenburn   install Zenburn-for-Terminator
     --copy      install CopyQ
-    --tmux      install tmux"
+    --tmux      install tmux
+    --thefuck   install thefuck"
 
 # ======================== main ========================
 if [[ $# -eq 0 ]] ; then # No arguments supplied.
@@ -253,4 +266,6 @@ elif [[ $* == *--copy* ]] ; then
   configure_copyQ
 elif [[ $* == *--tmux* ]] ; then
   configure_tmux
+elif [[ $* == *--thefuck* ]] ; then
+  configure_thefuck
 fi

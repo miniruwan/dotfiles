@@ -13,7 +13,6 @@ function startSignalling
 {
   cd $SIG_ROOT_DIR/app
   pm2 start main.js --name sig-main
-  pm2 start service.js --name sig-service
 }
 
 # grep in signalling code excluding some directories

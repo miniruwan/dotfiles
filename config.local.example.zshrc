@@ -4,7 +4,7 @@ CONFIG_DIR=${0:a:h}
 PROJECT_DIR=${0:a:h:h}
 
 # Source the config.zshrc
-source $PROJECT_DIR/configs/config.zshrc
+source $CONFIG_DIR/config.zshrc
 
 # Source any more custom zshrc files
 source $CONFIG_DIR/Temasys/plugin.zshrc

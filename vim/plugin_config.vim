@@ -110,6 +110,7 @@ nmap <leader>c :TagbarToggle<CR>
 """"""""""""""""""""""""""""""
 " YankRing
 """"""""""""""""""""""""""""""
+let g:yankring_history_dir = '~/.vim'
 let g:yankring_map_dot = 0
 nnoremap <leader>ps :YRShow<CR>
 
