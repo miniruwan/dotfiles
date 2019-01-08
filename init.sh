@@ -166,6 +166,11 @@ configure_vim() {
   sudo update-alternatives --install /usr/bin/vi vi /usr/local/bin/vim 1
   sudo update-alternatives --set vi /usr/local/bin/vim
 
+  # Install the Basic version of https://github.com/amix/vimrc
+  git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
+  echo "source ~/.vim_runtime/vimrcs/basic.vim" >> ~/.vimrc
+
+  # Source this project's vim config
   echo "source $CONFIG_DIR/vim/config.vim" >> ~/.vimrc
 
   curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
