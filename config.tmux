@@ -15,13 +15,6 @@ bind l select-pane -R
 
 set -g mouse on
 
-# Using https://github.com/powerline/powerline
-# TODO : Instead of hardcoding the pythong site-packages directory,
-#         find a way to get it from here.
-#         The command is:
-#           python -m site --user-site
-source $HOME/.local/lib/python2.7/site-packages/powerline/bindings/tmux/powerline.conf
-
 # tmux plugin manager configuration
 # reference : https://github.com/tmux-plugins/tpm
 # ==========================================
@@ -49,4 +42,3 @@ set-option -g repeat-time 200
 setw -g mode-keys vi
 
 bind r source-file ~/.tmux.conf \; display-message "Config reloaded..."
-

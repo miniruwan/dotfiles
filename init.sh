@@ -99,9 +99,12 @@ configure_tmux() {
   if [[ $platform == 'linux' ]]; then
     sudo apt-get install -y tmux
   fi
-  configure_powerline_font
+  # Install https://github.com/gpakosz/.tmux
+  git clone https://github.com/gpakosz/.tmux.git ~/.tmux
+  ln -s -f ~/.tmux/.tmux.conf ~/.tmux.conf
+  cp ~/.tmux/.tmux.conf.local ~/
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-  echo "source-file $CONFIG_DIR/config.tmux" >> ~/.tmux.conf
+  echo "source-file $CONFIG_DIR/config.tmux" >> ~/.tmux.conf.local
 }
 
 configure_zenburn() {
