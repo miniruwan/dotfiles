@@ -1,11 +1,11 @@
-setEnvVariableIfNotSet SKYLINKJS_ROOT_DIR $PROJECT_DIR/SkylinkJS
+setEnvVariableIfNotSet SKYLINKJS_ROOT_DIR $PROJECT_DIR/web-sdk-2.x
 
 alias cdsky='cd $SKYLINKJS_ROOT_DIR'
 
 function startSkylink
 {
-  cdsky
-  pm2 start server.js --name skylinkJS
+  cd $SKYLINKJS_ROOT_DIR/demos/reactjs
+  pm2 start scripts/start.js --name skylinkJS
 }
 
 # grep in signalling code excluding some directories
