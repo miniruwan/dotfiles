@@ -1051,24 +1051,26 @@
 			<string>iTermTouchBarIdentifierNextMark</string>
 		</array>
 	</dict>
+	<key>NSWindow Frame NSColorPanel</key>
+	<string>0 149 224 280 0 0 1680 1027 </string>
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>874 95 445 77 0 0 1680 1027 </string>
 	<key>NSWindow Frame SUStatusFrame</key>
 	<string>972 435 400 129 0 0 1680 1027 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>530 494 620 392 0 0 1680 1027 </string>
+	<string>534 1548 620 392 -116 1050 1920 1057 </string>
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>269 101 606 469 0 0 1680 1027 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>681 1166 796 486 -116 1050 1920 1057 </string>
+	<string>527 1334 1016 512 -116 1050 1920 1057 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>127 443 592 584 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>-116 1050 1920 1057 -116 1050 1920 1057 </string>
+	<string>-117 1073 1920 1034 -116 1050 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>0 94 1680 933 0 0 1680 1027 </string>
+	<string>0 71 1680 956 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>-996 1680 650 427 -996 1050 1920 1057 </string>
+	<string>-116 1667 650 427 -116 1050 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
 	<string>0 76 1680 951 0 0 1680 1027 </string>
 	<key>New Bookmarks</key>
@@ -1641,7 +1643,7 @@
 			<key>Normal Font</key>
 			<string>DroidSansMonoDottedForPowerline 13</string>
 			<key>Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
 			<false/>
 			<key>Right Option Key Sends</key>
@@ -2010,11 +2012,11 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-09-27T07:30:20Z</date>
+	<date>2019-01-11T08:05:52Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowFullScreenTabBar</key>
-	<false/>
+	<true/>
 	<key>TabStyle</key>
 	<integer>1</integer>
 	<key>UKCrashReporterLastCrashReportDate</key>
@@ -2028,7 +2030,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.2.1</string>
+	<string>3.2.6</string>
 	<key>kCPFavoritesUserDefaultsKey</key>
 	<array>
 		<data>

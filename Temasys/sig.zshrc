@@ -11,8 +11,10 @@ alias cdSigLog='cd $SIG_ROOT_DIR/logs/daily/'
 
 function startSignalling
 {
-  cd $SIG_ROOT_DIR/app
-  pm2 start main.js --name sig-main
+  export mcu_on_demand=true
+  cd $SIG_ROOT_DIR
+  pm2 start app/main.js --name sig-main
+  pm2 start app/message.js --name sig-message
 }
 
 # grep in signalling code excluding some directories
