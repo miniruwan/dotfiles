@@ -97,6 +97,27 @@ function showWindowsMessageBox
     fi
 }
 
+function spotifyAdBlock
+{
+  if [[ $platform != 'osx' ]]; then
+    echo "This is only implemented for OSX"
+    return 1;
+  fi
+
+  # Quit Spotify
+  osascript -e 'quit app "/Applications/Spotify.app"'
+
+  # Edit the hosts file
+  sudo wget -O /etc/hosts.d/spotifyAdBlock.txt https://raw.githubusercontent.com/CHEF-KOCH/CKs-FilterList/master/Anti-Corp/Spotify/Spotify-HOSTS.txt
+  sudo sh -c 'cat /etc/hosts.d/*.txt > /etc/hosts'
+
+  # Clear cache
+  rm -rf $HOME/Library/Caches/com.spotify.client/*
+
+  # Finally Open Spotify
+  open -a Spotify
+}
+
 # arg1 : Environment variable name
 # arg2 : Value to be set for the  environment variable if not set
 function setEnvVariableIfNotSet
@@ -117,6 +138,10 @@ fi
 
 # set tab space to 2
 tabs -2
+
+# https://github.com/wernight/powerline-web-fonts/issues/8
+export LANG=en_US.UTF-8
+export LC_CTYPE=en_US.UTF-8
 
 # https://unix.stackexchange.com/questions/241726/fix-ls-colors-for-directories-with-777-permission
 if ! [[ $platform == 'osx' ]]; then
