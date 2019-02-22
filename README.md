@@ -1,6 +1,6 @@
 # Dotfiles
 ### Introduction
-This repository includes the my configuration files for [vim](https://dillinger.io), [zsh](https://ohmyz.sh), [tmux](https://en.wikipedia.org/wiki/Tmux), etc
+This repository includes my configuration files for [vim](https://www.vim.org), [zsh](https://ohmyz.sh), [tmux](https://en.wikipedia.org/wiki/Tmux), etc
 
 #### Screenshots
 ##### Zsh
