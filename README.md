@@ -4,10 +4,10 @@ This repository includes the my configuration files for [vim](https://dillinger.
 
 #### Screenshots
 ##### Zsh
-![zsh](https://i.imgur.com/UuvY2Sp.gif)
+![zsh](art/zsh.gif)
 More info: https://ohmyz.sh
 ##### Vim
-![vim](https://i.imgur.com/chx8zLT.gif)
+![vim](art/vim.gif)
 More info: https://vimawesome.com
 ##### Tmux
 ![Screenshot](https://cloud.githubusercontent.com/assets/553208/19740585/85596a5a-9bbf-11e6-8aa1-7c8d9829c008.gif)
