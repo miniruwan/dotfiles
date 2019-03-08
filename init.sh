@@ -94,10 +94,46 @@ configure_powerline_font() {
   fi
 }
 
+configure_cmake() {
+  if [[ $platform == 'linux' ]]; then
+    cmakeLatestVersion=$(curl --silent "https://api.github.com/repos/Kitware/CMake/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")' | cut -d'v' -f 2)
+    cd ~/tmp
+    wget https://github.com/Kitware/CMake/releases/download/v$cmakeLatestVersion/cmake-$cmakeLatestVersion-Linux-x86_64.tar.gz
+    tar -xzvf cmake-$cmakeLatestVersion-Linux-x86_64.tar.gz
+    cd cmake-$cmakeLatestVersion-Linux-x86_64
+    # install
+    mkdir -p ~/.local/bin/
+    mkdir -p ~/.local/share/
+    cp -r bin/* ~/.local/bin/
+    cp -r share/* ~/.local/share/
+  fi
+}
+
+build_tmux() {
+  # libevent is needed as a dependency to build tmux.
+  cd ~/tmp
+  git clone https://github.com/libevent/libevent.git
+  mkdir build && cd build
+  cmake ..
+  make && make install
+
+  # TODO: May be we need lates cmake to compile. Refer above configure_cmake
+  cd ~/tmp
+  git clone https://github.com/tmux/tmux.git
+  cd tmux
+	sh autogen.sh
+	./configure && make
+}
+
 configure_tmux() {
   print_info "Installing tmux"
   if [[ $platform == 'linux' ]]; then
-    sudo apt-get install -y tmux
+    # tmux latest version is needed. So, check the version available from apt-get
+    if [[ $(apt-cache policy tmux | sed -n '3p' | cut -c 14- | cut -d'-' -f 1) -lt 2 ]]; then
+      build_tmux
+    else
+      sudo apt-get install -y tmux
+    fi
   fi
   # Install https://github.com/gpakosz/.tmux
   git clone https://github.com/gpakosz/.tmux.git ~/.tmux
