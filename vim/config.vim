@@ -1,3 +1,11 @@
+" ===============================================================
+"
+" This is the main vim configuration file.
+" This file will source other vim configuration files also.
+" _______________________________________________________________
+" ===============================================================
+
+
 " https://superuser.com/questions/179164/vim-complains-about-a-temporary-file-when-opening-syntax-highlighted-files-on-ma
 set shell=/bin/zsh
 " Detect windows OS
@@ -9,6 +17,10 @@ endif
 
 let mapleader=","
 
+" Source other vim configuration files
+if has('nvim')
+  execute 'source ' . expand('<sfile>:p:h') . '/neovim.vim'
+endif
 execute 'source ' . expand('<sfile>:p:h') . '/plugin_config.vim'
 
 set nu

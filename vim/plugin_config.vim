@@ -1,3 +1,10 @@
+" _______________________________________________________________
+" ===============================================================
+"
+" This file contains the vim plugin configurations
+" _______________________________________________________________
+" ===============================================================
+
 " --------- start of vim-plug config ---------
 call plug#begin('~/.vim/plugged')
 Plug 'mileszs/ack.vim'
@@ -6,7 +13,6 @@ if isWindows
 else
   Plug 'jnurmine/zenburn'
 endif
-Plug 'jnurmine/Zenburn'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
@@ -25,6 +31,9 @@ Plug 'vobornik/vim-mql4'
 Plug 'rupurt/vim-mql5'
 Plug 'leafgarland/typescript-vim'
 Plug 'godlygeek/tabular'
+Plug 'terryma/vim-expand-region'
+Plug 'tpope/vim-surround'
+Plug 'easymotion/vim-easymotion'
 call plug#end()
 " --------- End of vim-plug config ---------
 
@@ -76,7 +85,8 @@ let $LC_ALL='en_US.UTF-8'
 nnoremap <silent> <Leader>ss :Ag <C-R><C-W><CR> 
 " Find references
 " --------------
-nnoremap <silent> <Leader>r :tselect <C-R><C-W><CR> 
+" (tselect word under cursor. This is useful if there are multiple tags for the same word)
+nnoremap <silent> <C-\> :tselect <C-R><C-W><CR> 
 
 """"""""""""""""""""""""""""""
 " => vim-fswitch
@@ -105,7 +115,7 @@ nnoremap <leader>nn :call ToggleNERDTreeFind()<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => tagbar
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <leader>c :TagbarToggle<CR>
+nmap <leader>r :TagbarToggle<CR>
 
 """"""""""""""""""""""""""""""
 " YankRing
