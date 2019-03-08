@@ -135,24 +135,42 @@ configure_powerline_font() {
 }
 
 configure_cmake() {
-  if [[ $platform == 'linux' ]]; then
-    cmakeLatestVersion=$(curl --silent "https://api.github.com/repos/Kitware/CMake/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")' | cut -d'v' -f 2)
-    cd ~/packages
-    wget https://github.com/Kitware/CMake/releases/download/v$cmakeLatestVersion/cmake-$cmakeLatestVersion-Linux-x86_64.tar.gz
-    tar -xzvf cmake-$cmakeLatestVersion-Linux-x86_64.tar.gz
-    cd cmake-$cmakeLatestVersion-Linux-x86_64
-    # install
-    mkdir -p ~/.local/bin/
-    mkdir -p ~/.local/share/
-    cp -r bin/* ~/.local/bin/
-    cp -r share/* ~/.local/share/
-
-    # cleanup
-    cd ~/packages
-    rm -rf cmake-$cmakeLatestVersion-Linux-x86_64
-    rm cmake-$cmakeLatestVersion-Linux-x86_64.tar.gz
-
+  if [[ $platform != 'linux' ]]; then
+    print_important "Installing cmake is currently implemented only linux"
+    return 1;
   fi
+
+  local programName=cmake
+  local minimumRequriredVersion=3
+  if [[ -x "$(command -v $programName)" ]]; then # program exists
+    local availableVersion=$($programName --version | head -n 1 | cut -d" " -f 3)
+    if [[ $availableVersion -gt $minimumRequriredVersion ]]; then
+      print_debug "Compilation is not required for $programName because the available version($availableVersion) \
+        already satisfies the minimumRequriredVersion($minimumRequriredVersion)"
+      return 0;
+    else
+      print_debug "Compiling $programName because because the available version($availableVersion) \
+        is less than the minimumRequriredVersion($minimumRequriredVersion)"
+    fi
+  else
+    print_debug "Compiling $programName because $programName is not found"
+  fi
+
+  cmakeLatestVersion=$(curl --silent "https://api.github.com/repos/Kitware/CMake/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")' | cut -d'v' -f 2)
+  cd ~/packages
+  wget https://github.com/Kitware/CMake/releases/download/v$cmakeLatestVersion/cmake-$cmakeLatestVersion-Linux-x86_64.tar.gz
+  tar -xzvf cmake-$cmakeLatestVersion-Linux-x86_64.tar.gz
+  cd cmake-$cmakeLatestVersion-Linux-x86_64
+  # install
+  mkdir -p ~/.local/bin/
+  mkdir -p ~/.local/share/
+  cp -r bin/* ~/.local/bin/
+  cp -r share/* ~/.local/share/
+  
+  # cleanup
+  cd ~/packages
+  rm -rf cmake-$cmakeLatestVersion-Linux-x86_64
+  rm cmake-$cmakeLatestVersion-Linux-x86_64.tar.gz
 }
 
 compile_tmux() {
@@ -179,7 +197,9 @@ compile_tmux() {
   cmake ..
   make && make install
 
-  # TODO: May be we need lates cmake to compile. Refer above configure_cmake
+  # newer cmake is needed to compile
+  configure_cmake
+
   cd ~/packages
   git clone https://github.com/tmux/tmux.git
   cd tmux
@@ -343,6 +363,7 @@ where <option>:
     --font      install powerline font
     --zenburn   install Zenburn-for-Terminator
     --copy      install CopyQ
+    --cmake     install cmake
     --tmux      install tmux
     --thefuck   install thefuck"
 
@@ -365,6 +386,8 @@ elif [[ $* == *--zenburn* ]] ; then
   configure_zenburn
 elif [[ $* == *--copy* ]] ; then
   configure_copyQ
+elif [[ $* == *--cmake* ]] ; then
+  configure_cmake
 elif [[ $* == *--tmux* ]] ; then
   configure_tmux
 elif [[ $* == *--thefuck* ]] ; then
