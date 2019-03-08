@@ -21,6 +21,14 @@ elif [[ "$unamestr" == 'Darwin' ]]; then
 fi
 
 # ---------- Helper functions -----------
+print_debug() {
+  # Printing message in the console.
+  BLUE='\e[94m'
+  NC='\033[0m' # No Color
+  echo ""
+  echo -e "${BLUE}$1${NC}"
+}
+
 print_info() {
   # Printing message in the console.
   GREEN_BLINK_BOLD='\e[5m\e[32m\e[1m'
@@ -43,10 +51,48 @@ print_important() {
 
 # ================= functions for each configuration task =====================
 
+// Checks whether the required version is installed
+
+compile_zsh() {
+  local programName=zsh
+  local minimumRequriredVersion=5
+  if [[ -x "$(command -v $programName)" ]]; then # program exists
+    local availableVersion=$($programName --version | cut -d' ' -f 2)
+    if [[ $availableVersion -gt $minimumRequriredVersion ]]; then
+      print_debug "Compilation is not required for $programName because the available version($availableVersion) \
+        already satisfies the minimumRequriredVersion($minimumRequriredVersion)"
+      return 0;
+    else
+      print_debug "Compiling $programName because because the available version($availableVersion) \
+        is less than the minimumRequriredVersion($minimumRequriredVersion)"
+    fi
+  else
+    print_debug "Compiling $programName because $programName is not found"
+  fi
+
+  cd ~/packages
+  wget -O zsh.tar.xz https://sourceforge.net/projects/zsh/files/latest/download
+  mkdir zsh && unxz zsh.tar.xz && tar -xvf zsh.tar -C zsh --strip-components 1
+  cd zsh
+  mkdir -p $HOME/.local
+  ./configure --prefix=$HOME/.local
+  make && make install
+}
+
+configure_fzf() {
+  print_info "Installing fzf"
+	git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+	~/.fzf/install
+}
+
 configure_zsh() {
   print_info "Installing Zsh"
-	sudo apt-get install zsh
+
+  compile_zsh
+
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+  configure_fzf
 
   # zplug
 	git clone https://github.com/zplug/zplug ~/packages/zplug
@@ -71,12 +117,6 @@ configure_node() {
 	sudo apt-get install -y nodejs
 }
 
-configure_fzf() {
-  print_info "Installing fzf"
-	git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-	~/.fzf/install
-}
-
 configure_python() {
   if [[ $platform == 'linux' ]]; then
     sudo apt install python-pip
@@ -97,7 +137,7 @@ configure_powerline_font() {
 configure_cmake() {
   if [[ $platform == 'linux' ]]; then
     cmakeLatestVersion=$(curl --silent "https://api.github.com/repos/Kitware/CMake/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")' | cut -d'v' -f 2)
-    cd ~/tmp
+    cd ~/packages
     wget https://github.com/Kitware/CMake/releases/download/v$cmakeLatestVersion/cmake-$cmakeLatestVersion-Linux-x86_64.tar.gz
     tar -xzvf cmake-$cmakeLatestVersion-Linux-x86_64.tar.gz
     cd cmake-$cmakeLatestVersion-Linux-x86_64
@@ -106,35 +146,53 @@ configure_cmake() {
     mkdir -p ~/.local/share/
     cp -r bin/* ~/.local/bin/
     cp -r share/* ~/.local/share/
+
+    # cleanup
+    cd ~/packages
+    rm -rf cmake-$cmakeLatestVersion-Linux-x86_64
+    rm cmake-$cmakeLatestVersion-Linux-x86_64.tar.gz
+
   fi
 }
 
-build_tmux() {
+compile_tmux() {
+  local programName=tmux
+  local minimumRequriredVersion=2
+  if [[ -x "$(command -v $programName)" ]]; then # program exists
+    local availableVersion=$(tmux -V | cut -d' ' -f 2)
+    if [[ $availableVersion -gt $minimumRequriredVersion ]]; then
+      print_debug "Compilation is not required for $programName because the available version($availableVersion) \
+        already satisfies the minimumRequriredVersion($minimumRequriredVersion)"
+      return 0;
+    else
+      print_debug "Compiling $programName because because the available version($availableVersion) \
+        is less than the minimumRequriredVersion($minimumRequriredVersion)"
+    fi
+  else
+    print_debug "Compiling $programName because $programName is not found"
+  fi
+
   # libevent is needed as a dependency to build tmux.
-  cd ~/tmp
+  cd ~/packages
   git clone https://github.com/libevent/libevent.git
   mkdir build && cd build
   cmake ..
   make && make install
 
   # TODO: May be we need lates cmake to compile. Refer above configure_cmake
-  cd ~/tmp
+  cd ~/packages
   git clone https://github.com/tmux/tmux.git
   cd tmux
 	sh autogen.sh
-	./configure && make
+  ./configure --prefix=$HOME/.local
+  make && make install
 }
 
 configure_tmux() {
   print_info "Installing tmux"
-  if [[ $platform == 'linux' ]]; then
-    # tmux latest version is needed. So, check the version available from apt-get
-    if [[ $(apt-cache policy tmux | sed -n '3p' | cut -c 14- | cut -d'-' -f 1) -lt 2 ]]; then
-      build_tmux
-    else
-      sudo apt-get install -y tmux
-    fi
-  fi
+
+  compile_tmux
+
   # Install https://github.com/gpakosz/.tmux
   git clone https://github.com/gpakosz/.tmux.git ~/.tmux
   ln -s -f ~/.tmux/.tmux.conf ~/.tmux.conf
