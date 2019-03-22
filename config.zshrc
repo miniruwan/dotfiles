@@ -108,7 +108,7 @@ function spotifyAdBlock
   osascript -e 'quit app "/Applications/Spotify.app"'
 
   # Edit the hosts file
-  sudo wget -O /etc/hosts.d/spotifyAdBlock.txt https://raw.githubusercontent.com/CHEF-KOCH/CKs-FilterList/master/Anti-Corp/Spotify/Spotify-HOSTS.txt
+  sudo wget -O /etc/hosts.d/spotifyAdBlock.txt https://www.doorcraft.de/dl/spotify-ads.txt
   sudo sh -c 'cat /etc/hosts.d/*.txt > /etc/hosts'
 
   # Clear cache
