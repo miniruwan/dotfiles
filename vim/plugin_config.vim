@@ -7,6 +7,7 @@
 
 " --------- start of vim-plug config ---------
 call plug#begin('~/.vim/plugged')
+Plug 'mhinz/vim-startify'
 Plug 'mileszs/ack.vim'
 if isWindows
   Plug 'morhetz/gruvbox'
@@ -34,6 +35,9 @@ Plug 'godlygeek/tabular'
 Plug 'terryma/vim-expand-region'
 Plug 'tpope/vim-surround'
 Plug 'easymotion/vim-easymotion'
+Plug 'jiangmiao/auto-pairs'
+Plug 'junegunn/vim-easy-align'
+Plug 'vim-scripts/DrawIt'
 call plug#end()
 " --------- End of vim-plug config ---------
 
@@ -136,3 +140,9 @@ let g:UltiSnipsSnippetDirectories = [expand('<sfile>:p:h').'/UltiSnips', 'UltiSn
 """"""""""""""""""""""""""""""
 map <leader>f :Ag<CR>
 map <leader>tt :Windows<cr>
+
+""""""""""""""""""""""""""""""
+" => vim-easy-align
+""""""""""""""""""""""""""""""
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
