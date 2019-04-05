@@ -11,10 +11,10 @@ source $CONFIG_DIR/Temasys/plugin.zshrc
 source $CONFIG_DIR/Temasys/sig.zshrc
 source $PROJECT_DIR/mcu-libwebrtc/dotfiles/config.example.zshrc
 source $CONFIG_DIR/Temasys/skylink.zshrc
+source $CONFIG_DIR/Temasys/skylink_old.zshrc
 
 function startMcuDeps
 {
-  pm2 start redis-server -- --save "900 1" --dir "/var"
   startSkylink # Depends on skylink.zshrc
   startSignalling # Depends on sig.zshrc
 }
