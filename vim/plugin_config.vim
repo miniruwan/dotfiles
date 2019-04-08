@@ -34,6 +34,9 @@ Plug 'leafgarland/typescript-vim'
 Plug 'godlygeek/tabular'
 Plug 'terryma/vim-expand-region'
 Plug 'tpope/vim-surround'
+Plug 'haya14busa/incsearch.vim'
+Plug 'haya14busa/incsearch-fuzzy.vim'
+Plug 'haya14busa/incsearch-easymotion.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/vim-easy-align'
@@ -49,6 +52,7 @@ call plug#end()
 " => YouCompleteMe
 """"""""""""""""""""""""""""""
 let g:ycm_global_ycm_extra_conf = expand('<sfile>:p:h') . '/ycm_extra_conf.py'
+let g:ycm_max_diagnostics_to_display = 200
 map <leader>y :YcmCompleter FixIt<CR>
 
 """"""""""""""""""""""""""""""
@@ -87,10 +91,6 @@ let $LC_ALL='en_US.UTF-8'
 " Ag
 " ---
 nnoremap <silent> <Leader>ss :Ag <C-R><C-W><CR> 
-" Find references
-" --------------
-" (tselect word under cursor. This is useful if there are multiple tags for the same word)
-nnoremap <silent> <C-\> :tselect <C-R><C-W><CR> 
 
 """"""""""""""""""""""""""""""
 " => vim-fswitch
@@ -146,3 +146,16 @@ map <leader>tt :Windows<cr>
 """"""""""""""""""""""""""""""
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
+
+""""""""""""""""""""""""""""""
+" => incsearch
+""""""""""""""""""""""""""""""
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+
+""""""""""""""""""""""""""""""
+" => incsearch-fuzzy
+""""""""""""""""""""""""""""""
+map <Space>/ <Plug>(incsearch-fuzzy-/)
+map <Space>? <Plug>(incsearch-fuzzy-?)

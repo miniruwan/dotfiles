@@ -67,6 +67,11 @@ map <silent> <Leader>h :%s/<C-R><C-W>
 " Switch to last split
 map <silent> <Leader>w <C-W>w
 
+" Find references
+" --------------
+" (tselect word under cursor. This is useful if there are multiple tags for the same word)
+nnoremap <silent> <C-\> :tselect <C-R><C-W><CR> 
+
 " unfold everything when opening a file
 set foldlevelstart=99
 
