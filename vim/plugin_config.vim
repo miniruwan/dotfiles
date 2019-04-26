@@ -159,3 +159,8 @@ map g/ <Plug>(incsearch-stay)
 """"""""""""""""""""""""""""""
 map <Space>/ <Plug>(incsearch-fuzzy-/)
 map <Space>? <Plug>(incsearch-fuzzy-?)
+
+""""""""""""""""""""""""""""""
+" => auto-pairs
+""""""""""""""""""""""""""""""
+let g:AutoPairsShortcutJump='<leader><Tab>'
