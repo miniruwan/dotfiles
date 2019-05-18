@@ -126,7 +126,7 @@ nmap <leader>r :TagbarToggle<CR>
 """"""""""""""""""""""""""""""
 let g:yankring_history_dir = '~/.vim'
 let g:yankring_map_dot = 0
-nnoremap <leader>ps :YRShow<CR>
+map <leader>ps :YRShow<CR>
 
 """"""""""""""""""""""""""""""
 " UltiSnips
@@ -163,4 +163,4 @@ map <Space>? <Plug>(incsearch-fuzzy-?)
 """"""""""""""""""""""""""""""
 " => auto-pairs
 """"""""""""""""""""""""""""""
-let g:AutoPairsShortcutJump='<leader><Tab>'
+let g:AutoPairsShortcutJump='<S-Tab>'

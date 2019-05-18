@@ -41,4 +41,7 @@ set-option -g repeat-time 200
 
 setw -g mode-keys vi
 
+# Drag windows on the status bar
+bind-key -n MouseDrag1Status swap-window -t=
+
 bind r source-file ~/.tmux.conf \; display-message "Config reloaded..."

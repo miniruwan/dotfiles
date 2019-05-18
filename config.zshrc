@@ -68,6 +68,7 @@ alias zshrc='vim $CONFIG_DIR/config.zshrc'
 alias vimrc='vim $CONFIG_DIR/vim/config.vim'
 alias cdp='cd $PROJECT_DIR/'
 alias cdw='cd ~/work'
+alias cdt='cd ~/temp';
 alias v='nvim'
 
 # Exports
