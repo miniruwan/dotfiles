@@ -123,7 +123,7 @@ function spotifyAdBlock
 # arg2 : Value to be set for the  environment variable if not set
 function setEnvVariableIfNotSet
 {
-  if ! [[ -v $1 ]]; then
+  if ! [[ -z $1 ]]; then
     export "$1"="$2"
   fi
 }
