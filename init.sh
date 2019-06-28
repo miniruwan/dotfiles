@@ -195,14 +195,23 @@ compile_tmux() {
   git clone https://github.com/libevent/libevent.git
   mkdir build && cd build
   cmake ..
-  make && make install
+  make && sudo make install
 
   # newer cmake is needed to compile
   configure_cmake
 
+  # Some dependencies not available in old linux versions
+  if [ "$platform" == 'linux' ] && [ `lsb_release -rs` == "14.04" ]; then
+    sudo apt-get install -y libncursesw5-dev bison byacc
+  fi
+
   cd ~/packages
   git clone https://github.com/tmux/tmux.git
   cd tmux
+  # tmux versions >=3 doesn't seem to be working with gpakosz/.tmux
+  git checkout tags/2.9
+  
+
 	sh autogen.sh
   ./configure --prefix=$HOME/.local
   make && make install
@@ -390,6 +399,8 @@ elif [[ $* == *--cmake* ]] ; then
   configure_cmake
 elif [[ $* == *--tmux* ]] ; then
   configure_tmux
+elif [[ $* == *--vim* ]] ; then
+  configure_vim
 elif [[ $* == *--thefuck* ]] ; then
   configure_thefuck
 fi
