@@ -2,10 +2,11 @@
     "vim.handleKeys": {
         "<C-d>": true
     },
+    "vim.leader": ",",
     "window.zoomLevel": 0,
     "telemetry.enableTelemetry": false,
     "telemetry.enableCrashReporter": false,
-    "keyboard.dispatch": "keyCode",
     // TODO : Add the installation of font in the init.sh
-    "terminal.integrated.fontFamily": "'Source Code Pro for Powerline'"
+    "terminal.integrated.fontFamily": "'Source Code Pro for Powerline'",
+    "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\wsl.exe"
 }
