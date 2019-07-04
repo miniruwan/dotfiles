@@ -8,12 +8,8 @@
 
 " https://superuser.com/questions/179164/vim-complains-about-a-temporary-file-when-opening-syntax-highlighted-files-on-ma
 set shell=/bin/zsh
-" Detect windows OS
+" Detect OS for later
 let uname = system('uname -a')
-let isWindows = 0
-if uname =~ "Microsoft"
- let isWindows = 1
-endif
 
 let mapleader=","
 
@@ -77,7 +73,7 @@ set foldlevelstart=99
 
 map <leader>et :tabe ~/temp/temp.txt<CR>
 
-if isWindows
+if uname =~ "Microsoft"
   set t_Co=16
   set background=dark
   colorscheme gruvbox

@@ -9,7 +9,7 @@
 call plug#begin('~/.vim/plugged')
 Plug 'mhinz/vim-startify'
 Plug 'mileszs/ack.vim'
-if isWindows
+if uname =~ "Microsoft"
   Plug 'morhetz/gruvbox'
 else
   Plug 'jnurmine/zenburn'
@@ -164,3 +164,6 @@ map <Space>? <Plug>(incsearch-fuzzy-?)
 " => auto-pairs
 """"""""""""""""""""""""""""""
 let g:AutoPairsShortcutJump='<S-Tab>'
+if uname =~ "Linux"
+  let g:AutoPairsShortcutBackInsert = '<C-b>'
+endif

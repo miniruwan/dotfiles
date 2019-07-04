@@ -193,7 +193,7 @@ compile_tmux() {
   # libevent is needed as a dependency to build tmux.
   cd ~/packages
   git clone https://github.com/libevent/libevent.git
-  mkdir build && cd build
+  cd libevent && mkdir build && cd build
   cmake ..
   make && sudo make install
 
@@ -203,6 +203,8 @@ compile_tmux() {
   # Some dependencies not available in old linux versions
   if [ "$platform" == 'linux' ] && [ `lsb_release -rs` == "14.04" ]; then
     sudo apt-get install -y libncursesw5-dev bison byacc
+  elif [[ "$platform" == 'wsl' ]]; then
+    sudo apt-get install -y libssl-dev automake
   fi
 
   cd ~/packages

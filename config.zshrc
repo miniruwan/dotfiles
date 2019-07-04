@@ -18,8 +18,8 @@ if [[ $platform == 'wsl' ]]; then
   unsetopt BG_NICE
 
   alias open=explorer.exe
-  alias git="/mnt/c/Program\ Files/Git/bin/git.exe"
-  export PATH=mnt/c/Program\ Files/Git/bin:$PATH
+  #alias git="/mnt/c/Program\ Files/Git/bin/git.exe"
+  #export PATH=mnt/c/Program\ Files/Git/bin:$PATH
 
   command_not_found_handler() {
       if cmd.exe /c "(where $1 || (help $1 |findstr /V Try)) >nul 2>nul && ($* || exit 0)"; then
@@ -131,11 +131,10 @@ function setEnvVariableIfNotSet
 # Some Exports
 if [[ $platform == 'osx' ]]; then
   export PATH=/usr/local/opt/openssl/bin:$PATH
-fi
-
-if [[ $platform == 'linux' ]]; then
+else
   export PATH=$HOME/.local/bin:$PATH
 fi
+export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 
 # set tab space to 2
 tabs -2
