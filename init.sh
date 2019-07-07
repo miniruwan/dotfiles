@@ -95,10 +95,10 @@ configure_zsh() {
   configure_fzf
 
   # zplug
-	git clone https://github.com/zplug/zplug ~/packages/zplug
+	git clone https://github.com/zplug/zplug ~/.zplug
 	echo "#" >> ~/.zshrc
 	echo "# Mini's configs" >> ~/.zshrc
-	echo "source ~/packages/zplug/init.zsh" >> ~/.zshrc
+	echo "source ~/.zplug/init.zsh" >> ~/.zshrc
 
 	cp $CONFIG_DIR/config.local.example.zshrc $CONFIG_DIR/config.local.zshrc
 	echo "source $CONFIG_DIR/config.local.zshrc" >> ~/.zshrc
@@ -166,7 +166,7 @@ configure_cmake() {
   mkdir -p ~/.local/share/
   cp -r bin/* ~/.local/bin/
   cp -r share/* ~/.local/share/
-  
+
   # cleanup
   cd ~/packages
   rm -rf cmake-$cmakeLatestVersion-Linux-x86_64
@@ -212,7 +212,7 @@ compile_tmux() {
   cd tmux
   # tmux versions >=3 doesn't seem to be working with gpakosz/.tmux
   git checkout tags/2.9
-  
+
 
 	sh autogen.sh
   ./configure --prefix=$HOME/.local

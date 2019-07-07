@@ -32,7 +32,7 @@ if [[ $platform == 'wsl' ]]; then
 fi
 
 # ----- start zplug configuration ----- 
-source ~/packages/zplug/init.zsh
+source ~/.zplug/init.zsh
 
 zplug "rupa/z", use:z.sh #Tracks your most used directories, based on 'frecency'
 zplug "changyuheng/fz", defer:1 # The missing fuzzy tab completion feature of z
