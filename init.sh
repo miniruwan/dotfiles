@@ -104,6 +104,14 @@ configure_zsh() {
 	echo "source $CONFIG_DIR/config.local.zshrc" >> ~/.zshrc
 }
 
+configure_ack() {
+  if [[ "$platform" == 'linux' ]]; then
+    sudo apt install silversearcher-ag ack-grep
+  elif [[ "$platform" == 'osx' ]]; then
+    brew install the_silver_searcher
+  fi
+}
+
 configure_mono() {
 		sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
 		sudo apt install apt-transport-https

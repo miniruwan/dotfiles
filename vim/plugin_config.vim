@@ -77,10 +77,10 @@ map <leader>o :CtrlPMRU<CR>
 " Ack
 " ---
 let g:ack_default_options = ' -s -H --nopager --nocolor --nogroup --column --ignore-file=is:tags'
-nnoremap <silent> <Leader>st :Ack! <C-R><C-W><CR> 
-xnoremap <silent> <Leader>st y:Ack! --literal "<C-R>""<CR> 
-nnoremap <silent> <Leader>s :Ack! --ignore-dir=Test <C-R><C-W><CR> 
-xnoremap <silent> <Leader>s y:Ack! --ignore-dir=Test --literal "<C-R>""<CR> 
+nnoremap <silent> <Leader>ft :Ack! <C-R><C-W><CR> 
+xnoremap <silent> <Leader>ft y:Ack! --literal "<C-R>""<CR> 
+nnoremap <silent> <Leader>f :Ack! --ignore-dir=Test <C-R><C-W><CR> 
+xnoremap <silent> <Leader>f y:Ack! --ignore-dir=Test --literal "<C-R>""<CR> 
 " Avoid opening in a new tab because switchbuf current value (switchbuf=useopen,usetab,newtab) includes newtab
 " Reference : https://github.com/mileszs/ack.vim/issues/213
 set switchbuf=useopen,usetab
@@ -90,7 +90,7 @@ let $LC_CTYPE='en_US.UTF-8'
 let $LC_ALL='en_US.UTF-8'
 " Ag
 " ---
-nnoremap <silent> <Leader>ss :Ag <C-R><C-W><CR> 
+nnoremap <silent> <Leader>fs :Ag <C-R><C-W><CR> 
 
 """"""""""""""""""""""""""""""
 " => vim-fswitch
@@ -138,7 +138,7 @@ let g:UltiSnipsSnippetDirectories = [expand('<sfile>:p:h').'/UltiSnips', 'UltiSn
 """"""""""""""""""""""""""""""
 " => FZF
 """"""""""""""""""""""""""""""
-map <leader>f :Ag<CR>
+map <leader>ff :Ag<CR>
 map <leader>tt :Windows<cr>
 
 """"""""""""""""""""""""""""""
