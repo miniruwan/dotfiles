@@ -129,6 +129,7 @@ function setEnvVariableIfNotSet
 }
 
 # Some Exports
+export PATH=$HOME/.fzf/bin:$PATH
 if [[ $platform == 'osx' ]]; then
   export PATH=/usr/local/opt/openssl/bin:$PATH
 else
