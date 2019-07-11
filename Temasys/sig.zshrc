@@ -9,10 +9,18 @@ alias rms='rm $SIG_ROOT_DIR/logs/daily/*;rm $SIG_ROOT_DIR/logs/global/*';
 alias lastSigLog='vim `ls -t $SIG_ROOT_DIR/logs/daily/* | head -1`'
 alias cdSigLog='cd $SIG_ROOT_DIR/logs/daily/'
 
-function startSignalling
+function startNewSignalling
 {
   cd $SIG_ROOT_DIR
   pm2 start app/main.js --name sig
+}
+
+function startOldSignalling
+{
+  cd $SIG_ROOT_DIR
+  export DynamoDB=local
+  pm2 start app/main.js --name sigMain --interpreter=node@6.10.3
+  pm2 start app/service.js --name sigService --interpreter=node@6.10.3
 }
 
 # grep in signalling code excluding some directories
