@@ -8,6 +8,7 @@ alias cdmixingManager='cd $MIXING_MANAGER'
 alias rmMixingManagerLogs='rm $MIXING_MANAGER/logs/daily/*;rm $MIXING_MANAGER/logs/global/*';
 alias lsMixingManagerLog='ls -t $MIXING_MANAGER/logs/daily/* | head -1'
 alias mixingManagerlog='vim `lsMixerLog`'
+alias pm2MixingManagerlog='pm2 logs mixingManager'
 alias tailMixingManagerlog='tail -f `lsMixerLog`'
 alias cdMixingManagerLog='cd $MIXING_MANAGER/logs/daily/'
 alias vimMixingManager='vim $MIXING_MANAGER/app/MCUManager.js'
