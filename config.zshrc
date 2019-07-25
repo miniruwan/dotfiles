@@ -31,6 +31,12 @@ if [[ $platform == 'wsl' ]]; then
   }
 fi
 
+
+# fzf
+export PATH=$HOME/.fzf/bin:$PATH
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.fzf/plugin/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh ] && source ~/.fzf/plugin/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
+
 # ----- start zplug configuration ----- 
 source ~/.zplug/init.zsh
 
@@ -129,7 +135,6 @@ function setEnvVariableIfNotSet
 }
 
 # Some Exports
-export PATH=$HOME/.fzf/bin:$PATH
 if [[ $platform == 'osx' ]]; then
   export PATH=/usr/local/opt/openssl/bin:$PATH
 else
