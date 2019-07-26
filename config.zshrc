@@ -32,11 +32,6 @@ if [[ $platform == 'wsl' ]]; then
 fi
 
 
-# fzf
-export PATH=$HOME/.fzf/bin:$PATH
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-[ -f ~/.fzf/plugin/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh ] && source ~/.fzf/plugin/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
-
 # ----- start zplug configuration ----- 
 source ~/.zplug/init.zsh
 
@@ -62,6 +57,12 @@ fi
 zplug load
 
 # ----- end zplug configuration ----- 
+
+
+# fzf
+export PATH=$HOME/.fzf/bin:$PATH
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.fzf/plugin/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh ] && source ~/.fzf/plugin/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
 
 # https://stackoverflow.com/questions/22600259/zsh-autocomplete-from-the-middle-of-filename
 zstyle ':completion:*' completer _complete

@@ -76,6 +76,7 @@ map <leader>o :CtrlPMRU<CR>
 """"""""""""""""""""""""""""""
 " Ack
 " ---
+" let g:ack_default_options = ' -s -H --nopager --nocolor --nogroup --column --ignore-dir={node_modules,publish,doc,doc-style} --ignore-file=is:tags'
 let g:ack_default_options = ' -s -H --nopager --nocolor --nogroup --column --ignore-file=is:tags'
 nnoremap <silent> <Leader>ft :Ack! <C-R><C-W><CR> 
 xnoremap <silent> <Leader>ft y:Ack! --literal "<C-R>""<CR> 
