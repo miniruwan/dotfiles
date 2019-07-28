@@ -7,13 +7,9 @@
 
 " --------- start of vim-plug config ---------
 call plug#begin('~/.vim/plugged')
+Plug 'rafi/awesome-vim-colorschemes'
 Plug 'mhinz/vim-startify'
 Plug 'mileszs/ack.vim'
-if uname =~ "Microsoft"
-  Plug 'morhetz/gruvbox'
-else
-  Plug 'jnurmine/zenburn'
-endif
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'

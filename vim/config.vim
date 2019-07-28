@@ -71,5 +71,5 @@ if uname =~ "Microsoft"
   set background=dark
   colorscheme gruvbox
 else
-  colorscheme zenburn
+  colorscheme onedark
 endif
