@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Exit on error
+set -e
+
 # Warning : This is not completely tested yet
 
 # ========== General script ==========
@@ -51,9 +54,8 @@ print_important() {
 
 # ================= functions for each configuration task =====================
 
-// Checks whether the required version is installed
-
 compile_zsh() {
+  # Checks whether the required version is installed
   local programName=zsh
   local minimumRequriredVersion=5
   if [[ -x "$(command -v $programName)" ]]; then # program exists
@@ -85,6 +87,15 @@ configure_fzf() {
 	~/.fzf/install
 }
 
+configure_symlinks() {
+  rm -rf ~/Downloads && ln -s '/media/miniruwan/Data/Downloads' ~/Downloads
+  rm -rf ~/Downloads && ln -s '/media/miniruwan/Data/Documents' ~/Documents
+  rm -rf ~/Downloads && ln -s '/media/miniruwan/Data/Music' ~/Music
+  rm -rf ~/Downloads && ln -s '/media/miniruwan/Data/Videos' ~/Videos
+  rm -rf ~/Downloads && ln -s '/media/miniruwan/Data/Pictures' ~/Pictures
+  rm -rf ~/Downloads && ln -s '/media/miniruwan/Data/projects' ~/projects
+}
+
 configure_zsh() {
   print_info "Installing Zsh"
 
@@ -106,7 +117,7 @@ configure_zsh() {
 
 configure_ack() {
   if [[ "$platform" == 'linux' ]]; then
-    sudo apt install silversearcher-ag ack-grep
+    sudo apt install -y silversearcher-ag ack-grep
   elif [[ "$platform" == 'osx' ]]; then
     brew install the_silver_searcher
   fi
@@ -114,21 +125,20 @@ configure_ack() {
 
 configure_mono() {
 		sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
-		sudo apt install apt-transport-https
+		sudo apt install -y apt-transport-https
 		echo "deb https://download.mono-project.com/repo/ubuntu stable-xenial main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
 		sudo apt update
-		sudo apt install mono-devel
+		sudo apt install -y mono-devel
 }
 
 configure_node() {
 	curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
-	sudo apt-get install -y nodejs
+	sudo apt install -y nodejs
 }
 
 configure_python() {
   if [[ $platform == 'linux' ]]; then
-    sudo apt install python-pip
-    sudo apt install python-setuptools
+    sudo apt install -y python-pip python-setuptools
     pip install wheel
   fi
 }
@@ -136,7 +146,7 @@ configure_python() {
 configure_powerline_font() {
   if [[ $platform == 'linux' ]]; then
     print_info "Installing powerline font"
-    sudo apt-get install fonts-powerline
+    sudo apt install -y fonts-powerline
     configure_python
     pip install --user powerline-status
   fi
@@ -210,9 +220,9 @@ compile_tmux() {
 
   # Some dependencies not available in old linux versions
   if [ "$platform" == 'linux' ] && [ `lsb_release -rs` == "14.04" ]; then
-    sudo apt-get install -y libncursesw5-dev bison byacc
+    sudo apt install -y libncursesw5-dev bison byacc
   elif [[ "$platform" == 'wsl' ]]; then
-    sudo apt-get install -y libssl-dev automake
+    sudo apt install -y libssl-dev automake
   fi
 
   cd ~/packages
@@ -251,8 +261,10 @@ configure_zenburn() {
 
 configure_gitkraken() {
   if [[ $platform == 'linux' ]]; then
+    cd ~/packages
     wget https://release.gitkraken.com/linux/gitkraken-amd64.deb
     sudo dpkg -i gitkraken-amd64.deb
+    rm ~/packages/gitkraken-amd64.deb
   fi
 }
 
@@ -266,12 +278,51 @@ configure_vscode() {
   fi
 }
 
-configure_node() {
-  curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-  sudo apt-get install -y nodejs
+configure_vim_neovim_common() {
+  # Install the Basic version of https://github.com/amix/vimrc
+  git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
+  echo "source ~/.vim_runtime/vimrcs/basic.vim" >> ~/.vimrc
+
+  # Source this project's vim config
+  echo "source $CONFIG_DIR/vim/config.vim" >> ~/.vimrc
+
+  # youcompleteme
+  sudo apt install -y build-essential cmake python-dev python3-dev
+  cd ~/.vim/plugged/YouCompleteMe
+  ./install.py --clang-completer --cs-completer --js-completer
 }
 
-configure_vim() {
+configure_neovim() {
+  mkdir -p $HOME/.local/bin
+  curl -o $HOME/.local/bin/nvim -L https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
+  chmod u+x $HOME/.local/bin/nvim
+
+  # vim-plug
+  curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+  # xsel is needed to copy to clipboard
+  sudo apt install -y xsel
+
+  configure_vim_neovim_common
+}
+
+compile_vim() {
+  local programName=vim
+  local minimumRequriredVersion=8
+  if [[ -x "$(command -v $programName)" ]]; then # program exists
+    local availableVersion=$($programName --version | head -1 | cut -d ' ' -f 5)
+    if [[ $availableVersion -gt $minimumRequriredVersion ]]; then
+      print_debug "Compilation is not required for $programName because the available version($availableVersion) \
+        already satisfies the minimumRequriredVersion($minimumRequriredVersion)"
+      return 0;
+    else
+      print_debug "Compiling $programName because because the available version($availableVersion) \
+        is less than the minimumRequriredVersion($minimumRequriredVersion)"
+    fi
+  else
+    print_debug "Compiling $programName because $programName is not found"
+  fi
+
   # Make vim
   # source : https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source
   sudo apt remove vim vim-runtime gvim
@@ -295,26 +346,27 @@ configure_vim() {
 							--prefix=/usr/local
   make VIMRUNTIMEDIR=/usr/local/share/vim/vim80
   sudo make install
-  cd
+}
+
+configure_vim() {
+  print -P "\n\n%F{magenta}Do you want to use neovim instead vim??%f"
+  read -q "useNeovim"
+  if [[ $useNeovim == 'y' ]]; then
+    configure_neovim
+    return 0;
+  fi
+
+  compile_vim
+
   sudo update-alternatives --install /usr/bin/editor editor /usr/local/bin/vim 1
   sudo update-alternatives --set editor /usr/local/bin/vim
   sudo update-alternatives --install /usr/bin/vi vi /usr/local/bin/vim 1
   sudo update-alternatives --set vi /usr/local/bin/vim
 
-  # Install the Basic version of https://github.com/amix/vimrc
-  git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
-  echo "source ~/.vim_runtime/vimrcs/basic.vim" >> ~/.vimrc
-
-  # Source this project's vim config
-  echo "source $CONFIG_DIR/vim/config.vim" >> ~/.vimrc
-
+  # vim-plug
   curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-  # youcompleteme
-  sudo apt-get install build-essential cmake
-  sudo apt-get install python-dev python3-dev
-  cd ~/.vim/plugged/YouCompleteMe
-  ./install.py --clang-completer --cs-completer --js-completer
+  configure_vim_neovim_common
 }
 
 configure_iterm() {
@@ -327,7 +379,7 @@ configure_iterm() {
 configure_theFuck() {
   if [[ $platform == 'linux' ]]; then
     sudo apt update
-    sudo apt install python3-dev python3-pip
+    sudo apt install -y python3-dev python3-pip
     sudo pip3 install thefuck
   elif [[ $platform == 'osx' ]]; then
     brew install thefuck
@@ -349,7 +401,7 @@ configure_thefuck() {
   print_info "Installing thefuck"
   if [[ $platform == 'linux' ]]; then
     sudo apt update
-    sudo apt install python3-dev python3-pip python3-setuptools
+    sudo apt install -y python3-dev python3-pip python3-setuptools
     sudo pip3 install thefuck
   elif [[ $platform == 'osx' ]]; then
     brew install thefuck
@@ -359,7 +411,7 @@ configure_thefuck() {
 run_all_configurations() {
 
   if [[ $platform == 'linux' ]]; then
-    sudo apt-get update
+    sudo apt update
   fi
   configure_zsh
   configure_fzf
@@ -399,6 +451,8 @@ elif [[ $* == *--fzf* ]] ; then
   configure_fzf
 elif [[ $* == *--python* ]] ; then
   configure_python
+elif [[ $* == *--node* ]] ; then
+  configure_node
 elif [[ $* == *--font* ]] ; then
   configure_powerline_font
 elif [[ $* == *--zenburn* ]] ; then
