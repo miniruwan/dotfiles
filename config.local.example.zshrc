@@ -13,8 +13,19 @@ source $PROJECT_DIR/mcu-libwebrtc/dotfiles/config.example.zshrc
 source $CONFIG_DIR/Temasys/skylink.zshrc
 source $CONFIG_DIR/Temasys/skylink_old.zshrc
 
+# Environment specific funtions
+# ----------------------------------------
+function mountLicode
+{
+  mkdir -p ~/mnt/licode
+  sshfs -o allow_other,IdentityFile=$HOME/.ssh/id_rsa ubuntu@old-mcu-test.temasys.io:/home/ubuntu ~/mnt/licode
+}
+
 function startMcuDeps
 {
   startSkylink # Depends on skylink.zshrc
   startSignalling # Depends on sig.zshrc
 }
+
+# ----------------------------------------
+
