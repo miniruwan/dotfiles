@@ -14,7 +14,6 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'tpope/vim-fugitive'
 Plug 'majutsushi/tagbar'
 Plug 'vim-airline/vim-airline'
 Plug 'terryma/vim-smooth-scroll'
@@ -29,7 +28,9 @@ Plug 'rupurt/vim-mql5'
 Plug 'leafgarland/typescript-vim'
 Plug 'godlygeek/tabular'
 Plug 'terryma/vim-expand-region'
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
 Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/incsearch-fuzzy.vim'
 Plug 'haya14busa/incsearch-easymotion.vim'
@@ -37,6 +38,10 @@ Plug 'easymotion/vim-easymotion'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/vim-easy-align'
 Plug 'vim-scripts/DrawIt'
+Plug 'bfrg/vim-cpp-modern'
+if has('nvim')
+  Plug 'arakashic/chromatica.nvim'
+endif
 call plug#end()
 " --------- End of vim-plug config ---------
 
@@ -164,3 +169,11 @@ let g:AutoPairsShortcutJump='<S-Tab>'
 if uname =~ "Linux"
   let g:AutoPairsShortcutBackInsert = '<C-b>'
 endif
+
+""""""""""""""""""""""""""""""
+" => chromatica.nvim
+""""""""""""""""""""""""""""""
+if uname =~ "Darwin"
+  let g:chromatica#libclang_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
+endif
+let g:chromatica#enable_at_startup=1
