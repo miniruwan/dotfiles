@@ -303,6 +303,12 @@ configure_neovim() {
   # xsel is needed to copy to clipboard
   sudo apt install -y xsel
 
+  # https://vi.stackexchange.com/questions/12794/how-to-share-config-between-vim-and-neovim
+  mkdir -p ~/.config/nvim
+  echo "set runtimepath^=~/.vim runtimepath+=~/.vim/after" >> ~/.config/nvim/init.vim
+  echo "let &packpath=&runtimepath" >> ~/.config/nvim/init.vim
+  echo "source ~/.vimrc" >> ~/.config/nvim/init.vim
+
   configure_vim_neovim_common
 }
 
