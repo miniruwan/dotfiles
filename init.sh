@@ -300,14 +300,22 @@ configure_neovim() {
   # vim-plug
   curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-  # xsel is needed to copy to clipboard
-  sudo apt install -y xsel
+  if [[ $platform == 'linux' ]]; then
+    # libclang is needed for arakashic/chromatica.nvim
+    sudo apt install -y clang
+
+    # xsel is needed to copy to clipboard
+    sudo apt install -y xsel
+  fi
 
   # https://vi.stackexchange.com/questions/12794/how-to-share-config-between-vim-and-neovim
   mkdir -p ~/.config/nvim
   echo "set runtimepath^=~/.vim runtimepath+=~/.vim/after" >> ~/.config/nvim/init.vim
   echo "let &packpath=&runtimepath" >> ~/.config/nvim/init.vim
   echo "source ~/.vimrc" >> ~/.config/nvim/init.vim
+
+
+  pip3 install pynvim
 
   configure_vim_neovim_common
 }

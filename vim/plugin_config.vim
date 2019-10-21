@@ -177,5 +177,7 @@ endif
 """"""""""""""""""""""""""""""
 if uname =~ "Darwin"
   let g:chromatica#libclang_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
+else
+  let g:chromatica#libclang_path='/usr/lib/x86_64-linux-gnu/libclang.so.1'
 endif
 let g:chromatica#enable_at_startup=1
