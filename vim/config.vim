@@ -72,4 +72,5 @@ if uname =~ "Microsoft"
   colorscheme gruvbox
 else
   colorscheme onedark
+  hi MatchParen cterm=bold ctermfg=LightYellow ctermbg=Gray
 endif
