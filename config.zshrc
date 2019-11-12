@@ -83,6 +83,7 @@ alias sudo='sudo '
 # Exports
 export TERM=xterm-256color # Assuming terminal to support 256 colors
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
+[ -f /usr/local/bin/nvim ] && export EDITOR=/usr/local/bin/nvim
 
 # Sometimes error described in the following link happens and need to do the suggested solution
 # _arguments:450: _vim_files: function definition file not found
