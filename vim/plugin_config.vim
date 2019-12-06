@@ -119,6 +119,7 @@ function! ToggleNERDTreeFind()
 endfunction
 
 nnoremap <leader>nn :call ToggleNERDTreeFind()<CR>
+nnoremap <leader>nf :NERDTreeFind<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => tagbar
