@@ -43,6 +43,7 @@ Plug 'pandysong/ghost-text.vim'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 if has('nvim')
   Plug 'arakashic/chromatica.nvim'
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 endif
 call plug#end()
 " --------- End of vim-plug config ---------
@@ -184,6 +185,15 @@ else
   let g:chromatica#libclang_path='/usr/lib/x86_64-linux-gnu/libclang.so.1'
 endif
 let g:chromatica#enable_at_startup=1
+
+""""""""""""""""""""""""""""""
+" => deoplete
+""""""""""""""""""""""""""""""
+let g:deoplete#enable_at_startup = 1
+" Tab completion
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" Disable YouCompleteMe
+let g:loaded_youcompleteme = 1
 
 """"""""""""""""""""""""""""""
 " => vim-prettier
