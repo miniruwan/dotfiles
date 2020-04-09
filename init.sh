@@ -271,8 +271,8 @@ configure_gitkraken() {
 configure_vscode() {
   if [ -d ~/.config/Code/User ]; then
     cd ~/.config/Code/User
-    ln -s $PROJECT_DIR/configs/vscode/settings.json settings.json
-    ln -s $PROJECT_DIR/configs/vscode/keybindings.json keybindings.json
+    ln -s $CONFIG_DIR/vscode/settings.json settings.json
+    ln -s $CONFIG_DIR/vscode/keybindings.json keybindings.json
   else
     print_important "Couldnn't find VSCode config directory"
   fi
@@ -385,7 +385,7 @@ configure_vim() {
 
 configure_iterm() {
   if [[ $platform == 'osx' ]]; then
-    ln -s -f $CONFIG_DIR/com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
+    ln -s -f $CONFIG_DIR/iterm/com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
   fi
 }
 

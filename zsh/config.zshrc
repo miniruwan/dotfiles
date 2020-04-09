@@ -18,8 +18,6 @@ if [[ $platform == 'wsl' ]]; then
   unsetopt BG_NICE
 
   alias open=explorer.exe
-  #alias git="/mnt/c/Program\ Files/Git/bin/git.exe"
-  #export PATH=mnt/c/Program\ Files/Git/bin:$PATH
   export PATH=$CONFIG_DIR/bin:$PATH
   export DISPLAY=localhost:0.0
 
@@ -78,7 +76,7 @@ autoload -Uz compinit
 compinit
 
 # Alias
-alias zshrc='vim $CONFIG_DIR/config.zshrc'
+alias zshrc='vim $CONFIG_DIR/zsh/config.zshrc'
 alias vimrc='vim $CONFIG_DIR/vim/config.vim'
 alias cdp='cd $PROJECT_DIR/'
 alias cdw='cd ~/work'
@@ -112,7 +110,7 @@ function showWindowsMessageBox
 {
     # Show notification (only on windows because Mac can use iTerm2 triggers)
     if [[ $platform == 'cygwin' ]]; then
-        cscript `cygpath -d "$CONFIG_DIR/Helpers/MessageBox.vbs"` $1
+        cscript `cygpath -d "$CONFIG_DIR/bin/MessageBox.vbs"` $1
     fi
 }
 
