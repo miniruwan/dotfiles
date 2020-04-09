@@ -39,6 +39,8 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/vim-easy-align'
 Plug 'vim-scripts/DrawIt'
 Plug 'bfrg/vim-cpp-modern'
+Plug 'pandysong/ghost-text.vim'
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 if has('nvim')
   Plug 'arakashic/chromatica.nvim'
 endif
@@ -182,3 +184,8 @@ else
   let g:chromatica#libclang_path='/usr/lib/x86_64-linux-gnu/libclang.so.1'
 endif
 let g:chromatica#enable_at_startup=1
+
+""""""""""""""""""""""""""""""
+" => vim-prettier
+""""""""""""""""""""""""""""""
+nmap <Leader>py <Plug>(Prettier)

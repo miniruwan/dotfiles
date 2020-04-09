@@ -13,6 +13,11 @@ let uname = system('uname -a')
 
 let mapleader=","
 
+
+" copying to clipboard
+vmap <C-x> :!pbcopy<CR>  
+vmap <C-c> "+y
+
 " Source other vim configuration files
 if has('nvim')
   execute 'source ' . expand('<sfile>:p:h') . '/neovim.vim'
@@ -21,10 +26,6 @@ execute 'source ' . expand('<sfile>:p:h') . '/plugin_config.vim'
 
 set nu
 set noswapfile
-
-" copying to clipboard
-vmap <C-x> :!pbcopy<CR>  
-vmap <C-c> "+y
 
 " Setting the correct path for grep
 set grepprg=/usr/bin/grep
@@ -39,16 +40,23 @@ map <ScrollWheelUp> <C-Y>
 map <ScrollWheelDown> <C-E>
 
 " configure tabwidth and insert spaces instead of tabs
-set tabstop=2        " tab width is 4 spaces
-set shiftwidth=2     " indent also with 4 spaces
-set expandtab        " expand tabs to spaces
+set tabstop=4        " tab width is 4 spaces
+set shiftwidth=4     " indent also with 4 spaces
 
 " Search web selected text
+if uname =~ "Microsoft"
+:vmap ?? y:!
+ \ /mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe "http://www.google.com/search?q=
+ \<C-R>0
+ \"
+ \<CR><CR>
+else
 :vmap ?? y:!
  \ /usr/bin/open -a "/Applications/Google Chrome.app" "http://www.google.com/search?q=
  \<C-R>0
  \"
  \<CR><CR>
+endif
 
 " Initiate replace word under cursor
 map <silent> <Leader>h :%s/<C-R><C-W>
@@ -59,7 +67,11 @@ map <silent> <Leader>w <C-W>w
 " Find references
 " --------------
 " (tselect word under cursor. This is useful if there are multiple tags for the same word)
-nnoremap <silent> <C-\> :tselect <C-R><C-W><CR> 
+" nnoremap <silent> <C-\> :tselect <C-R><C-W><CR> 
+
+" Move out of auto-completed paranthesis(or similar) when in insert mode
+" inside the paranthesis
+inoremap <C-\> <Esc>A
 
 " unfold everything when opening a file
 set foldlevelstart=99
@@ -69,7 +81,8 @@ map <leader>et :tabe ~/temp/temp.txt<CR>
 if uname =~ "Microsoft"
   set t_Co=16
   set background=dark
-  colorscheme gruvbox
+  colorscheme OceanicNext
+  set clipboard=
 else
   colorscheme onedark
   hi MatchParen cterm=bold ctermfg=LightYellow ctermbg=Gray

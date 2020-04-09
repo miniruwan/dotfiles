@@ -20,6 +20,8 @@ if [[ $platform == 'wsl' ]]; then
   alias open=explorer.exe
   #alias git="/mnt/c/Program\ Files/Git/bin/git.exe"
   #export PATH=mnt/c/Program\ Files/Git/bin:$PATH
+  export PATH=$CONFIG_DIR/bin:$PATH
+  export DISPLAY=localhost:0.0
 
   command_not_found_handler() {
       if cmd.exe /c "(where $1 || (help $1 |findstr /V Try)) >nul 2>nul && ($* || exit 0)"; then
@@ -64,6 +66,11 @@ export PATH=$HOME/.fzf/bin:$PATH
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.fzf/plugin/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh ] && source ~/.fzf/plugin/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
 
+# zsh-users/zsh-autosuggestions
+if [[ $platform == 'wsl' ]]; then
+    bindkey '^^' autosuggest-execute
+fi
+
 # https://stackoverflow.com/questions/22600259/zsh-autocomplete-from-the-middle-of-filename
 zstyle ':completion:*' completer _complete
 zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' '+l:|=* r:|=*'
@@ -76,7 +83,8 @@ alias vimrc='vim $CONFIG_DIR/vim/config.vim'
 alias cdp='cd $PROJECT_DIR/'
 alias cdw='cd ~/work'
 alias cdt='cd ~/temp';
-alias v='nvim'
+alias vt='v ~/temp/temp.txt'
+alias vw='v ~/temp/work.txt'
 # Following make user alias available for sudo
 alias sudo='sudo '
 
@@ -139,6 +147,7 @@ function setEnvVariableIfNotSet
 }
 
 # Some Exports
+export PATH=/usr/local/bin:$PATH
 if [[ $platform == 'osx' ]]; then
   export PATH=/usr/local/opt/openssl/bin:$PATH
 else
