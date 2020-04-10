@@ -1,6 +1,6 @@
 local modules_dir=$CONFIG_DIR/zsh/modules
 
-source $modules_dir/set_platform.zsh
+source $CONFIG_DIR/scripts/set_platform.sh
 source $modules_dir/wsl.zsh
 source $modules_dir/plugin_config.zsh
 source $modules_dir/aliases.zsh

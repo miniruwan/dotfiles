@@ -5,87 +5,17 @@ set -e
 
 # Warning : This is not completely tested yet
 
-# ========== General script ==========
-CONFIG_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
-
-# Detect platform
-platform='unknown'
-unamestr=`uname`
-if [[ "$unamestr" == 'Linux' ]]; then
-	if grep -q Microsoft /proc/version; then
-	  platform='wsl' # windows subsystem for linux
-	else
-	  platform='linux' # Native linux
-	fi
-elif [[ "$unamestr" == 'FreeBSD' ]]; then
-  platform='freebsd'
-elif [[ "$unamestr" == 'Darwin' ]]; then
-  platform='osx'
-fi
-
-# ---------- Helper functions -----------
-print_debug() {
-  # Printing message in the console.
-  BLUE='\e[94m'
-  NC='\033[0m' # No Color
-  echo ""
-  echo -e "${BLUE}$1${NC}"
-}
-
-print_info() {
-  # Printing message in the console.
-  GREEN_BLINK_BOLD='\e[5m\e[32m\e[1m'
-  NC='\033[0m' # No Color
-  echo ""
-  echo "------------------------------"
-  echo -e "${GREEN_BLINK_BOLD}$1${NC}"
-  echo "------------------------------"
-}
-
-print_important() {
-  # Printing message in the console.
-  RED='\033[0;31m'
-  NC='\033[0m' # No Color
-  echo ""
-  echo "------------------------------------- NOTICE -----------------------------------------"
-  echo -e "${RED}$1${NC}"
-  echo "--------------------------------------------------------------------------------------"
-}
+# ========== Common sources ==========
+source scripts/set_variables.sh
+source scripts/set_platform.sh
+source scripts/print_helper.sh
 
 # ================= functions for each configuration task =====================
 
-compile_zsh() {
-  # Checks whether the required version is installed
-  local programName=zsh
-  local minimumRequriredVersion=5
-  if [[ -x "$(command -v $programName)" ]]; then # program exists
-    local availableVersion=$($programName --version | cut -d' ' -f 2)
-    if [[ $availableVersion -gt $minimumRequriredVersion ]]; then
-      print_debug "Compilation is not required for $programName because the available version($availableVersion) \
-        already satisfies the minimumRequriredVersion($minimumRequriredVersion)"
-      return 0;
-    else
-      print_debug "Compiling $programName because because the available version($availableVersion) \
-        is less than the minimumRequriredVersion($minimumRequriredVersion)"
-    fi
-  else
-    print_debug "Compiling $programName because $programName is not found"
-  fi
-
-  cd ~/packages
-  wget -O zsh.tar.xz https://sourceforge.net/projects/zsh/files/latest/download
-  mkdir zsh && unxz zsh.tar.xz && tar -xvf zsh.tar -C zsh --strip-components 1
-  cd zsh
-  mkdir -p $HOME/.local
-  ./configure --prefix=$HOME/.local
-  make && make install
-}
-
-configure_fzf() {
-  print_info "Installing fzf"
-	git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-	~/.fzf/install
-}
+source scripts/zsh.sh
+source scripts/fzf.sh
+source scripts/cmake.sh
+source scripts/tmux.sh
 
 configure_symlinks() {
   rm -rf ~/Downloads && ln -s '/media/miniruwan/Data/Downloads' ~/Downloads
@@ -94,25 +24,6 @@ configure_symlinks() {
   rm -rf ~/Downloads && ln -s '/media/miniruwan/Data/Videos' ~/Videos
   rm -rf ~/Downloads && ln -s '/media/miniruwan/Data/Pictures' ~/Pictures
   rm -rf ~/Downloads && ln -s '/media/miniruwan/Data/projects' ~/projects
-}
-
-configure_zsh() {
-  print_info "Installing Zsh"
-
-  compile_zsh
-
-	sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-
-  configure_fzf
-
-  # zplug
-	git clone https://github.com/zplug/zplug ~/.zplug
-	echo "#" >> ~/.zshrc
-	echo "# Mini's configs" >> ~/.zshrc
-	echo "source ~/.zplug/init.zsh" >> ~/.zshrc
-
-	cp $CONFIG_DIR/config.local.example.zsh $CONFIG_DIR/config.local.zsh
-	echo "source $CONFIG_DIR/config.local.zsh" >> ~/.zshrc
 }
 
 configure_ack() {
@@ -124,11 +35,11 @@ configure_ack() {
 }
 
 configure_mono() {
-		sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
-		sudo apt install -y apt-transport-https
-		echo "deb https://download.mono-project.com/repo/ubuntu stable-xenial main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
-		sudo apt update
-		sudo apt install -y mono-devel
+    sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+    sudo apt install -y apt-transport-https
+    echo "deb https://download.mono-project.com/repo/ubuntu stable-xenial main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
+    sudo apt update
+    sudo apt install -y mono-devel
 }
 
 configure_node() {
@@ -150,104 +61,6 @@ configure_powerline_font() {
     configure_python
     pip install --user powerline-status
   fi
-}
-
-configure_cmake() {
-  if [[ $platform != 'linux' ]]; then
-    print_important "Installing cmake is currently implemented only linux"
-    return 1;
-  fi
-
-  local programName=cmake
-  local minimumRequriredVersion=3
-  if [[ -x "$(command -v $programName)" ]]; then # program exists
-    local availableVersion=$($programName --version | head -n 1 | cut -d" " -f 3)
-    if [[ $availableVersion -gt $minimumRequriredVersion ]]; then
-      print_debug "Compilation is not required for $programName because the available version($availableVersion) \
-        already satisfies the minimumRequriredVersion($minimumRequriredVersion)"
-      return 0;
-    else
-      print_debug "Compiling $programName because because the available version($availableVersion) \
-        is less than the minimumRequriredVersion($minimumRequriredVersion)"
-    fi
-  else
-    print_debug "Compiling $programName because $programName is not found"
-  fi
-
-  cmakeLatestVersion=$(curl --silent "https://api.github.com/repos/Kitware/CMake/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")' | cut -d'v' -f 2)
-  cd ~/packages
-  wget https://github.com/Kitware/CMake/releases/download/v$cmakeLatestVersion/cmake-$cmakeLatestVersion-Linux-x86_64.tar.gz
-  tar -xzvf cmake-$cmakeLatestVersion-Linux-x86_64.tar.gz
-  cd cmake-$cmakeLatestVersion-Linux-x86_64
-  # install
-  mkdir -p ~/.local/bin/
-  mkdir -p ~/.local/share/
-  cp -r bin/* ~/.local/bin/
-  cp -r share/* ~/.local/share/
-
-  # cleanup
-  cd ~/packages
-  rm -rf cmake-$cmakeLatestVersion-Linux-x86_64
-  rm cmake-$cmakeLatestVersion-Linux-x86_64.tar.gz
-}
-
-compile_tmux() {
-  local programName=tmux
-  local minimumRequriredVersion=2
-  if [[ -x "$(command -v $programName)" ]]; then # program exists
-    local availableVersion=$(tmux -V | cut -d' ' -f 2)
-    if [[ $availableVersion -gt $minimumRequriredVersion ]]; then
-      print_debug "Compilation is not required for $programName because the available version($availableVersion) \
-        already satisfies the minimumRequriredVersion($minimumRequriredVersion)"
-      return 0;
-    else
-      print_debug "Compiling $programName because because the available version($availableVersion) \
-        is less than the minimumRequriredVersion($minimumRequriredVersion)"
-    fi
-  else
-    print_debug "Compiling $programName because $programName is not found"
-  fi
-
-  # libevent is needed as a dependency to build tmux.
-  cd ~/packages
-  git clone https://github.com/libevent/libevent.git
-  cd libevent && mkdir build && cd build
-  cmake ..
-  make && sudo make install
-
-  # newer cmake is needed to compile
-  configure_cmake
-
-  # Some dependencies not available in old linux versions
-  if [ "$platform" == 'linux' ] && [ `lsb_release -rs` == "14.04" ]; then
-    sudo apt install -y libncursesw5-dev bison byacc
-  elif [[ "$platform" == 'wsl' ]]; then
-    sudo apt install -y libssl-dev automake
-  fi
-
-  cd ~/packages
-  git clone https://github.com/tmux/tmux.git
-  cd tmux
-  # tmux versions >=3 doesn't seem to be working with gpakosz/.tmux
-  git checkout tags/2.9
-
-
-	sh autogen.sh
-  ./configure --prefix=$HOME/.local
-  make && make install
-}
-
-configure_tmux() {
-  print_info "Installing tmux"
-
-  compile_tmux
-
-  # Install https://github.com/gpakosz/.tmux
-  git clone https://github.com/gpakosz/.tmux.git ~/.tmux
-  ln -s -f ~/.tmux/.tmux.conf ~/.tmux.conf
-  cp ~/.tmux/.tmux.conf.local ~/
-  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-  echo "source-file $CONFIG_DIR/tmux/config.tmux" >> ~/.tmux.conf.local
 }
 
 configure_zenburn() {
@@ -278,125 +91,9 @@ configure_vscode() {
   fi
 }
 
-configure_vim_neovim_common() {
-  # Install the Basic version of https://github.com/amix/vimrc
-  git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
-  echo "source ~/.vim_runtime/vimrcs/basic.vim" >> ~/.vimrc
-
-  # Source this project's vim config
-  echo "source $CONFIG_DIR/vim/config.vim" >> ~/.vimrc
-
-  # youcompleteme
-  sudo apt install -y build-essential cmake python-dev python3-dev
-  cd ~/.vim/plugged/YouCompleteMe
-  ./install.py --clang-completer --cs-completer --js-completer
-}
-
-configure_neovim() {
-  mkdir -p $HOME/.local/bin
-  curl -o $HOME/.local/bin/nvim -L https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
-  chmod u+x $HOME/.local/bin/nvim
-
-  # vim-plug
-  curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-  if [[ $platform == 'linux' ]]; then
-    # libclang is needed for arakashic/chromatica.nvim
-    sudo apt install -y clang
-
-    # xsel is needed to copy to clipboard
-    sudo apt install -y xsel
-  fi
-
-  # https://vi.stackexchange.com/questions/12794/how-to-share-config-between-vim-and-neovim
-  mkdir -p ~/.config/nvim
-  echo "set runtimepath^=~/.vim runtimepath+=~/.vim/after" >> ~/.config/nvim/init.vim
-  echo "let &packpath=&runtimepath" >> ~/.config/nvim/init.vim
-  echo "source ~/.vimrc" >> ~/.config/nvim/init.vim
-
-
-  pip3 install pynvim
-
-  configure_vim_neovim_common
-}
-
-compile_vim() {
-  local programName=vim
-  local minimumRequriredVersion=8
-  if [[ -x "$(command -v $programName)" ]]; then # program exists
-    local availableVersion=$($programName --version | head -1 | cut -d ' ' -f 5)
-    if [[ $availableVersion -gt $minimumRequriredVersion ]]; then
-      print_debug "Compilation is not required for $programName because the available version($availableVersion) \
-        already satisfies the minimumRequriredVersion($minimumRequriredVersion)"
-      return 0;
-    else
-      print_debug "Compiling $programName because because the available version($availableVersion) \
-        is less than the minimumRequriredVersion($minimumRequriredVersion)"
-    fi
-  else
-    print_debug "Compiling $programName because $programName is not found"
-  fi
-
-  # Make vim
-  # source : https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source
-  sudo apt remove vim vim-runtime gvim
-  sudo apt install libncurses5-dev libgnome2-dev libgnomeui-dev \
-  libgtk2.0-dev libatk1.0-dev libbonoboui2-dev \
-  libcairo2-dev libx11-dev libxpm-dev libxt-dev python-dev \
-  python3-dev ruby-dev libperl-dev
-  cd ~/packages
-  git clone https://github.com/vim/vim.git
-  cd vim
-  ./configure --with-features=huge \
-              --with-compiledby=Miniruwan \
-							--enable-multibyte \
-							--enable-rubyinterp=yes \
-							--enable-pythoninterp=yes \
-							--with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu \
-							--enable-python3interp=yes \
-							--with-python3-config-dir=/usr/lib/python3.6/config-3.6m-x86_64-linux-gnu \
-							--enable-perlinterp=yes \
-							--enable-cscope \
-							--prefix=/usr/local
-  make -j8 VIMRUNTIMEDIR=/usr/local/share/vim/vim82
-  sudo make install
-}
-
-configure_vim() {
-  print -P "\n\n%F{magenta}Do you want to use neovim instead vim??%f"
-  read -q "useNeovim"
-  if [[ $useNeovim == 'y' ]]; then
-    configure_neovim
-    return 0;
-  fi
-
-  compile_vim
-
-  sudo update-alternatives --install /usr/bin/editor editor /usr/local/bin/vim 1
-  sudo update-alternatives --set editor /usr/local/bin/vim
-  sudo update-alternatives --install /usr/bin/vi vi /usr/local/bin/vim 1
-  sudo update-alternatives --set vi /usr/local/bin/vim
-
-  # vim-plug
-  curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-  configure_vim_neovim_common
-}
-
 configure_iterm() {
   if [[ $platform == 'osx' ]]; then
     ln -s -f $CONFIG_DIR/iterm/com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
-  fi
-}
-
-# https://github.com/nvbn/thefuck
-configure_theFuck() {
-  if [[ $platform == 'linux' ]]; then
-    sudo apt update
-    sudo apt install -y python3-dev python3-pip
-    sudo pip3 install thefuck
-  elif [[ $platform == 'osx' ]]; then
-    brew install thefuck
   fi
 }
 
@@ -411,14 +108,15 @@ configure_copyQ() {
   fi
 }
 
+# https://github.com/nvbn/thefuck
 configure_thefuck() {
   print_info "Installing thefuck"
-  if [[ $platform == 'linux' ]]; then
+  if [[ $platform == 'osx' ]]; then
+    brew install thefuck
+  else
     sudo apt update
     sudo apt install -y python3-dev python3-pip python3-setuptools
     sudo pip3 install thefuck
-  elif [[ $platform == 'osx' ]]; then
-    brew install thefuck
   fi
 }
 

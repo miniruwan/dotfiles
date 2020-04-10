@@ -1,9 +1,9 @@
 platform='unknown'
-local unamestr=`uname`
+unamestr=`uname`
 if [[ "$unamestr" == 'Linux' ]]; then
   if ( grep -q Microsoft /proc/version ); then
     platform='wsl'
-  else 
+  else
     platform='linux'
   fi
 elif [[ "$unamestr" == 'Darwin' ]]; then
