@@ -111,8 +111,8 @@ configure_zsh() {
 	echo "# Mini's configs" >> ~/.zshrc
 	echo "source ~/.zplug/init.zsh" >> ~/.zshrc
 
-	cp $CONFIG_DIR/config.local.example.zshrc $CONFIG_DIR/config.local.zshrc
-	echo "source $CONFIG_DIR/config.local.zshrc" >> ~/.zshrc
+	cp $CONFIG_DIR/config.local.example.zsh $CONFIG_DIR/config.local.zsh
+	echo "source $CONFIG_DIR/config.local.zsh" >> ~/.zshrc
 }
 
 configure_ack() {
@@ -247,7 +247,7 @@ configure_tmux() {
   ln -s -f ~/.tmux/.tmux.conf ~/.tmux.conf
   cp ~/.tmux/.tmux.conf.local ~/
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-  echo "source-file $CONFIG_DIR/config.tmux" >> ~/.tmux.conf.local
+  echo "source-file $CONFIG_DIR/tmux/config.tmux" >> ~/.tmux.conf.local
 }
 
 configure_zenburn() {
