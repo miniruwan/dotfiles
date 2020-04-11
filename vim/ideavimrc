@@ -1,0 +1,52 @@
+let mapleader=","
+
+set easymotion
+let g:EasyMotion_override_acejump = 1
+
+set surround
+
+vnoremap <c-c> :action EditorCopy<cr>
+
+
+" ================================================================
+" Most of the following is copied following from:
+" https://gist.github.com/ppasieka/3801f12e93fc22cdf9e32ec89441993c
+map <leader>; :action LocateInSolutionView<CR>
+map <leader>ff :action Find<CR>
+map <leader>fF :action FindModal<CR>
+map <leader>/ :action CommentByLineComment<CR>
+map <leader>fu :action FindUsages<CR>
+map <leader>u  :action ShowUsages<CR>
+map <leader>rr :action RenameElement<CR>
+map <leader>rt :action Refactorings.QuickListPopupAction <CR>
+map <leader>q  :action CloseActiveTab<CR>
+
+map <leader>ga :action GotoAction<CR>
+map <leader>gm :action FileStructurePopup<CR>
+map <leader>gi :action GotoImplementation<CR>
+map <leader>gd :action GotoDeclaration<CR>
+map <leader>gf :action GotoFile<CR>
+map <leader>gs :action GotoSymbol<CR>
+map <leader>gt :action GotoClass<CR>
+map <leader>o :action RecentFiles<CR>
+map <leader>ge :action RecentChangedFiles<CR>
+
+map <leader>ri :action Inline<CR>
+map <leader>rv :action IntroduceVariable<CR>
+vmap <leader>rv :action IntroduceVariable<CR>
+
+noremap Y ^y$
+
+nnoremap <leader>tr :action RiderUnitTestRunContextAction<CR>
+nnoremap <leader>td :action RiderUnitTestDebugContextAction<CR>
+
+"nnoremap <c-o> :action Back<cr>
+"nnoremap <c-i> :action Forward<cr>
+nnoremap <c-w> :action JumpToLastWindow<CR>
+
+nnoremap = :action ReformatCode<CR>
+vnoremap = :action ReformatCode<CR>
+
+nnoremap <leader>a :action GotoAction<CR>
+vnoremap <leader>a :action GotoAction<CR>
+" ================================================================
