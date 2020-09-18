@@ -30,6 +30,7 @@ map <leader>gs :action GotoSymbol<CR>
 map <leader>gt :action GotoClass<CR>
 map <leader>o :action RecentFiles<CR>
 map <leader>ge :action RecentChangedFiles<CR>
+map <leader>w :action NextSplitter<CR>
 
 map <leader>ri :action Inline<CR>
 map <leader>rv :action IntroduceVariable<CR>

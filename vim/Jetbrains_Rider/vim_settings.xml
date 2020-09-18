@@ -65,7 +65,7 @@
       <shortcut-conflict owner="ide">
         <text>ctrl pressed K</text>
       </shortcut-conflict>
-      <shortcut-conflict owner="vim">
+      <shortcut-conflict owner="ide">
         <text>ctrl pressed OPEN_BRACKET</text>
       </shortcut-conflict>
       <shortcut-conflict owner="ide">
@@ -78,7 +78,7 @@
     <editor />
     <notifications>
       <idea-join enabled="true" />
-      <idea-put enabled="false" />
+      <idea-put enabled="true" />
     </notifications>
   </component>
 </application>

@@ -1,7 +1,16 @@
-﻿/*
-Re-map Capslock to ESC
-*/
-Capslock::Esc
+﻿; +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+; https://github.com/rcmdnk/vim_ahk.git
+VimGroup := "ahk_exe notepad.exe,ahk_exe Ssms.exe"
+#include D:\packages\vim_ahk\vim.ahk
+
+; +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+; https://www.autohotkey.com/download/AutoCorrect.ahk
+#include D:\packages\AutoHotKey\AutoCorrect.ahk
+
+
+; +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Control & j::Send {Down}
+Control & k::Send {Up}
 
 ; +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 /*
