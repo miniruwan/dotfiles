@@ -1,7 +1,7 @@
 platform='unknown'
 unamestr=`uname`
 if [[ "$unamestr" == 'Linux' ]]; then
-  if ( grep -q Microsoft /proc/version ); then
+  if ( grep -q microsoft /proc/version ); then
     platform='wsl'
   else
     platform='linux'

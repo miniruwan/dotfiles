@@ -13,6 +13,7 @@ source scripts/print_helper.sh
 # ================= functions for each configuration task =====================
 
 source scripts/zsh.sh
+source scripts/vim.sh
 source scripts/fzf.sh
 source scripts/cmake.sh
 source scripts/tmux.sh
@@ -179,4 +180,7 @@ elif [[ $* == *--vim* ]] ; then
   configure_vim
 elif [[ $* == *--thefuck* ]] ; then
   configure_thefuck
+else
+  print_important "Unsupported argument: $*"
+  echo "$usage"
 fi

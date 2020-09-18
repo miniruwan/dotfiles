@@ -41,6 +41,7 @@ Plug 'vim-scripts/DrawIt'
 Plug 'bfrg/vim-cpp-modern'
 Plug 'pandysong/ghost-text.vim'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plug 'bkad/CamelCaseMotion'
 if has('nvim')
   Plug 'arakashic/chromatica.nvim'
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -199,3 +200,8 @@ let g:loaded_youcompleteme = 1
 " => vim-prettier
 """"""""""""""""""""""""""""""
 nmap <Leader>py <Plug>(Prettier)
+
+""""""""""""""""""""""""""""""
+" => CamelCaseMotion
+""""""""""""""""""""""""""""""
+let g:camelcasemotion_key = ';'

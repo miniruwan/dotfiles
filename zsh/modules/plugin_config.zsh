@@ -31,6 +31,7 @@ export PATH=$HOME/.fzf/bin:$PATH
 [ -f ~/.fzf/plugin/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh ] && source ~/.fzf/plugin/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
 
 # zsh-users/zsh-autosuggestions
+bindkey '^ ' autosuggest-accept
 if [[ $platform == 'wsl' ]]; then
     bindkey '^^' autosuggest-execute
 fi
