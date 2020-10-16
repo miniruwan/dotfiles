@@ -142,6 +142,7 @@ where <option>:
     --help      show this help text
     --all       run all initialization scripts
     --zsh       install zsh with oh-my-zsh
+    --vim       install vim or neovim
     --fzf       install fzf
     --python    install pip
     --font      install powerline font
