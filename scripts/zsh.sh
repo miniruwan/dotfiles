@@ -50,3 +50,5 @@ configure_zsh() {
 	cp $CONFIG_DIR/zsh/config.local.example.zsh $CONFIG_DIR/zsh/config.local.zsh
 	echo "source $CONFIG_DIR/zsh/config.local.zsh" >> ~/.zshrc
 }
+
+powerlevel.sh
