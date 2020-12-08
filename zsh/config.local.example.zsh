@@ -37,12 +37,67 @@ alias cdi='cd $PROJECT_DIR/Wallace/Rifleman.Imports'
 alias cdg='cd $PROJECT_DIR/Wallace/Rifleman.GlobalAdmin'
 
 # run some projects
-alias runr='iisexpress /config:C:/Projects/Wallace/Rifleman/RiflemanWeb/.idea/config/applicationhost.config /site:RiflemanWeb /apppool:Clr4IntegratedAppPool'
-alias runi='cd $IMPORTING_API_PROJECT_DIR && dotnet run'
 alias rung='cd $GLOBAL_ADMIN_PROJECT_DIR && dotnet run'
-alias runf='cd $FUNCTIONS_PROJECT_DIR && func start'
 
 # build some projects
 alias buildr='cdr && MSBuild.exe'
 alias buildi='cd $IMPORTING_API_PROJECT_DIR && dotnet build'
 alias buildg='cd $GLOBAL_ADMIN_PROJECT_DIR && dotnet build'
+
+
+
+# Functions
+# =========
+
+function runi
+{
+    cdi
+
+    [[ $(AzureStorageEmulator.exe status) == *False* ]] && AzureStorageEmulator.exe start
+
+    dotnet run
+}
+
+function runf
+{
+    cdf
+
+    [[ $(AzureStorageEmulator.exe status) == *False* ]] && AzureStorageEmulator.exe start
+
+    func start
+}
+
+function runr
+{
+    cdr
+
+    # Checkout branch and build if branch name is provided
+    if (( # != 0 )); then
+        git fetch && \
+        git switch $1 && \
+        git pull && \
+        buildr
+    fi
+
+    # Open localhost
+    /mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe --profile-directory="Default" "http://localhost:57204/Property/Details/50633?propertyTab=14"
+
+    # Run
+    iisexpress /config:C:/Projects/Wallace/Rifleman/RiflemanWeb/.idea/config/applicationhost.config /site:RiflemanWeb /apppool:Clr4IntegratedAppPool
+}
+
+function testr
+{
+    cdr
+
+    # Checkout branch and build if branch name is provided
+    if (( # != 0 )); then
+        git fetch && \
+        git switch $1 && \
+        git pull && \
+        buildr
+    fi
+
+    # Run the tests
+    packages/xunit.runner.console.2.4.1/tools/net472/xunit.console.exe $(find . -type f -regex ".*/bin/Debug/.*Tests\.dll")
+}
