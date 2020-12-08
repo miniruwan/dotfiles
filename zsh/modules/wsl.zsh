@@ -16,9 +16,13 @@ git() {
 # See https://github.com/Microsoft/BashOnWindows/issues/1887
 unsetopt BG_NICE
 
+# Make X11 Forwarding working in WSL
+# https://stackoverflow.com/a/61110604
+export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0
+
 alias open=explorer.exe
 export PATH=$CONFIG_DIR/bin:$PATH
-export DISPLAY=localhost:0.0
+
 
 command_not_found_handler() {
   if cmd.exe /c "(where $1 || (help $1 |findstr /V Try)) >nul 2>nul && ($* || exit 0)"; then

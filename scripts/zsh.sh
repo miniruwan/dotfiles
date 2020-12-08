@@ -37,6 +37,8 @@ configure_zsh() {
 
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+
   configure_fzf
 
   # zplug
@@ -45,6 +47,8 @@ configure_zsh() {
 	echo "# Mini's configs" >> ~/.zshrc
 	echo "source ~/.zplug/init.zsh" >> ~/.zshrc
 
-	cp $CONFIG_DIR/config.local.example.zsh $CONFIG_DIR/config.local.zsh
-	echo "source $CONFIG_DIR/config.local.zsh" >> ~/.zshrc
+	cp $CONFIG_DIR/zsh/config.local.example.zsh $CONFIG_DIR/zsh/config.local.zsh
+	echo "source $CONFIG_DIR/zsh/config.local.zsh" >> ~/.zshrc
 }
+
+powerlevel.sh
