@@ -78,6 +78,8 @@ set foldlevelstart=99
 
 map <leader>et :tabe ~/temp/temp.txt<CR>
 
+command VT tabe ~/temp/temp.txt
+
 if uname =~ "Microsoft"
   set t_Co=16
   set background=dark
