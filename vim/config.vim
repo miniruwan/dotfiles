@@ -89,3 +89,7 @@ else
   colorscheme onedark
   hi MatchParen cterm=bold ctermfg=LightYellow ctermbg=Gray
 endif
+
+" Treat wods with dash as one word
+" https://til.hashrocket.com/posts/t8osyzywau-treat-words-with-dash-as-a-word-in-vim
+set iskeyword+=-

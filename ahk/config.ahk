@@ -3,13 +3,13 @@
 ; +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ; https://github.com/rcmdnk/vim_ahk.git
 VimGroup := "ahk_exe notepad.exe,ahk_exe Ssms.exe"
-#include D:\packages\vim_ahk\vim.ahk
+#include C:\packages\AutoHotKey\vim_ahk\vim.ahk
 
 
 
 ; +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ; https://www.autohotkey.com/download/AutoCorrect.ahk
-#include D:\packages\AutoHotKey\AutoCorrect.ahk
+#include C:\packages\AutoHotKey\AutoCorrect.ahk
 
 
 
@@ -17,7 +17,7 @@ VimGroup := "ahk_exe notepad.exe,ahk_exe Ssms.exe"
 Control & j::Send {Down}
 Control & k::Send {Up}
 
-
+Capslock::Esc
 
 ; +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 /*
@@ -46,7 +46,12 @@ using GitKraken
 
 ^+B::
     Send {Ctrl down}b{Ctrl up}
-    Send feature/%git_branch_prefix%/     ; branch prefix
+    Send feature/%git_branch_prefix%/     ; feature branch prefix
+    return
+
+^!B::
+    Send {Ctrl down}b{Ctrl up}
+    Send bug/%git_branch_prefix%/     ; bug branch prefix
     return
 
 #IfWinActive
@@ -57,7 +62,7 @@ using GitKraken
 /*
 Launch Tasky plugin of Launchy
 */
-!Escape::Send {Alt down}{Space}{Alt up}t{Tab}
+!Capslock::Send {Alt down}{Space}{Alt up}t{Tab}
 
 
 
@@ -66,11 +71,11 @@ Launch Tasky plugin of Launchy
 Toggle Window Scaling
 Reference : https://github.com/lihas/windows-DPI-scaling-sample.git
 */
-^+F7::ToggleWindowScaling()
+^!F8::ToggleWindowScaling()
 	
 ToggleWindowScaling()
 {
-	Run, "D:\packages\windows-DPI-scaling-sample\x64\Debug\DPIScalingMFCApp.exe"
+	Run, "%packages_dir%\windows-DPI-scaling-sample\x64\Debug\DPIScalingMFCApp.exe"
 	WinWaitActive, DPIScalingMFCApp
 	ControlGetText, currentDpi, Edit2, DPIScalingMFCApp
 	if(currentDpi == 100)
@@ -83,3 +88,14 @@ ToggleWindowScaling()
 	}
 	WinClose, DPIScalingMFCApp
 }
+
+
+
+; ++++++++++++++++++++++++++++++++++++++++++++
+/*
+Google search the highlighted text
+*/
+#f::
+    Send ^c
+    Run, chrome.exe --profile-directory="%chrome_personal_profile_directory%" "http://www.google.com/search?hl=en&q=%Clipboard%"
+    return
