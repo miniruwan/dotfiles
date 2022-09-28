@@ -39,11 +39,9 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/vim-easy-align'
 Plug 'vim-scripts/DrawIt'
 Plug 'bfrg/vim-cpp-modern'
-Plug 'pandysong/ghost-text.vim'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'bkad/CamelCaseMotion'
 if has('nvim')
-  Plug 'arakashic/chromatica.nvim'
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 endif
 call plug#end()
