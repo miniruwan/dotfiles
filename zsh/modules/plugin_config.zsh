@@ -3,6 +3,7 @@ source ~/.zplug/init.zsh
 
 zplug "zsh-users/zsh-autosuggestions"
 zplug "aloxaf/fzf-tab"
+zplug "agkozak/zsh-z"
 # Install zsh-iterm-touchbar only for OS X
 if [[ $platform == 'osx' ]]; then
     zplug "iam4x/zsh-iterm-touchbar"

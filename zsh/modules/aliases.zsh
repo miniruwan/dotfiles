@@ -7,3 +7,4 @@ alias vt='v ~/temp/temp.txt'
 alias vw='v ~/temp/work.txt'
 # Following make user alias available for sudo
 alias sudo='sudo '
+alias ls='lsd'

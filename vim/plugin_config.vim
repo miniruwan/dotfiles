@@ -14,26 +14,20 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'majutsushi/tagbar'
-Plug 'vim-airline/vim-airline'
+"Plug 'majutsushi/tagbar'
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 Plug 'terryma/vim-smooth-scroll'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'derekwyatt/vim-fswitch'
 Plug 'vim-scripts/YankRing.vim'
-Plug 'Valloric/YouCompleteMe'
 Plug 'scrooloose/nerdcommenter'
-Plug 'vobornik/vim-mql4'
-Plug 'rupurt/vim-mql5'
 Plug 'leafgarland/typescript-vim'
 Plug 'godlygeek/tabular'
 Plug 'terryma/vim-expand-region'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'haya14busa/incsearch.vim'
-Plug 'haya14busa/incsearch-fuzzy.vim'
-Plug 'haya14busa/incsearch-easymotion.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/vim-easy-align'
@@ -43,6 +37,11 @@ Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'bkad/CamelCaseMotion'
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'nvim-lualine/lualine.nvim'
+  Plug 'kyazdani42/nvim-web-devicons'
+else
+ Plug 'Valloric/YouCompleteMe'
+ Plug 'vim-airline/vim-airline'
 endif
 call plug#end()
 " --------- End of vim-plug config ---------
@@ -57,6 +56,13 @@ call plug#end()
 let g:ycm_global_ycm_extra_conf = expand('<sfile>:p:h') . '/ycm_extra_conf.py'
 let g:ycm_max_diagnostics_to_display = 200
 map <leader>y :YcmCompleter FixIt<CR>
+
+""""""""""""""""""""""""""""""
+" => lualine
+""""""""""""""""""""""""""""""
+if has('nvim')
+  lua require('lualine').setup()
+endif
 
 """"""""""""""""""""""""""""""
 " => Smooth scroll
@@ -128,6 +134,7 @@ nnoremap <leader>nf :NERDTreeFind<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nmap <leader>r :TagbarToggle<CR>
 
+
 """"""""""""""""""""""""""""""
 " YankRing
 """"""""""""""""""""""""""""""
@@ -155,19 +162,6 @@ map <leader>tt :Windows<cr>
 xmap ga <Plug>(EasyAlign)
 
 """"""""""""""""""""""""""""""
-" => incsearch
-""""""""""""""""""""""""""""""
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
-
-""""""""""""""""""""""""""""""
-" => incsearch-fuzzy
-""""""""""""""""""""""""""""""
-map <Space>/ <Plug>(incsearch-fuzzy-/)
-map <Space>? <Plug>(incsearch-fuzzy-?)
-
-""""""""""""""""""""""""""""""
 " => auto-pairs
 """"""""""""""""""""""""""""""
 let g:AutoPairsShortcutJump='<S-Tab>'
@@ -188,7 +182,7 @@ let g:chromatica#enable_at_startup=1
 """"""""""""""""""""""""""""""
 " => deoplete
 """"""""""""""""""""""""""""""
-let g:deoplete#enable_at_startup = 1
+"let g:deoplete#enable_at_startup = 1
 " Tab completion
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " Disable YouCompleteMe
