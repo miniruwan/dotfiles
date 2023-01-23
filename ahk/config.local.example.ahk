@@ -1,9 +1,21 @@
 ﻿; +++++++++++++++++++++++++++++++++++++++++++++++++++++++
-; Set some variables needed later in the included scripts
+; Set the variables needed and includ the needed scripts
+
+; Comment out the stuff you don't need
 ; =======================================================
 
-git_branch_prefix := "black-sheep"
-todo_task_name := "service-date"
-chrome_personal_profile_directory := "Default" 
+^Esc::CapsLock
 
-#Include %A_LineFile%\..\config.ahk
+chrome_personal_profile_directory := "Default" 
+#include %A_LineFile%\..\libraries\web_search.ahk
+
+todo_task_name := "my-task"
+#include %A_LineFile%\..\libraries\todo_comment.ahk
+
+;packages_dir := "C:\Packages" 
+;#include %A_LineFile%\..\libraries\window_scaling.ahk
+
+;#include %A_LineFile%\..\libraries\ssms.ahk
+
+#include %A_LineFile%\..\libraries\cosmos.ahk
+;#include %A_LineFile%\..\libraries\postman.ahk
