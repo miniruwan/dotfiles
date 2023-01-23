@@ -8,6 +8,7 @@
     <keyboard-shortcut first-keystroke="tab" />
     <keyboard-shortcut first-keystroke="ctrl n" />
   </action>
+  <action id="CodeCleanup" />
   <action id="CodeCompletion">
     <keyboard-shortcut first-keystroke="ctrl space" />
   </action>
@@ -19,6 +20,9 @@
     <keyboard-shortcut first-keystroke="ctrl alt divide" />
   </action>
   <action id="Debugger.MarkObject" />
+  <action id="EditBookmark">
+    <keyboard-shortcut first-keystroke="ctrl alt f11" />
+  </action>
   <action id="Editor Copy">
     <keyboard-shortcut first-keystroke="shift ctrl alt 0" />
   </action>
@@ -26,6 +30,7 @@
     <keyboard-shortcut first-keystroke="down" />
     <keyboard-shortcut first-keystroke="ctrl j" />
   </action>
+  <action id="EditorToggleColumnMode" />
   <action id="EditorUp">
     <keyboard-shortcut first-keystroke="up" />
     <keyboard-shortcut first-keystroke="ctrl k" />
@@ -50,9 +55,7 @@
     <keyboard-shortcut first-keystroke="alt insert" />
   </action>
   <action id="OpenFile" />
-  <action id="ReformatCode">
-    <keyboard-shortcut first-keystroke="ctrl alt enter" />
-  </action>
+  <action id="ReformatCode" />
   <action id="RiderUnitTestAppendTestsAction">
     <keyboard-shortcut first-keystroke="ctrl t" second-keystroke="a" />
     <keyboard-shortcut first-keystroke="ctrl t" second-keystroke="ctrl a" />
@@ -102,10 +105,12 @@
     <keyboard-shortcut first-keystroke="ctrl t" second-keystroke="ctrl f" />
   </action>
   <action id="SearchEverywhere" />
-  <action id="ToggleBookmark" />
-  <action id="Vcs.ReformatCommitMessage">
-    <keyboard-shortcut first-keystroke="ctrl alt enter" />
+  <action id="ShowReformatFileDialog" />
+  <action id="SilentCodeCleanup" />
+  <action id="ToggleBookmark">
+    <keyboard-shortcut first-keystroke="ctrl f11" />
   </action>
+  <action id="ToggleBookmarkWithMnemonic" />
   <action id="WebOpenInAction">
     <keyboard-shortcut first-keystroke="alt f2" />
   </action>

@@ -1,12 +1,41 @@
 {
+    "workbench.colorTheme": "Default Dark+",
+    "window.zoomLevel": 5,
+    "telemetry.enableTelemetry": false,
+    "telemetry.enableCrashReporter": false,
+    "terminal.integrated.fontFamily": "'MesloLGS NF'",
+    "terminal.integrated.profiles.windows": {
+        "PowerShell": {
+            "source": "PowerShell",
+            "icon": "terminal-powershell"
+        },
+        "Command Prompt": {
+            "path": [
+                "${env:windir}\\Sysnative\\cmd.exe",
+                "${env:windir}\\System32\\cmd.exe"
+            ],
+            "args": [],
+            "icon": "terminal-cmd"
+        },
+        "Git Bash": {
+            "source": "Git Bash"
+        },
+        "Ubuntu (WSL)": {
+            "path": "C:\\Windows\\System32\\wsl.exe",
+            "args": [
+                "-d",
+                "Ubuntu"
+            ]
+        }
+    },
+    "terminal.integrated.defaultProfile.windows": "Ubuntu (WSL)",
     "vim.handleKeys": {
         "<C-d>": true
     },
     "vim.leader": ",",
-    "window.zoomLevel": 0,
-    "telemetry.enableTelemetry": false,
-    "telemetry.enableCrashReporter": false,
-    // TODO : Add the installation of font in the init.sh
-    "terminal.integrated.fontFamily": "'Source Code Pro for Powerline'",
-    "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\wsl.exe"
+    "vim.useCtrlKeys": false,
+    "vim.hlsearch": true,
+    "vim.highlightedyank.enable": true,
+    "vim.easymotion": true,
+    "editor.renderWhitespace": "all"
 }

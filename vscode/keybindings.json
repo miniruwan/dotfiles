@@ -1,6 +1,11 @@
 // Place your key bindings in this file to overwrite the defaults
 [
     {
+        "key": "ctrl+a",
+        "command": "-extension.vim_ctrl+a",
+        "when": "editorTextFocus && vim.active && vim.use<C-a> && !inDebugRepl"
+    },
+    {
         "key": "ctrl+t",
         "command": "-extension.vim_ctrl+t",
         "when": "editorTextFocus && vim.active && vim.use<C-t> && !inDebugRepl"
@@ -67,5 +72,18 @@
         "key": "ctrl+v",
         "command": "-extension.vim_ctrl+v",
         "when": "editorTextFocus && vim.active && vim.use<C-v> && !inDebugRepl"
+    },
+    {
+        "key": "ctrl+q",
+        "command": "-workbench.action.quickOpenNavigateNextInViewPicker",
+        "when": "inQuickOpen && inViewsPicker"
+    },
+    {
+        "key": "ctrl+q",
+        "command": "-workbench.action.quickOpenView"
+    },
+    {
+        "key": "ctrl+q",
+        "command": "extension.vim_winCtrlQ"
     }
 ]
