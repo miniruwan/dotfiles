@@ -1,6 +1,6 @@
 {
     "workbench.colorTheme": "Default Dark+",
-    "window.zoomLevel": 5,
+    "window.zoomLevel": 3,
     "telemetry.enableTelemetry": false,
     "telemetry.enableCrashReporter": false,
     "terminal.integrated.fontFamily": "'MesloLGS NF'",
@@ -28,12 +28,11 @@
             ]
         }
     },
-    "terminal.integrated.defaultProfile.windows": "Ubuntu (WSL)",
+    "terminal.integrated.defaultProfile.windows": "Command Prompt",
     "vim.handleKeys": {
         "<C-d>": true
     },
     "vim.leader": ",",
-    "vim.useCtrlKeys": false,
     "vim.hlsearch": true,
     "vim.highlightedyank.enable": true,
     "vim.easymotion": true,

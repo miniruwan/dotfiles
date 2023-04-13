@@ -18,9 +18,9 @@ configure_vim_neovim_common() {
 }
 
 configure_neovim() {
-  mkdir -p $HOME/.local/bin
-  curl -o $HOME/.local/bin/nvim -L https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
-  chmod u+x $HOME/.local/bin/nvim
+  curl -o /tmp/nvim -L https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
+  chmod u+x /tmp/nvim
+  sudo mv /tmp/nvim /usr/local/bin
 
   # vim-plug
   curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim

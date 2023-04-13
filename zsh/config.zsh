@@ -13,6 +13,7 @@ export TERM=xterm-256color # Assuming terminal to support 256 colors
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 export PATH=/usr/local/bin:$PATH
 export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+export ZSH_THEME="powerlevel10k/powerlevel10k
 
 if [[ $platform == 'osx' ]]; then
   export PATH=/usr/local/opt/openssl/bin:$PATH
