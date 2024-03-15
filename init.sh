@@ -50,7 +50,7 @@ configure_node() {
 
 configure_python() {
   if [[ $platform == 'linux' ]]; then
-    sudo apt install -y python-pip python-setuptools
+    sudo apt install -y python3 python3-pip
     pip install wheel
   fi
 }

@@ -5,6 +5,7 @@ set -e
 
 configure_zsh() {
   print_info "Installing Zsh"
+  sudo apt install zsh
 
   print_debug "Installing oh-my-zsh"
 
