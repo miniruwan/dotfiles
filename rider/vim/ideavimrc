@@ -15,43 +15,48 @@ vnoremap <c-c> :action EditorCopy<cr>
 " ================================================================
 " Most of the following is copied following from:
 " https://gist.github.com/ppasieka/3801f12e93fc22cdf9e32ec89441993c
-map <leader>; :action LocateInSolutionView<CR>
-map <leader>ff :action Find<CR>
-map <leader>fF :action FindModal<CR>
-map <leader>/ :action CommentByLineComment<CR>
-map <leader>fu :action FindUsages<CR>
-map <leader>u  :action ShowUsages<CR>
-map <leader>rr :action RenameElement<CR>
-map <leader>rt :action Refactorings.QuickListPopupAction <CR>
-map <leader>q  :action CloseActiveTab<CR>
+map <leader>; <Action>(QuickDocumentation)
+map <leader>ff <Action>(Find)
+map <leader>fF <Action>(FindModal)
+map <leader>/ <Action>(CommentByLineComment)
+map <leader>fu <Action>(FindUsages)
+map <leader>u  <Action>(ShowUsages)
+map <leader>rr <Action>(RenameElement)
+map <leader>rt <Action>(Refactorings.QuickListPopupAction)
+map <leader>q  <Action>(CloseActiveTab)
 
-map <leader>ga :action GotoAction<CR>
-map <leader>gm :action FileStructurePopup<CR>
-map <leader>gi :action GotoImplementation<CR>
-map <leader>gd :action GotoDeclaration<CR>
-map <leader>gf :action GotoFile<CR>
-map <leader>gs :action GotoSymbol<CR>
-map <leader>gt :action GotoClass<CR>
-map <leader>o :action RecentFiles<CR>
-map <leader>ge :action RecentChangedFiles<CR>
-map <leader>w :action NextSplitter<CR>
+map <leader>ga <Action>(GotoAction)
+map <leader>gm <Action>(FileStructurePopup)
+map <leader>gi <Action>(GotoImplementation)
+map <leader>gd <Action>(GotoDeclaration)
+map <leader>ge <Action>(RecentChangedFiles)
 
-map <leader>ri :action Inline<CR>
-map <leader>rv :action IntroduceVariable<CR>
-vmap <leader>rv :action IntroduceVariable<CR>
+map <leader>ri <Action>(Inline)
+map <leader>rv <Action>(IntroduceVariable)
+vmap <leader>rv <Action>(IntroduceVariable)
 
-noremap Y ^y$
+nmap Y ^y$
 
-nnoremap <leader>tr :action RiderUnitTestRunContextAction<CR>
-nnoremap <leader>td :action RiderUnitTestDebugContextAction<CR>
+nmap <leader>tr <Action>(RiderUnitTestRunContextAction)
+nmap <leader>td <Action>(RiderUnitTestDebugContextAction)
 
-"nnoremap <c-o> :action Back<cr>
-"nnoremap <c-i> :action Forward<cr>
-nnoremap <c-w> :action JumpToLastWindow<CR>
+nmap <c-o> <Action>(Back)
+nmap <c-i> <Action>(Forward)
+nmap <c-w> <Action>(JumpToLastWindow)
 
-"nnoremap = :action ReformatCode<CR>
-"vnoremap = :action ReformatCode<CR>
+nmap <c-,>f <Action>(GotoFile)
+nmap <c-,>t <Action>(GotoClass)
+nmap <c-,>s <Action>(GotoSymbol)
+nmap <c-,>r <Action>(RecentFiles)
+nmap <c-,>e <Action>(RecentChangedFiles)
+nmap <leader>. <Action>(ShowErrorDescription)
 
-nnoremap <leader>a :action GotoAction<CR>
-vnoremap <leader>a :action GotoAction<CR>
+nmap == <Action>(ReformatCode)
+vmap == <Action>(ReformatCode)
+
+nmap <leader>a <Action>(GotoAction)
+vmap <leader>a <Action>(GotoAction)
+
+nmap [[ <Action>(MethodUp)
+nmap ]] <Action>(MethodDown)
 " ================================================================

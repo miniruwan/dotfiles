@@ -3,24 +3,11 @@
 # Exit on error
 set -e
 
-compile_zsh() {
-  # Checks whether the required version is installed
-  local programName=zsh
-  local minimumRequriredVersion=5
-  if [[ -x "$(command -v $programName)" ]]; then # program exists
-    local availableVersion=$($programName --version | cut -d' ' -f 2)
-    if [[ $availableVersion -gt $minimumRequriredVersion ]]; then
-      print_debug "Compilation is not required for $programName because the available version($availableVersion) \
-        already satisfies the minimumRequriredVersion($minimumRequriredVersion)"
-      return 0;
-    else
-      print_debug "Compiling $programName because because the available version($availableVersion) \
-        is less than the minimumRequriredVersion($minimumRequriredVersion)"
-    fi
-  else
-    print_debug "Compiling $programName because $programName is not found"
-  fi
+local minimumRequriredVersion=5
+local programName=zsh
 
+compile_zsh() {
+  mkdir -p ~/packages
   cd ~/packages
   wget -O zsh.tar.xz https://sourceforge.net/projects/zsh/files/latest/download
   mkdir zsh && unxz zsh.tar.xz && tar -xvf zsh.tar -C zsh --strip-components 1
@@ -30,16 +17,42 @@ compile_zsh() {
   make && make install
 }
 
+install_zsh() {
+  local availableVersion=$(apt-cache policy $programName | grep Candidate | awk '{print $2}')
+  if [[ $availableVersion -gt $minimumRequriredVersion ]]; then
+    print_debug "Installing $programName from apt because a version($availableVersion) which is \
+      greater than $minimumRequiredVersion is available to install from apt"
+    sudo apt install zsh
+  else
+    print_debug "Compiling $programName because $programName is not available with the minimum required version($minimumRequiredVersion)"
+    compile_zsh
+  fi
+}
+
 configure_zsh() {
   print_info "Installing Zsh"
 
-  compile_zsh
+  # check installed version
+  if [[ -x "$(command -v $programName)" ]]; then # program exists
+    local installedVersion=$($programName --version | cut -d' ' -f 2)
+    if [[ $installedVersion -gt $minimumRequriredVersion ]]; then
+      print_debug "$programName executable already exists with the minimum required version. Installed version($installedVersion) \
+        already satisfies the minimumRequriredVersion($minimumRequriredVersion)"
+      return 0;
+    fi
+  else
+    install_zsh
+  fi
+
+  print_info "Installing oh-my-zsh"
 
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
   configure_fzf
+
+  print_info "Setting up zplug"
 
   # zplug
 	git clone https://github.com/zplug/zplug ~/.zplug
