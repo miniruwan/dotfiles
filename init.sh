@@ -178,7 +178,7 @@ elif [[ $* == *--cmake* ]] ; then
 elif [[ $* == *--tmux* ]] ; then
   configure_tmux
 elif [[ $* == *--vim* ]] ; then
-  configure_vim
+  configure_neovim
 elif [[ $* == *--thefuck* ]] ; then
   configure_thefuck
 else
