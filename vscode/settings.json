@@ -27,7 +27,7 @@
             ]
         }
     },
-    "terminal.integrated.defaultProfile.windows": "Command Prompt",
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
     "vim.handleKeys": {
         "<C-d>": true,
         "<C-p>": false
@@ -54,6 +54,8 @@
     ],
     "editor.accessibilitySupport": "off",
     "cSpell.userWords": [
-        "Colour"
-    ]
+        "Colour",
+        "Trademe"
+    ],
+    "cSpell.enabled": false
 }

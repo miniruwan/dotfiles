@@ -31,6 +31,12 @@
     <keyboard-shortcut first-keystroke="down" />
     <keyboard-shortcut first-keystroke="ctrl j" />
   </action>
+  <action id="EditorEnter">
+    <keyboard-shortcut first-keystroke="enter" />
+  </action>
+  <action id="EditorEscape">
+    <keyboard-shortcut first-keystroke="escape" />
+  </action>
   <action id="EditorToggleColumnMode" />
   <action id="EditorUp">
     <keyboard-shortcut first-keystroke="up" />
