@@ -1,6 +1,5 @@
 {
-    "workbench.colorTheme": "Default Dark+",
-    "window.zoomLevel": 5,
+    "window.zoomLevel": 4,
     "telemetry.enableTelemetry": false,
     "telemetry.enableCrashReporter": false,
     "terminal.integrated.fontFamily": "'MesloLGS NF'",
@@ -28,14 +27,35 @@
             ]
         }
     },
-    "terminal.integrated.defaultProfile.windows": "Ubuntu (WSL)",
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
     "vim.handleKeys": {
-        "<C-d>": true
+        "<C-d>": true,
+        "<C-p>": false
     },
+    "editor.renderWhitespace": "all",
+    "git.enableSmartCommit": true,
+    "git.confirmSync": false,
     "vim.leader": ",",
-    "vim.useCtrlKeys": false,
     "vim.hlsearch": true,
     "vim.highlightedyank.enable": true,
     "vim.easymotion": true,
-    "editor.renderWhitespace": "all"
+    "vim.statusBarColors.visual": "",
+    "vim.visualModeKeyBindingsNonRecursive": [],
+    "vim.useCtrlKeys": true,
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": ["u"],
+            "commands": ["undo"]
+        },
+        {
+            "before": ["<C-r>"],
+            "commands": ["redo"]
+        }
+    ],
+    "editor.accessibilitySupport": "off",
+    "cSpell.userWords": [
+        "Colour",
+        "Trademe"
+    ],
+    "cSpell.enabled": false
 }

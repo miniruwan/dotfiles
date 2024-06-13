@@ -18,6 +18,7 @@
   <action id="CommentByLineComment">
     <keyboard-shortcut first-keystroke="ctrl alt slash" />
     <keyboard-shortcut first-keystroke="ctrl alt divide" />
+    <keyboard-shortcut first-keystroke="ctrl slash" />
   </action>
   <action id="Debugger.MarkObject" />
   <action id="EditBookmark">
@@ -29,6 +30,12 @@
   <action id="EditorDown">
     <keyboard-shortcut first-keystroke="down" />
     <keyboard-shortcut first-keystroke="ctrl j" />
+  </action>
+  <action id="EditorEnter">
+    <keyboard-shortcut first-keystroke="enter" />
+  </action>
+  <action id="EditorEscape">
+    <keyboard-shortcut first-keystroke="escape" />
   </action>
   <action id="EditorToggleColumnMode" />
   <action id="EditorUp">
@@ -48,6 +55,7 @@
   <action id="GotoChangedFile" />
   <action id="GotoNextBookmark" />
   <action id="GotoPreviousBookmark" />
+  <action id="HelpTopics" />
   <action id="JumpToNextChange">
     <keyboard-shortcut first-keystroke="shift ctrl equals" />
   </action>
@@ -55,6 +63,11 @@
     <keyboard-shortcut first-keystroke="alt insert" />
   </action>
   <action id="OpenFile" />
+  <action id="QuickJavaDoc">
+    <keyboard-shortcut first-keystroke="ctrl k" second-keystroke="i" />
+    <keyboard-shortcut first-keystroke="ctrl k" second-keystroke="ctrl i" />
+    <keyboard-shortcut first-keystroke="ctrl f1" />
+  </action>
   <action id="ReformatCode" />
   <action id="RiderUnitTestAppendTestsAction">
     <keyboard-shortcut first-keystroke="ctrl t" second-keystroke="a" />

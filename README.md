@@ -2,6 +2,7 @@
 ### Introduction
 This repository includes my configuration files for [vim](https://www.vim.org), [zsh](https://ohmyz.sh), [tmux](https://en.wikipedia.org/wiki/Tmux), etc
 
+git clone git@github.com:miniruwan/dotfiles.git
 #### Screenshots
 ##### Zsh
 ![zsh](art/zsh.gif)

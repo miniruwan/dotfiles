@@ -50,7 +50,7 @@ configure_node() {
 
 configure_python() {
   if [[ $platform == 'linux' ]]; then
-    sudo apt install -y python-pip python-setuptools
+    sudo apt install -y python3 python3-pip
     pip install wheel
   fi
 }
@@ -178,7 +178,7 @@ elif [[ $* == *--cmake* ]] ; then
 elif [[ $* == *--tmux* ]] ; then
   configure_tmux
 elif [[ $* == *--vim* ]] ; then
-  configure_vim
+  configure_neovim
 elif [[ $* == *--thefuck* ]] ; then
   configure_thefuck
 else
