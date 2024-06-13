@@ -14,7 +14,6 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'ctrlpvim/ctrlp.vim'
-"Plug 'majutsushi/tagbar'
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 Plug 'terryma/vim-smooth-scroll'
 Plug 'SirVer/ultisnips'
@@ -31,8 +30,6 @@ Plug 'tpope/vim-unimpaired'
 Plug 'easymotion/vim-easymotion'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/vim-easy-align'
-Plug 'vim-scripts/DrawIt'
-Plug 'bfrg/vim-cpp-modern'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'bkad/CamelCaseMotion'
 if has('nvim')

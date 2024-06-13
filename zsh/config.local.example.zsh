@@ -17,6 +17,7 @@ PROJECT_DIR=/mnt/c/Projects
 # =======
 export EDITOR=nvim
 export PATH=$PATH:'/mnt/c/Program Files (x86)/Microsoft SDKs/Azure/Storage Emulator'
+export REQUESTS_CA_BUNDLE=/mnt/c/ProgramData/netskope/stagent/download/nscacert_combined.pem
 
 # Project Directories
 export IMPORTS_PROJECT_ROOT_DIR=$PROJECT_DIR/Wallace/Rifleman.Imports/Rifleman.Imports
