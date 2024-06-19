@@ -36,7 +36,7 @@ configure_neovim() {
   echo "source $CONFIG_DIR/vim/config.vim" >> ~/.vimrc
 
   # youcompleteme
-  sudo apt install -y build-essential cmake python-dev python3-dev
-  cd ~/.vim/plugged/YouCompleteMe
-  ./install.py --clang-completer --cs-completer --js-completer
+  #sudo apt install -y build-essential cmake python-dev python3-dev
+  #cd ~/.vim/plugged/YouCompleteMe
+  #./install.py --clang-completer --cs-completer --js-completer
 }
