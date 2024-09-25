@@ -2,7 +2,7 @@
     "window.zoomLevel": 4,
     "telemetry.enableTelemetry": false,
     "telemetry.enableCrashReporter": false,
-    "terminal.integrated.fontFamily": "'MesloLGS NF'",
+    "terminal.integrated.fontFamily": "MesloLGM Nerd Font",
     "terminal.integrated.profiles.windows": {
         "PowerShell": {
             "source": "PowerShell",
@@ -50,12 +50,28 @@
         {
             "before": ["<C-r>"],
             "commands": ["redo"]
-        }
+        },
+        {
+            "before": ["leader", "."],
+            "commands": [
+                "editor.action.showHover"
+            ]
+        }        
     ],
     "editor.accessibilitySupport": "off",
     "cSpell.userWords": [
         "Colour",
         "Trademe"
     ],
-    "cSpell.enabled": false
+    "cSpell.enabled": false,
+    "editor.fontFamily": "Source Code Pro",
+    "git.autofetch": true,
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "workbench.editor.editorActionsLocation": "hidden",
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "terminal.integrated.enablePersistentSessions": false
 }
