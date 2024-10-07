@@ -171,5 +171,14 @@
     {
         "key": "alt+\\",
         "command": "workbench.action.gotoSymbol"
+    },
+    {
+        "key": "shift+alt+l",
+        "command": "-bookmarks.expandSelectionToNext",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "shift+alt+l",
+        "command": "workbench.files.action.showActiveFileInExplorer"
     }
 ]
