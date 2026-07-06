@@ -10,7 +10,7 @@ if [[ $platform == 'osx' ]]; then
 fi
 # Note that zsh-syntax-highlighting must be the last plugin sourced
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
-
+zplug romkatv/powerlevel10k, as:theme, depth:1
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
     printf "Install? [y/N]: "
