@@ -5,8 +5,7 @@
     "terminal.integrated.fontFamily": "MesloLGM Nerd Font",
     "terminal.integrated.profiles.windows": {
         "PowerShell": {
-            "source": "PowerShell",
-            "icon": "terminal-powershell"
+            "path": "C:\\Program Files\\PowerShell\\7\\pwsh.exe"
         },
         "Command Prompt": {
             "path": [
@@ -17,7 +16,8 @@
             "icon": "terminal-cmd"
         },
         "Git Bash": {
-            "source": "Git Bash"
+            "source": "Git Bash",
+            "icon": "terminal-git-bash"
         },
         "Ubuntu (WSL)": {
             "path": "C:\\Windows\\System32\\wsl.exe",
@@ -28,9 +28,20 @@
         }
     },
     "terminal.integrated.defaultProfile.windows": "PowerShell",
+    "terminal.integrated.shellIntegration.enabled": true,
+    "terminal.integrated.shellIntegration.decorationsEnabled": "both",
+    "vim.insertModeKeyBindings": [
+        {
+            "before": ["j", "j"],
+            "after": ["<Esc>"]
+        }
+    ],
     "vim.handleKeys": {
         "<C-d>": true,
-        "<C-p>": false
+        "<C-p>": false,
+        "<C-j>": true,
+        "<C-k>": true,
+        "<Esc>": true
     },
     "editor.renderWhitespace": "all",
     "git.enableSmartCommit": true,
@@ -76,5 +87,70 @@
     "terminal.integrated.enablePersistentSessions": false,
     "[json]": {
         "editor.defaultFormatter": "vscode.json-language-features"
-    }
+    },
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "js/ts.updateImportsOnFileMove.enabled": "always",
+    "chat.agent.enabled": true,
+    "[dockercompose]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "editor.autoIndent": "advanced",
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "[github-actions-workflow]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "chat.tools.terminal.autoApprove": {
+        "git fetch": true,
+        "git checkout": true,
+        "git pull": true,
+        "git rev-parse": true,
+        "dotnet build": true
+    },
+    "workbench.secondarySideBar.defaultVisibility": "visible",
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "gitlens.ai.model": "vscode",
+    "gitlens.ai.vscode.model": "copilot:gpt-4.1",
+    "github.copilot.chat.githubMcpServer.enabled": true,
+    "github.copilot.chat.terminalChatLocation": "terminal",
+    "gitlens.gitkraken.mcp.autoEnabled": false,
+    "chat.tools.urls.autoApprove": {
+        "https://code.visualstudio.com": true,
+        "https://github.com/microsoft/vscode/wiki/*": true,
+        "https://*.microsoft.com": true,
+        "https://*.nuget.org": true,
+        "https://github.com": {
+            "approveRequest": false,
+            "approveResponse": true
+        },
+        "https://www.google.com": true,
+        "https://html.duckduckgo.com": {
+            "approveRequest": true,
+            "approveResponse": false
+        },
+        "https://shopify.dev": true
+    },
+    "resharper.region.region": "Oceania",
+    "resharper.dataSharing.allowDataSharing": false,
+    "chat.plugins.marketplaces": [
+        "github/copilot-plugins",
+        "github/awesome-copilot",
+        "git@github.com:flarehr/awesome-flare.git"
+    ],
+    "security.allowedUNCHosts": [
+        "wsl.localhost"
+    ],
+    "adoProductivity.github.enabled": false,
+    "chat.tools.terminal.terminalProfile.windows": {
+        "path": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
+        "args": ["-NoLogo"]
+    },
+    "chat.viewSessions.orientation": "stacked",
+    "terminal.integrated.agentHostProfile.linux": "",
+    "datadog.vscode.notification.suppressMcpMigrationMessage": true,
+    "diffEditor.renderSideBySide": false,
+    "datadog.codeSecurity.setup.port": 49169,
+    "chat.agent.maxRequests": 100
 }
