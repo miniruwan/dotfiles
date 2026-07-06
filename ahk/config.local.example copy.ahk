@@ -19,3 +19,5 @@ todo_task_name := "my-task"
 
 #include %A_LineFile%\..\libraries\cosmos.ahk
 ;#include %A_LineFile%\..\libraries\postman.ahk
+
+#include %A_LineFile%\..\libraries\paste_to_vscode.ahk
