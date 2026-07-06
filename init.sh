@@ -13,7 +13,7 @@ source scripts/print_helper.sh
 # ================= functions for each configuration task =====================
 
 source scripts/zsh.sh
-source scripts/vim.sh
+source scripts/neovim.sh
 source scripts/fzf.sh
 source scripts/cmake.sh
 source scripts/tmux.sh
@@ -142,7 +142,7 @@ where <option>:
     --help      show this help text
     --all       run all initialization scripts
     --zsh       install zsh with oh-my-zsh
-    --vim       install vim or neovim
+    --nvim      install and configure Neovim
     --fzf       install fzf
     --python    install pip
     --font      install powerline font
@@ -177,7 +177,10 @@ elif [[ $* == *--cmake* ]] ; then
   configure_cmake
 elif [[ $* == *--tmux* ]] ; then
   configure_tmux
+elif [[ $* == *--nvim* || $* == *--neovim* ]] ; then
+  configure_neovim
 elif [[ $* == *--vim* ]] ; then
+  print_important "--vim is deprecated. Use --nvim or --neovim."
   configure_neovim
 elif [[ $* == *--thefuck* ]] ; then
   configure_thefuck
