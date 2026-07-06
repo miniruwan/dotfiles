@@ -1,2 +1,3 @@
 ahk/config.local.ahk
+pwsh/config.local.ps1
 zsh/config.local.zsh
