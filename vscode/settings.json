@@ -1,7 +1,5 @@
 {
-    "window.zoomLevel": 4,
-    "telemetry.enableTelemetry": false,
-    "telemetry.enableCrashReporter": false,
+    "telemetry.telemetryLevel": "off",
     "terminal.integrated.fontFamily": "MesloLGM Nerd Font",
     "terminal.integrated.profiles.windows": {
         "PowerShell": {
@@ -27,8 +25,7 @@
             ]
         }
     },
-    "terminal.integrated.defaultProfile.windows": "PowerShell",
-    "terminal.integrated.shellIntegration.enabled": true,
+    "terminal.integrated.defaultProfile.windows": "Ubuntu (WSL)",
     "terminal.integrated.shellIntegration.decorationsEnabled": "both",
     "vim.insertModeKeyBindings": [
         {
@@ -36,6 +33,7 @@
             "after": ["<Esc>"]
         }
     ],
+    "terminal.integrated.shellIntegration.enabled": true,
     "vim.handleKeys": {
         "<C-d>": true,
         "<C-p>": false,
@@ -74,7 +72,7 @@
         "Colour",
         "Trademe"
     ],
-    "cSpell.enabled": false,
+    "cSpell.enabled": true,
     "editor.fontFamily": "Source Code Pro",
     "git.autofetch": true,
     "[typescript]": {
@@ -88,69 +86,68 @@
     "[json]": {
         "editor.defaultFormatter": "vscode.json-language-features"
     },
-    "[html]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "jupyter.askForKernelRestart": false,
+    "explorer.fileNesting.patterns": {
+        "*.ts": "${capture}.js",
+        "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
+        "*.jsx": "${capture}.js",
+        "*.tsx": "${capture}.ts",
+        "tsconfig.json": "tsconfig.*.json",
+        "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb, bun.lock",
+        "*.sqlite": "${capture}.${extname}-*",
+        "*.db": "${capture}.${extname}-*",
+        "*.sqlite3": "${capture}.${extname}-*",
+        "*.db3": "${capture}.${extname}-*",
+        "*.sdb": "${capture}.${extname}-*",
+        "*.s3db": "${capture}.${extname}-*"
     },
-    "js/ts.updateImportsOnFileMove.enabled": "always",
-    "chat.agent.enabled": true,
-    "[dockercompose]": {
-        "editor.insertSpaces": true,
-        "editor.tabSize": 2,
-        "editor.autoIndent": "advanced",
-        "editor.defaultFormatter": "redhat.vscode-yaml"
-    },
-    "[github-actions-workflow]": {
-        "editor.defaultFormatter": "redhat.vscode-yaml"
-    },
-    "chat.tools.terminal.autoApprove": {
-        "git fetch": true,
-        "git checkout": true,
-        "git pull": true,
-        "git rev-parse": true,
-        "dotnet build": true
-    },
-    "workbench.secondarySideBar.defaultVisibility": "visible",
     "github.copilot.nextEditSuggestions.enabled": true,
-    "gitlens.ai.model": "vscode",
-    "gitlens.ai.vscode.model": "copilot:gpt-4.1",
-    "github.copilot.chat.githubMcpServer.enabled": true,
-    "github.copilot.chat.terminalChatLocation": "terminal",
-    "gitlens.gitkraken.mcp.autoEnabled": false,
     "chat.tools.urls.autoApprove": {
         "https://code.visualstudio.com": true,
         "https://github.com/microsoft/vscode/wiki/*": true,
-        "https://*.microsoft.com": true,
-        "https://*.nuget.org": true,
-        "https://github.com": {
+        "https://zendriver.dev": {
             "approveRequest": false,
             "approveResponse": true
         },
-        "https://www.google.com": true,
-        "https://html.duckduckgo.com": {
-            "approveRequest": true,
-            "approveResponse": false
-        },
-        "https://shopify.dev": true
+        "https://www.electronjs.org/docs/latest": true,
+        "https://www.electronjs.org/docs": true,
+        "https://www.electronjs.org": true,
+        "https://*.electronjs.org": true,
+        "https://electron-vite.org": true,
+        "https://www.electron.build": true,
+        "https://*.electron.build": true,
+        "https://www.electronjs.org/docs/latest/tutorial/context-isolation": true,
+        "https://www.electronjs.org/docs/latest/tutorial": true,
+        "https://github.com/clauderic/dnd-kit": true,
+        "https://github.com/clauderic": true,
+        "https://github.com": true,
+        "https://github.com/react-beautiful-dnd/react-beautiful-dnd": true,
+        "https://github.com/react-beautiful-dnd": true,
+        "https://www.electronjs.org/docs/latest/tutorial/security": true,
+        "https://www.electronforge.io": true,
+        "https://*.electronforge.io": true,
+        "https://github.com/atlassian/react-beautiful-dnd": true,
+        "https://github.com/atlassian": true,
+        "https://www.npmjs.com/package/react-beautiful-dnd": true,
+        "https://www.npmjs.com/package": true,
+        "https://www.npmjs.com": true,
+        "https://*.npmjs.com": true,
+        "https://transact.nzta.govt.nz": true
     },
-    "resharper.region.region": "Oceania",
-    "resharper.dataSharing.allowDataSharing": false,
-    "chat.plugins.marketplaces": [
-        "github/copilot-plugins",
-        "github/awesome-copilot",
-        "git@github.com:flarehr/awesome-flare.git"
-    ],
     "security.allowedUNCHosts": [
         "wsl.localhost"
     ],
-    "adoProductivity.github.enabled": false,
+    "python.terminal.useEnvFile": true,
+    "python.analysis.typeCheckingMode": "standard",
+    "workbench.browser.enableChatTools": true,
+    "explorer.confirmDelete": false,
     "chat.tools.terminal.terminalProfile.windows": {
-        "path": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
-        "args": ["-NoLogo"]
+        "path": "C:\\Windows\\System32\\wsl.exe"
     },
     "chat.viewSessions.orientation": "stacked",
-    "terminal.integrated.agentHostProfile.linux": "",
-    "datadog.vscode.notification.suppressMcpMigrationMessage": true,
+    "chat.agent.maxRequests": 200,
     "diffEditor.renderSideBySide": false,
-    "datadog.codeSecurity.setup.port": 49169,
-    "chat.agent.maxRequests": 100
+    "github.copilot.enable": {
+        "markdown": true
+    }
 }

@@ -1,10 +1,10 @@
-# Jetbrains Rider IDE Configurations
+# Jetbrains IDE Configurations
 ## Introduction
-This directory includes my configuration files for [Rider](https://www.jetbrains.com/rider/)
+This directory includes my configuration files for Jetbrains IDEs like [Rider](https://www.jetbrains.com/rider/)
 
 ### Keymaps
 These keymaps are mainly because some of the default keymaps conflicts with ideavim plugin's keys. So I've remapped them.
-Symlink to this file from the Rider's configuration directory.
+Symlink to this file from the Jetbrains IDE's configuration directory.
 
 Example:
 
@@ -26,4 +26,4 @@ Example for Jetbrains Rider IDE:
 ### How to use ideavimrc
 Source the [ideavimrc](./vim/ideavimrc) file.
 
-```mklink C:\Users\MiniruwanMangala\.ideavimrc C:\dotfiles\rider\vim\ideavimrc```
+```mklink C:\Users\MiniruwanMangala\.ideavimrc C:\dotfiles\jetbrains\vim\ideavimrc```

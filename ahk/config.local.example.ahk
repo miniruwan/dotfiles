@@ -4,7 +4,13 @@
 ; Comment out the stuff you don't need
 ; =======================================================
 
-;^Esc::CapsLock
+#Requires AutoHotkey v2.0
+
+; 1. Press Shift + Caps Lock to toggle standard Caps Lock behavior
++Capslock::SetCapsLockState !GetKeyState("CapsLock", "T")
+
+; 2. Press Caps Lock alone to send Escape
+Capslock::Send("{Esc}")
 
 chrome_personal_profile_directory := "Default" 
 #include %A_LineFile%\..\libraries\web_search.ahk
