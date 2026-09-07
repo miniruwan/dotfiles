@@ -1,7 +1,9 @@
 vim.g.mapleader = ","
 vim.g.maplocalleader = ","
 
-vim.opt.shell = "/bin/zsh"
+if vim.fn.has("win32") == 0 then
+  vim.opt.shell = "/bin/zsh"
+end
 vim.opt.number = true
 vim.opt.swapfile = false
 vim.opt.mouse = "a"

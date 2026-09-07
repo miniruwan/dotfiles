@@ -258,4 +258,7 @@ return {
     event = "VeryLazy",
     opts = {},
   },
+  {
+    "subnut/nvim-ghost.nvim",
+  }
 }
