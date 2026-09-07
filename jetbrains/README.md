@@ -8,7 +8,7 @@ Symlink to this file from the Jetbrains IDE's configuration directory.
 
 Example:
 
-```mklink %appdata%\JetBrains\Rider2025.2\keymaps\Miniruwan.xml C:\dotfiles\rider\keymaps\Miniruwan.xml```
+```mklink %appdata%\JetBrains\Rider2026.2\keymaps\Miniruwan.xml C:\dotfiles\jetbrains\keymaps\Miniruwan.xml```
 
 ## Jetbrains IdeaVim Plugin Configurations
 ### Introduction
@@ -21,7 +21,7 @@ Symlink to this file from IntelliJ platform based IDE's configuration directory.
 
 Example for Jetbrains Rider IDE:
 
-```mklink %appdata%\JetBrains\Rider2025.2\options\vim_settings.xml C:\dotfiles\rider\vim\vim_settings.xml```
+```mklink %appdata%\JetBrains\Rider2026.2\options\vim_settings.xml C:\dotfiles\jetbrains\vim\vim_settings.xml```
 
 ### How to use ideavimrc
 Source the [ideavimrc](./vim/ideavimrc) file.
