@@ -1,5 +1,1113 @@
-// Place your key bindings in this file to overwrite the defaults
+// Merged keybindings: IntelliJ-style keymap + VSCodeVim setup
+// Order matters in this file: later rules win, and a "-command" rule removes
+// any earlier matching rule. Sections are arranged accordingly.
 [
+    // ─────────────────────────────────────────────────────────────
+    // VSCodeVim — free up the Ctrl keys the IntelliJ keymap needs
+    // (removals must stay ABOVE the ctrl+q bindings below)
+    // ─────────────────────────────────────────────────────────────
+    // Stop vim stealing Ctrl+A (increment number) so Ctrl+A = Select All
+    {
+        "key": "ctrl+a",
+        "command": "-extension.vim_ctrl+a",
+        "when": "editorTextFocus && vim.active && vim.use<C-a> && !inDebugRepl"
+    },
+    // Stop vim stealing Ctrl+C so it stays a normal Copy
+    {
+        "key": "ctrl+c",
+        "command": "-extension.vim_ctrl+c",
+        "when": "editorTextFocus && vim.active && vim.overrideCtrlC && vim.use<C-c> && !inDebugRepl"
+    },
+    // Stop Ctrl+D adding another cursor while vim is on, so it can duplicate a line
+    {
+        "key": "ctrl+d",
+        "command": "-editor.action.addSelectionToNextFindMatch",
+        "when": "editorTextFocus && vim.active && !inDebugRepl"
+    },
+    // Stop vim stealing Ctrl+F (page down) so Ctrl+F = Find
+    {
+        "key": "ctrl+f",
+        "command": "-extension.vim_ctrl+f",
+        "when": "editorTextFocus && vim.active && vim.use<C-f> && !inDebugRepl && vim.mode != 'Insert'"
+    },
+    // Free Ctrl+J from vim
+    {
+        "key": "ctrl+j",
+        "command": "-extension.vim_ctrl+j",
+        "when": "editorTextFocus && vim.active && vim.use<C-j> && !inDebugRepl"
+    },
+    // Free Ctrl+K from vim so it can be Git Commit
+    {
+        "key": "ctrl+k",
+        "command": "-extension.vim_ctrl+k",
+        "when": "editorTextFocus && vim.active && vim.use<C-k> && !inDebugRepl && vim.mode != 'Insert'"
+    },
+    // Stop vim stealing Ctrl+N so it can be Go to Symbol in Workspace
+    {
+        "key": "ctrl+n",
+        "command": "-extension.vim_ctrl+n",
+        "when": "editorTextFocus && vim.active && vim.use<C-n> && !inDebugRepl || vim.active && vim.use<C-n> && !inDebugRepl && vim.mode == 'CommandlineInProgress' || vim.active && vim.use<C-n> && !inDebugRepl && vim.mode == 'SearchInProgressMode'"
+    },
+    // Free Ctrl+T from vim so it can be Git Sync
+    {
+        "key": "ctrl+t",
+        "command": "-extension.vim_ctrl+t",
+        "when": "editorTextFocus && vim.active && vim.use<C-t> && !inDebugRepl"
+    },
+    // Stop vim stealing Ctrl+V so it stays a normal Paste (moved to Ctrl+Q)
+    {
+        "key": "ctrl+v",
+        "command": "-extension.vim_ctrl+v",
+        "when": "editorTextFocus && vim.active && vim.use<C-v> && !inDebugRepl"
+    },
+    // Stop vim stealing Ctrl+W so it can be Extend Selection
+    {
+        "key": "ctrl+w",
+        "command": "-extension.vim_ctrl+w",
+        "when": "editorTextFocus && vim.active && vim.use<C-w> && !inDebugRepl"
+    },
+    // Turn off vim's Ctrl+W J window navigation
+    {
+        "key": "ctrl+w j",
+        "command": "-extension.vim_navigateDown",
+        "when": "vim.active && vim.use<C-w> && !editorTextFocus"
+    },
+    // Turn off vim's Ctrl+W Ctrl+W window cycling
+    {
+        "key": "ctrl+w ctrl+w",
+        "command": "-extension.vim_navigateGroups",
+        "when": "vim.active && vim.use<C-w> && !editorTextFocus"
+    },
+    // Turn off vim's Ctrl+W H window navigation
+    {
+        "key": "ctrl+w h",
+        "command": "-extension.vim_navigateLeft",
+        "when": "vim.active && vim.use<C-w> && !editorTextFocus"
+    },
+    // Turn off vim's Ctrl+W L window navigation
+    {
+        "key": "ctrl+w l",
+        "command": "-extension.vim_navigateRight",
+        "when": "vim.active && vim.use<C-w> && !editorTextFocus"
+    },
+    // Turn off vim's Ctrl+W K window navigation
+    {
+        "key": "ctrl+w k",
+        "command": "-extension.vim_navigateUp",
+        "when": "vim.active && vim.use<C-w> && !editorTextFocus"
+    },
+    // Stop vim stealing Ctrl+Y so it can be Delete Line
+    {
+        "key": "ctrl+y",
+        "command": "-extension.vim_ctrl+y",
+        "when": "editorTextFocus && vim.active && vim.use<C-y> && !inDebugRepl"
+    },
+    // Clear vim's own Ctrl+Q binding before rebinding it below
+    {
+        "key": "ctrl+q",
+        "command": "-extension.vim_winCtrlQ",
+        "when": "editorTextFocus && vim.active && vim.use<C-q> && !inDebugRepl"
+    },
+    // Free Ctrl+Q from the view picker
+    {
+        "key": "ctrl+q",
+        "command": "-workbench.action.quickOpenNavigateNextInViewPicker",
+        "when": "inQuickOpen && inViewsPicker"
+    },
+    // Free Ctrl+Q from Quick Open View
+    {
+        "key": "ctrl+q",
+        "command": "-workbench.action.quickOpenView"
+    },
+    // Ctrl+Q takes over vim's blockwise-visual (normally Ctrl+V, which is paste here)
+    // Vim blockwise-visual mode (normally Ctrl+V, which is Paste here)
+    {
+        "key": "ctrl+q",
+        "command": "extension.vim_ctrl+v",
+        "when": "editorTextFocus && vim.active && vim.use<C-v> && !inDebugRepl"
+    },
+    // Vim: close the current split/window
+    {
+        "key": "ctrl+q",
+        "command": "extension.vim_winCtrlQ"
+    },
+
+    // ─────────────────────────────────────────────────────────────
+    // Clipboard / undo
+    // ─────────────────────────────────────────────────────────────
+    // Copy the selection
+    {
+        "command": "editor.action.clipboardCopyAction",
+        "key": "ctrl+c"
+    },
+    // Copy the selection (alternative shortcut)
+    {
+        "command": "editor.action.clipboardCopyAction",
+        "key": "ctrl+insert"
+    },
+    // Copy the selection (alternative shortcut)
+    {
+        "command": "editor.action.clipboardCopyAction",
+        "key": "shift+ctrl+alt+0"
+    },
+    // Cut the selection
+    {
+        "command": "editor.action.clipboardCutAction",
+        "key": "ctrl+x",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    // Cut the selection (alternative shortcut)
+    {
+        "command": "editor.action.clipboardCutAction",
+        "key": "shift+delete",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    // Paste from the clipboard
+    {
+        "command": "editor.action.clipboardPasteAction",
+        "key": "ctrl+v"
+    },
+    // Paste from the clipboard (alternative shortcut)
+    {
+        "command": "editor.action.clipboardPasteAction",
+        "key": "shift+insert"
+    },
+    // Copy the path of the selected file
+    {
+        "command": "copyFilePath",
+        "key": "shift+ctrl+c",
+        "when": "!editorFocus && !terminalFocus"
+    },
+    // Undo
+    {
+        "command": "undo",
+        "key": "ctrl+z"
+    },
+    // Undo (alternative shortcut)
+    {
+        "command": "undo",
+        "key": "alt+backspace"
+    },
+    // Redo
+    {
+        "command": "redo",
+        "key": "shift+ctrl+z"
+    },
+    // Redo (alternative shortcut)
+    {
+        "command": "redo",
+        "key": "shift+alt+backspace"
+    },
+    // Undo the last cursor movement (text stays as it is)
+    {
+        "command": "cursorUndo",
+        "key": "shift+alt+j",
+        "when": "textInputFocus"
+    },
+
+    // ─────────────────────────────────────────────────────────────
+    // IntelliSense / hover / quick fix
+    // ─────────────────────────────────────────────────────────────
+    // Show code completion suggestions
+    {
+        "command": "editor.action.triggerSuggest",
+        "key": "ctrl+space",
+        "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly"
+    },
+    // Accept the highlighted completion suggestion
+    {
+        "command": "acceptSelectedSuggestion",
+        "key": "shift+ctrl+enter",
+        "when": "suggestWidgetVisible && textInputFocus"
+    },
+    // Accept the highlighted completion suggestion
+    {
+        "command": "acceptSelectedSuggestion",
+        "key": "shift+ctrl+enter",
+        "when": "acceptSuggestionOnEnter && suggestWidgetVisible && suggestionMakesTextEdit && textInputFocus"
+    },
+    // Show the parameter hints for the function you are typing
+    {
+        "command": "editor.action.triggerParameterHints",
+        "key": "ctrl+p",
+        "when": "editorHasSignatureHelpProvider && editorTextFocus"
+    },
+    // Ctrl+F1 = documentation popup, Ctrl+Shift+F1 = error/warning details
+    // Show the documentation popup for whatever is under the cursor
+    {
+        "command": "editor.action.showHover",
+        "key": "ctrl+f1"
+    },
+    // Show the details of the error or warning under the cursor
+    {
+        "command": "workbench.action.showErrorsWarnings",
+        "key": "shift+ctrl+f1",
+        "when": "editorTextFocus"
+    },
+    // Show quick fixes and refactorings (the light bulb menu)
+    {
+        "command": "editor.action.quickFix",
+        "key": "alt+enter",
+        "when": "editorHasCodeActionsProvider && editorTextFocus && !editorReadonly"
+    },
+    // Jump to the next error or warning in the file
+    {
+        "command": "editor.action.marker.next",
+        "key": "f2",
+        "when": "editorFocus"
+    },
+    // Jump to the previous error or warning in the file
+    {
+        "command": "editor.action.marker.prev",
+        "key": "shift+f2",
+        "when": "editorFocus"
+    },
+
+    // ─────────────────────────────────────────────────────────────
+    // Comments
+    // ─────────────────────────────────────────────────────────────
+    // Comment or uncomment the current line
+    {
+        "command": "editor.action.commentLine",
+        "key": "ctrl+/",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    // Comment or uncomment the current line (alternative shortcut)
+    {
+        "command": "editor.action.commentLine",
+        "key": "ctrl+alt+/",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    // Comment or uncomment the current line (numpad shortcut)
+    {
+        "command": "editor.action.commentLine",
+        "key": "ctrl+alt+numpad_divide",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    // Comment or uncomment the selection as a block comment
+    {
+        "command": "editor.action.blockComment",
+        "key": "shift+ctrl+/",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    // Block comment the selection (numpad shortcut)
+    {
+        "command": "editor.action.blockComment",
+        "key": "shift+ctrl+numpad_divide",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+
+    // ─────────────────────────────────────────────────────────────
+    // Folding
+    // ─────────────────────────────────────────────────────────────
+    // Collapse every foldable section in the file
+    {
+        "command": "editor.foldAll",
+        "key": "shift+ctrl+numpad_subtract",
+        "when": "editorTextFocus && foldingEnabled"
+    },
+    // Expand every collapsed section in the file
+    {
+        "command": "editor.unfoldAll",
+        "key": "shift+ctrl+numpad_add",
+        "when": "editorTextFocus && foldingEnabled"
+    },
+    // Collapse the block at the cursor
+    {
+        "command": "editor.fold",
+        "key": "ctrl+numpad_subtract",
+        "when": "editorTextFocus && foldingEnabled"
+    },
+    // Collapse the block at the cursor (alternative shortcut)
+    {
+        "command": "editor.fold",
+        "key": "ctrl+-",
+        "when": "editorTextFocus && foldingEnabled"
+    },
+    // Collapse the block at the cursor and everything inside it
+    {
+        "command": "editor.foldRecursively",
+        "key": "ctrl+alt+numpad_subtract",
+        "when": "editorTextFocus && foldingEnabled"
+    },
+    // Collapse the block and everything inside it (alternative shortcut)
+    {
+        "command": "editor.foldRecursively",
+        "key": "ctrl+alt+-",
+        "when": "editorTextFocus && foldingEnabled"
+    },
+    // Expand the block at the cursor
+    {
+        "command": "editor.unfold",
+        "key": "ctrl+numpad_add",
+        "when": "editorTextFocus && foldingEnabled"
+    },
+    // Expand the block at the cursor (alternative shortcut)
+    {
+        "command": "editor.unfold",
+        "key": "ctrl+=",
+        "when": "editorTextFocus && foldingEnabled"
+    },
+    // Expand the block at the cursor and everything inside it
+    {
+        "command": "editor.unfoldRecursively",
+        "key": "ctrl+alt+numpad_add",
+        "when": "editorTextFocus && foldingEnabled"
+    },
+    // Expand the block and everything inside it (alternative shortcut)
+    {
+        "command": "editor.unfoldRecursively",
+        "key": "ctrl+alt+=",
+        "when": "editorTextFocus && foldingEnabled"
+    },
+
+    // ─────────────────────────────────────────────────────────────
+    // Line editing
+    // ─────────────────────────────────────────────────────────────
+    // Delete the whole current line
+    {
+        "command": "editor.action.deleteLines",
+        "key": "ctrl+y",
+        "when": "textInputFocus && !editorReadonly"
+    },
+    // Delete the word to the right of the cursor
+    {
+        "command": "deleteWordRight",
+        "key": "ctrl+delete",
+        "when": "textInputFocus && !editorReadonly && !config.intellij-idea-keybindings.useCamelHumpsWords"
+    },
+    // Delete the word to the left of the cursor
+    {
+        "command": "deleteWordLeft",
+        "key": "ctrl+backspace",
+        "when": "textInputFocus && !editorReadonly && !config.intellij-idea-keybindings.useCamelHumpsWords"
+    },
+    // Ctrl+D: duplicate line in the editor, open diff everywhere else.
+    // These two must stay in this order — the second one wins where it applies.
+    // Open the diff for the current file
+    {
+        "command": "git.openChange",
+        "key": "ctrl+d"
+    },
+    // Duplicate the current line below
+    {
+        "command": "editor.action.copyLinesDownAction",
+        "key": "ctrl+d",
+        "when": "editorTextFocus && !editorReadonly && !editorHasSelection"
+    },
+    // Join the next line onto the current one
+    {
+        "command": "editor.action.joinLines",
+        "key": "shift+ctrl+j",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    // Move the current line (or selection) down
+    {
+        "command": "editor.action.moveLinesDownAction",
+        "key": "shift+alt+down",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    // Move the current line (or selection) up
+    {
+        "command": "editor.action.moveLinesUpAction",
+        "key": "shift+alt+up",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    // Start a new line below, wherever the cursor is
+    {
+        "command": "editor.action.insertLineAfter",
+        "key": "shift+enter",
+        "when": "editorTextFocus && !editorReadonly && !notebookEditorFocused"
+    },
+    // Start a new line below, wherever the cursor is
+    {
+        "command": "editor.action.insertLineAfter",
+        "key": "shift+enter",
+        "when": "editorTextFocus && !editorReadonly && !suggestWidgetVisible"
+    },
+    // Start a new line above, wherever the cursor is
+    {
+        "command": "editor.action.insertLineBefore",
+        "key": "ctrl+alt+enter",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    // Insert a line break without moving the cursor
+    {
+        "command": "lineBreakInsert",
+        "key": "ctrl+enter",
+        "when": "textInputFocus && !editorReadonly"
+    },
+    // Tidy up and sort the import statements
+    {
+        "command": "editor.action.organizeImports",
+        "key": "ctrl+alt+o",
+        "when": "editorTextFocus && !editorReadonly && supportedCodeAction =~ /(\\s|^)source\\.organizeImports\\b/"
+    },
+    // Reformat the whole file
+    {
+        "command": "editor.action.formatDocument",
+        "key": "ctrl+alt+l",
+        "when": "editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly && !inCompositeEditor"
+    },
+    // Rename the symbol under the cursor everywhere it is used
+    {
+        "command": "editor.action.rename",
+        "key": "shift+f6",
+        "when": "editorHasRenameProvider && editorTextFocus && !editorReadonly"
+    },
+
+    // ─────────────────────────────────────────────────────────────
+    // Selection & cursor movement
+    // ─────────────────────────────────────────────────────────────
+    // Widen the selection to the next enclosing block
+    {
+        "command": "editor.action.smartSelect.grow",
+        "key": "ctrl+w",
+        "when": "editorTextFocus"
+    },
+    // Shrink the selection back in one step
+    {
+        "command": "editor.action.smartSelect.shrink",
+        "key": "shift+ctrl+w",
+        "when": "editorTextFocus"
+    },
+    // Switch column (rectangular) selection mode on or off
+    {
+        "command": "editor.action.toggleColumnSelection",
+        "key": "shift+alt+insert"
+    },
+    // Select every occurrence of the current word at once
+    {
+        "command": "editor.action.selectHighlights",
+        "key": "shift+ctrl+alt+j",
+        "when": "editorFocus"
+    },
+    // Add the next matching occurrence to the selection
+    {
+        "command": "editor.action.addSelectionToNextFindMatch",
+        "key": "alt+j",
+        "when": "editorFocus"
+    },
+    // Move to the end of the line
+    {
+        "command": "cursorLineEnd",
+        "key": "end",
+        "when": "textInputFocus"
+    },
+    // Select to the end of the line
+    {
+        "command": "cursorLineEndSelect",
+        "key": "shift+end",
+        "when": "textInputFocus"
+    },
+    // Move to the start of the line
+    {
+        "command": "cursorLineStart",
+        "key": "home",
+        "when": "textInputFocus"
+    },
+    // Select to the start of the line
+    {
+        "command": "cursorLineStartSelect",
+        "key": "shift+home",
+        "when": "textInputFocus"
+    },
+    // Move to the end of the file
+    {
+        "command": "cursorBottom",
+        "key": "ctrl+pagedown",
+        "when": "textInputFocus"
+    },
+    // Select all the way to the end of the file
+    {
+        "command": "cursorBottomSelect",
+        "key": "shift+ctrl+pagedown",
+        "when": "textInputFocus"
+    },
+    // Move to the top of the file
+    {
+        "command": "cursorTop",
+        "key": "ctrl+pageup",
+        "when": "textInputFocus"
+    },
+    // Select all the way to the top of the file
+    {
+        "command": "cursorTopSelect",
+        "key": "shift+ctrl+pageup",
+        "when": "textInputFocus"
+    },
+    // Move to the end of the file (alternative shortcut)
+    {
+        "command": "cursorBottom",
+        "key": "ctrl+end",
+        "when": "textInputFocus"
+    },
+    // Move to the top of the file (alternative shortcut)
+    {
+        "command": "cursorTop",
+        "key": "ctrl+home",
+        "when": "textInputFocus"
+    },
+    // Move down one screen
+    {
+        "command": "cursorPageDown",
+        "key": "pagedown",
+        "when": "textInputFocus"
+    },
+    // Select down one screen
+    {
+        "command": "cursorPageDownSelect",
+        "key": "shift+pagedown",
+        "when": "textInputFocus"
+    },
+    // Move up one screen
+    {
+        "command": "cursorPageUp",
+        "key": "pageup",
+        "when": "textInputFocus"
+    },
+    // Select up one screen
+    {
+        "command": "cursorPageUpSelect",
+        "key": "shift+pageup",
+        "when": "textInputFocus"
+    },
+    // Move to the start of the next word
+    {
+        "command": "cursorWordRight",
+        "key": "ctrl+right",
+        "when": "editorTextFocus && !inlineSuggestionVisible && !config.intellij-idea-keybindings.useCamelHumpsWords"
+    },
+    // Select to the start of the next word
+    {
+        "command": "cursorWordRightSelect",
+        "key": "shift+ctrl+right",
+        "when": "editorTextFocus && !config.intellij-idea-keybindings.useCamelHumpsWords"
+    },
+    // Move to the start of the previous word
+    {
+        "command": "cursorWordLeft",
+        "key": "ctrl+left",
+        "when": "editorTextFocus && !config.intellij-idea-keybindings.useCamelHumpsWords"
+    },
+    // Select to the start of the previous word
+    {
+        "command": "cursorWordLeftSelect",
+        "key": "shift+ctrl+left",
+        "when": "editorTextFocus && !config.intellij-idea-keybindings.useCamelHumpsWords"
+    },
+
+    // ─────────────────────────────────────────────────────────────
+    // Find & replace
+    // ─────────────────────────────────────────────────────────────
+    // Jump to the next search match
+    {
+        "command": "editor.action.nextMatchFindAction",
+        "key": "f3",
+        "when": "editorFocus"
+    },
+    // Jump to the next search match
+    {
+        "command": "editor.action.nextMatchFindAction",
+        "key": "f3",
+        "when": "editorFocus && findInputFocussed"
+    },
+    // Jump to the next search match (alternative shortcut)
+    {
+        "command": "editor.action.nextMatchFindAction",
+        "key": "ctrl+l",
+        "when": "editorFocus"
+    },
+    // Jump to the next search match (alternative shortcut)
+    {
+        "command": "editor.action.nextMatchFindAction",
+        "key": "ctrl+l",
+        "when": "editorFocus && findInputFocussed"
+    },
+    // Jump to the previous search match
+    {
+        "command": "editor.action.previousMatchFindAction",
+        "key": "shift+f3",
+        "when": "editorFocus"
+    },
+    // Jump to the previous search match
+    {
+        "command": "editor.action.previousMatchFindAction",
+        "key": "shift+f3",
+        "when": "editorFocus && findInputFocussed"
+    },
+    // Jump to the previous search match (alternative shortcut)
+    {
+        "command": "editor.action.previousMatchFindAction",
+        "key": "shift+ctrl+l",
+        "when": "editorFocus"
+    },
+    // Jump to the previous search match (alternative shortcut)
+    {
+        "command": "editor.action.previousMatchFindAction",
+        "key": "shift+ctrl+l",
+        "when": "editorFocus && findInputFocussed"
+    },
+    // Find and replace in this file
+    {
+        "command": "editor.action.startFindReplaceAction",
+        "key": "ctrl+r",
+        "when": "editorFocus || editorIsOpen"
+    },
+    // Search across all files in the project
+    {
+        "command": "workbench.action.findInFiles",
+        "key": "shift+ctrl+f"
+    },
+    // Search across all files in the project
+    {
+        "command": "workbench.action.findInFiles",
+        "key": "shift+ctrl+f",
+        "when": "!explorerResourceIsFolder || !filesExplorerFocus"
+    },
+    // Find and replace across all files in the project
+    {
+        "command": "workbench.action.replaceInFiles",
+        "key": "shift+ctrl+r"
+    },
+
+    // ─────────────────────────────────────────────────────────────
+    // Navigation / go to
+    // ─────────────────────────────────────────────────────────────
+    // Go back to where you were before
+    {
+        "command": "workbench.action.navigateBack",
+        "key": "ctrl+alt+left",
+        "when": "canNavigateBack"
+    },
+    // Go forward again after going back
+    {
+        "command": "workbench.action.navigateForward",
+        "key": "shift+ctrl+-",
+        "when": "canNavigateForward"
+    },
+    // Jump to the last place you edited
+    {
+        "command": "workbench.action.navigateToLastEditLocation",
+        "key": "shift+ctrl+backspace"
+    },
+    // Go to where this symbol is defined
+    {
+        "command": "editor.action.goToDeclaration",
+        "key": "f4",
+        "when": "editorTextFocus"
+    },
+    // Go to the implementation of this symbol
+    {
+        "command": "editor.action.goToImplementation",
+        "key": "ctrl+alt+b",
+        "when": "editorHasImplementationProvider && editorTextFocus && !isInEmbeddedEditor"
+    },
+    // Go to the definition of this symbol's type
+    {
+        "command": "editor.action.goToTypeDefinition",
+        "key": "shift+ctrl+b",
+        "when": "editorTextFocus"
+    },
+    // Peek at the definition without leaving the file
+    {
+        "command": "editor.action.previewDeclaration",
+        "key": "shift+ctrl+i"
+    },
+    // List everywhere this symbol is used
+    {
+        "command": "references-view.findReferences",
+        "key": "alt+f7",
+        "when": "editorHasReferenceProvider"
+    },
+    // Peek at all the usages of this symbol inline
+    {
+        "command": "editor.action.referenceSearch.trigger",
+        "key": "ctrl+alt+f7",
+        "when": "editorHasReferenceProvider && editorTextFocus && !inReferenceSearchEditor"
+    },
+    // Show what calls this function, and what it calls
+    {
+        "command": "references-view.showCallHierarchy",
+        "key": "ctrl+alt+h",
+        "when": "editorHasCallHierarchyProvider"
+    },
+    // Show the class hierarchy (Java files only)
+    {
+        "command": "java.action.showTypeHierarchy",
+        "key": "ctrl+h",
+        "when": "editorLangId == java && javaLSReady && editorTextFocus"
+    },
+    // Jump to a symbol inside the current file
+    {
+        "command": "workbench.action.gotoSymbol",
+        "key": "ctrl+f12",
+        "when": "editorTextFocus"
+    },
+    // Jump to a symbol inside the current file (alternative shortcut)
+    {
+        "command": "workbench.action.gotoSymbol",
+        "key": "shift+ctrl+alt+n",
+        "when": "editorTextFocus"
+    },
+    // Jump to a symbol inside the current file (alternative shortcut)
+    {
+        "key": "alt+\\",
+        "command": "workbench.action.gotoSymbol"
+    },
+    // Search for a symbol anywhere in the project
+    {
+        "command": "workbench.action.showAllSymbols",
+        "key": "ctrl+n"
+    },
+    // Open a file by typing part of its name
+    {
+        "command": "workbench.action.gotoLine",
+        "key": "ctrl+g"
+    },
+    // Move to the next item in the Quick Open list
+    {
+        "command": "workbench.action.quickOpenNavigateNext",
+        "key": "ctrl+tab",
+        "when": "inQuickOpen"
+    },
+    // Open a recently used project
+    {
+        "command": "workbench.action.openRecent",
+        "key": "ctrl+e",
+        "when": "!inQuickOpen"
+    },
+    // Reopen a recently used file from history
+    {
+        "command": "workbench.action.openPreviousEditorFromHistory",
+        "key": "ctrl+e",
+        "when": "inQuickOpen"
+    },
+    // Switch to the next open tab
+    {
+        "command": "workbench.action.nextEditor",
+        "key": "alt+right"
+    },
+    // Switch to the previous open tab
+    {
+        "command": "workbench.action.previousEditor",
+        "key": "alt+left"
+    },
+
+    // ─────────────────────────────────────────────────────────────
+    // Diff / merge
+    // ─────────────────────────────────────────────────────────────
+    // In a merge conflict, keep your version
+    {
+        "command": "merge-conflict.accept.current",
+        "key": "shift+alt+right",
+        "when": "isInDiffEditor"
+    },
+    // In a merge conflict, take the incoming version
+    {
+        "command": "merge-conflict.accept.incoming",
+        "key": "shift+alt+left",
+        "when": "isInDiffEditor"
+    },
+    // Jump to the next change in the diff view
+    {
+        "command": "workbench.action.compareEditor.nextChange",
+        "key": "f7",
+        "when": "textCompareEditorVisible"
+    },
+    // Jump to the previous change in the diff view
+    {
+        "command": "workbench.action.compareEditor.previousChange",
+        "key": "shift+f7",
+        "when": "textCompareEditorVisible"
+    },
+    // Jump to the previous uncommitted change in this file
+    {
+        "command": "editor.action.dirtydiff.previous",
+        "key": "shift+ctrl+alt+up",
+        "when": "editorTextFocus"
+    },
+
+    // ─────────────────────────────────────────────────────────────
+    // Git
+    // ─────────────────────────────────────────────────────────────
+    // Stage everything and commit
+    {
+        "command": "git.commitAll",
+        "key": "ctrl+k",
+        "when": "!inDebugMode && !terminalFocus"
+    },
+    // Push to a specific remote or branch
+    {
+        "command": "git.pushTo",
+        "key": "ctrl+alt+k",
+        "when": "!inDebugMode && !terminalFocus"
+    },
+    // Pull and then push (sync with the remote)
+    {
+        "command": "git.sync",
+        "key": "ctrl+t"
+    },
+    // Undo the selected uncommitted changes
+    {
+        "command": "git.revertSelectedRanges",
+        "key": "ctrl+alt+z",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+
+    // ─────────────────────────────────────────────────────────────
+    // Files
+    // ─────────────────────────────────────────────────────────────
+    // Save every open file
+    {
+        "command": "workbench.action.files.saveAll",
+        "key": "ctrl+s"
+    },
+    // Free Ctrl+Shift+S from Save As so it can be Save All
+    {
+        "key": "ctrl+shift+s",
+        "command": "-workbench.action.files.saveAs"
+    },
+    // Save every open file (alternative shortcut)
+    {
+        "key": "ctrl+shift+s",
+        "command": "workbench.action.files.saveAll"
+    },
+    // Create a new untitled file
+    {
+        "command": "workbench.action.files.newUntitledFile",
+        "key": "alt+insert",
+        "when": "(!editorHasCodeActionsProvider && editorTextFocus) || !editorTextFocus"
+    },
+    // Create a new untitled file (alternative shortcut)
+    {
+        "command": "workbench.action.files.newUntitledFile",
+        "key": "shift+ctrl+alt+insert",
+        "when": "(!editorHasCodeActionsProvider && editorTextFocus) || !editorTextFocus"
+    },
+    // Open file/folder moves to Ctrl+Shift+O so vim keeps Ctrl+O (jump back)
+    // Free Ctrl+O so vim can use it to jump back
+    {
+        "key": "ctrl+o",
+        "command": "-workbench.action.files.openFile",
+        "when": "true"
+    },
+    // Open a file from disk
+    {
+        "key": "ctrl+shift+o",
+        "command": "workbench.action.files.openFile",
+        "when": "true"
+    },
+    // Free Ctrl+O for vim (folder variant)
+    {
+        "key": "ctrl+o",
+        "command": "-workbench.action.files.openFolderViaWorkspace",
+        "when": "!openFolderWorkspaceSupport && workbenchState == 'workspace'"
+    },
+    // Open a folder while a workspace is loaded
+    {
+        "key": "ctrl+shift+o",
+        "command": "workbench.action.files.openFolderViaWorkspace",
+        "when": "!openFolderWorkspaceSupport && workbenchState == 'workspace'"
+    },
+    // Free Ctrl+O for vim (macOS variant)
+    {
+        "key": "ctrl+o",
+        "command": "-workbench.action.files.openFileFolder",
+        "when": "isMacNative && openFolderWorkspaceSupport"
+    },
+    // Open a file or folder (macOS)
+    {
+        "key": "ctrl+shift+o",
+        "command": "workbench.action.files.openFileFolder",
+        "when": "isMacNative && openFolderWorkspaceSupport"
+    },
+    // Free Ctrl+O for vim (remote variant)
+    {
+        "key": "ctrl+o",
+        "command": "-workbench.action.files.openLocalFile",
+        "when": "remoteFileDialogVisible"
+    },
+    // Open a local file while connected to a remote
+    {
+        "key": "ctrl+shift+o",
+        "command": "workbench.action.files.openLocalFile",
+        "when": "remoteFileDialogVisible"
+    },
+    // Open the current file in a new window
+    {
+        "command": "workbench.action.files.showOpenedFileInNewWindow",
+        "key": "shift+f4",
+        "when": "emptyWorkspaceSupport"
+    },
+    // Free Shift+Alt+L from the Bookmarks extension
+    {
+        "key": "shift+alt+l",
+        "command": "-bookmarks.expandSelectionToNext",
+        "when": "editorTextFocus"
+    },
+    // Reveal the current file in the Explorer sidebar
+    {
+        "key": "shift+alt+l",
+        "command": "workbench.files.action.showActiveFileInExplorer"
+    },
+    // Reveal the current file in the OS file explorer (Windows Explorer)
+    // Bound explicitly so Alt doesn't fall through to the Run menu's "R" mnemonic
+    {
+        "key": "shift+alt+r",
+        "command": "revealFileInOS"
+    },
+    // Close the current tab
+    {
+        "command": "workbench.action.closeActiveEditor",
+        "key": "ctrl+f4"
+    },
+
+    // ─────────────────────────────────────────────────────────────
+    // Views & workbench
+    // ─────────────────────────────────────────────────────────────
+    // Show or hide the left sidebar
+    {
+        "command": "workbench.action.toggleSidebarVisibility",
+        "key": "shift+escape",
+        "when": "!editorFocus && !terminalFocus && !problemFocus && !inDebugRepl"
+    },
+    // Show or hide the left sidebar
+    {
+        "command": "workbench.action.toggleSidebarVisibility",
+        "key": "shift+escape",
+        "when": "explorerViewletFocus"
+    },
+    // Show or hide the left sidebar
+    {
+        "command": "workbench.action.toggleSidebarVisibility",
+        "key": "shift+escape"
+    },
+    // Free Ctrl+J from the panel toggle
+    {
+        "key": "ctrl+j",
+        "command": "-workbench.action.togglePanel"
+    },
+    // Show or hide the bottom panel (terminal, problems, output)
+    {
+        "key": "ctrl+alt+j",
+        "command": "workbench.action.togglePanel"
+    },
+    // Right-hand (secondary) side bar — Ctrl+Alt+L now belongs to Format Code
+    // Show or hide the right-hand sidebar
+    {
+        "key": "shift+ctrl+alt+l",
+        "command": "workbench.action.toggleAuxiliaryBar"
+    },
+    // Maximise the editor and hide everything else
+    {
+        "command": "workbench.action.maximizeEditor",
+        "key": "shift+ctrl+f12"
+    },
+    // Open the Command Palette
+    {
+        "command": "workbench.action.openGlobalSettings",
+        "key": "ctrl+alt+s"
+    },
+    // Edit the task configuration
+    {
+        "command": "workbench.action.tasks.configureTaskRunner",
+        "key": "shift+ctrl+alt+s"
+    },
+
+    // ─────────────────────────────────────────────────────────────
+    // Debug & tasks
+    // ─────────────────────────────────────────────────────────────
+    // Open the Run and Debug panel
+    {
+        "command": "workbench.view.debug",
+        "key": "alt+5"
+    },
+    // Open the Run and Debug panel (alternative shortcut)
+    {
+        "command": "workbench.view.debug",
+        "key": "shift+alt+f9"
+    },
+    // Open the Run and Debug panel (alternative shortcut)
+    {
+        "command": "workbench.view.debug",
+        "key": "shift+ctrl+f8"
+    },
+    // Run the build task
+    {
+        "command": "workbench.action.tasks.build",
+        "key": "ctrl+f9"
+    },
+    // Run the last task again
+    {
+        "command": "workbench.action.tasks.reRunTask",
+        "key": "shift+f10",
+        "when": "taskCommandsRegistered && !terminalFocus"
+    },
+    // Start running without the debugger
+    {
+        "command": "workbench.action.debug.run",
+        "key": "shift+f9",
+        "when": "debuggersAvailable && !inDebugMode && !terminalFocus"
+    },
+    // Continue running until the next breakpoint
+    {
+        "command": "workbench.action.debug.continue",
+        "key": "f9",
+        "when": "inDebugMode"
+    },
+    // Step into the function call
+    {
+        "command": "workbench.action.debug.stepInto",
+        "key": "f7",
+        "when": "debugState != 'inactive'"
+    },
+    // Step over to the next line
+    {
+        "command": "workbench.action.debug.stepOver",
+        "key": "f8",
+        "when": "debugState == 'stopped'"
+    },
+    // Step out of the current function
+    {
+        "command": "workbench.action.debug.stepOut",
+        "key": "shift+f8",
+        "when": "debugState == 'stopped'"
+    },
+    // Run until the line the cursor is on
+    {
+        "command": "editor.debug.action.runToCursor",
+        "key": "alt+f9",
+        "when": "debugState == 'stopped'"
+    },
+    // Add or remove a breakpoint on this line
+    {
+        "command": "editor.debug.action.toggleBreakpoint",
+        "key": "ctrl+f8",
+        "when": "debuggersAvailable && editorTextFocus"
+    },
+    // Evaluate the selected expression in the debug console
+    {
+        "command": "editor.debug.action.selectionToRepl",
+        "key": "alt+f8",
+        "when": "debuggersAvailable && editorTextFocus && editorHasSelection"
+    },
+
+    // ─────────────────────────────────────────────────────────────
+    // Terminal (kept last so terminalFocus wins over the editor bindings)
+    // ─────────────────────────────────────────────────────────────
+    // Clear the default terminal toggle before rebinding it below
+    {
+        "key": "ctrl+`",
+        "command": "-workbench.action.terminal.toggleTerminal",
+        "when": "terminal.active"
+    },
+    // Show or hide the terminal
+    {
+        "key": "ctrl+`",
+        "command": "workbench.action.terminal.toggleTerminal"
+    },
+    // In the terminal, Shift+Enter adds a line continuation instead of running the command
     {
         "key": "shift+enter",
         "command": "workbench.action.terminal.sendSequence",
@@ -8,6 +1116,7 @@
             "text": "\\\r\n"
         }
     },
+    // In the terminal, Ctrl+Enter adds a line continuation instead of running the command
     {
         "key": "ctrl+enter",
         "command": "workbench.action.terminal.sendSequence",
@@ -16,227 +1125,544 @@
             "text": "\\\r\n"
         }
     },
+
+    // ─────────────────────────────────────────────────────────────
+    // Removed VS Code defaults (from the IntelliJ keymap)
+    // ─────────────────────────────────────────────────────────────
+    // Remove the default Redo shortcut
     {
-        "key": "ctrl+a",
-        "command": "-extension.vim_ctrl+a",
-        "when": "editorTextFocus && vim.active && vim.use<C-a> && !inDebugRepl"
+        "command": "-redo",
+        "key": "ctrl+shift+z"
     },
+    // Remove the default Redo shortcut
     {
-        "key": "ctrl+t",
-        "command": "-extension.vim_ctrl+t",
-        "when": "editorTextFocus && vim.active && vim.use<C-t> && !inDebugRepl"
+        "command": "-redo",
+        "key": "ctrl+y"
     },
+    // Remove the default Run and Debug shortcut
     {
-        "key": "ctrl+d",
+        "command": "-workbench.view.debug",
+        "key": "ctrl+shift+d"
+    },
+    // Remove a default Go Back shortcut
+    {
+        "command": "-workbench.action.navigateBack",
+        "key": "alt+left"
+    },
+    // Remove the default Call Hierarchy shortcut
+    {
+        "command": "-references-view.showCallHierarchy",
+        "key": "shift+alt+h"
+    },
+    // Clear the unbound default for Commit All
+    {
+        "command": "-git.commitAll",
+        "key": ""
+    },
+    // Free Ctrl+W so it can be Extend Selection
+    {
+        "command": "-workbench.action.closeActiveEditor",
+        "key": "ctrl+w"
+    },
+    // Remove the default suggestions shortcut (frees Ctrl+I for vim jump-forward)
+    {
+        "command": "-editor.action.triggerSuggest",
+        "key": "ctrl+i"
+    },
+    // Remove a default Fold All shortcut
+    {
+        "command": "-editor.foldAll",
+        "key": "ctrl+k ctrl+0"
+    },
+    // Remove the default Fold shortcut
+    {
+        "command": "-editor.fold",
+        "key": "ctrl+shift+["
+    },
+    // Remove the default Fold Recursively shortcut
+    {
+        "command": "-editor.foldRecursively",
+        "key": "ctrl+k ctrl+["
+    },
+    // Remove the default block-comment shortcut
+    {
+        "command": "-editor.action.blockComment",
+        "key": "shift+alt+a"
+    },
+    // Remove the default Run Build Task shortcut
+    {
+        "command": "-workbench.action.tasks.build",
+        "key": "ctrl+shift+b"
+    },
+    // Remove the default Copy File Path shortcut
+    {
+        "command": "-copyFilePath",
+        "key": "shift+alt+c"
+    },
+    // Remove the default Run Without Debugging shortcut
+    {
+        "command": "-workbench.action.debug.run",
+        "key": "ctrl+f5"
+    },
+    // Clear the unbound default for Accept Current Change
+    {
+        "command": "-merge-conflict.accept.current",
+        "key": ""
+    },
+    // Clear the unbound default for Accept Incoming Change
+    {
+        "command": "-merge-conflict.accept.incoming",
+        "key": ""
+    },
+    // Clear the unbound default for Quick Open Next
+    {
+        "command": "-workbench.action.quickOpenNavigateNext",
+        "key": ""
+    },
+    // Clear the unbound default for Open Changes
+    {
+        "command": "-git.openChange",
+        "key": ""
+    },
+    // Clear the unbound default for Go to Declaration
+    {
+        "command": "-editor.action.goToDeclaration",
+        "key": ""
+    },
+    // Remove the default Open in New Window shortcut
+    {
+        "command": "-workbench.action.files.showOpenedFileInNewWindow",
+        "key": "ctrl+k o"
+    },
+    // Stop Tab/Enter accepting a suggestion, so they type normally
+    {
+        "command": "-acceptSelectedSuggestion",
+        "key": "tab"
+    },
+    // Stop Tab/Enter accepting a suggestion, so they type normally
+    {
+        "command": "-acceptSelectedSuggestion",
+        "key": "enter"
+    },
+    // Remove the default Delete Line shortcut
+    {
+        "command": "-editor.action.deleteLines",
+        "key": "ctrl+shift+k"
+    },
+    // Remove the default Duplicate Line shortcut
+    {
+        "command": "-editor.action.copyLinesDownAction",
+        "key": "shift+alt+down"
+    },
+    // Clear the unbound default for Join Lines
+    {
+        "command": "-editor.action.joinLines",
+        "key": ""
+    },
+    // Clear the unbound default for End of Line
+    {
+        "command": "-cursorLineEnd",
+        "key": ""
+    },
+    // Clear the unbound default for Select to End of Line
+    {
+        "command": "-cursorLineEndSelect",
+        "key": ""
+    },
+    // Clear the unbound default for Start of Line
+    {
+        "command": "-cursorLineStart",
+        "key": ""
+    },
+    // Clear the unbound default for Select to Start of Line
+    {
+        "command": "-cursorLineStartSelect",
+        "key": ""
+    },
+    // Remove the default Select to End of File shortcut
+    {
+        "command": "-cursorBottomSelect",
+        "key": "ctrl+shift+end"
+    },
+    // Remove the default Select to Top of File shortcut
+    {
+        "command": "-cursorTopSelect",
+        "key": "ctrl+shift+home"
+    },
+    // Remove the default Select Word Right shortcut
+    {
+        "command": "-cursorWordRightSelect",
+        "key": "ctrl+shift+right"
+    },
+    // Remove the default Select Word Left shortcut
+    {
+        "command": "-cursorWordLeftSelect",
+        "key": "ctrl+shift+left"
+    },
+    // Clear the unbound default for Expand Selection
+    {
+        "command": "-editor.action.smartSelect.grow",
+        "key": ""
+    },
+    // Clear the unbound default for Insert Line Break
+    {
+        "command": "-lineBreakInsert",
+        "key": ""
+    },
+    // Remove the default Insert Line Below shortcut
+    {
+        "command": "-editor.action.insertLineAfter",
+        "key": "ctrl+enter"
+    },
+    // Remove the default Insert Line Above shortcut
+    {
+        "command": "-editor.action.insertLineBefore",
+        "key": "ctrl+shift+enter"
+    },
+    // Clear the unbound default for Column Selection Mode
+    {
+        "command": "-editor.action.toggleColumnSelection",
+        "key": ""
+    },
+    // Remove the default Shrink Selection shortcut
+    {
+        "command": "-editor.action.smartSelect.shrink",
+        "key": "shift+alt+left"
+    },
+    // Clear the unbound default for Evaluate in Console
+    {
+        "command": "-editor.debug.action.selectionToRepl",
+        "key": ""
+    },
+    // Remove a default Unfold All shortcut
+    {
+        "command": "-editor.unfoldAll",
+        "key": "ctrl+k ctrl+j"
+    },
+    // Remove the default Unfold shortcut
+    {
+        "command": "-editor.unfold",
+        "key": "ctrl+shift+]"
+    },
+    // Remove the default Unfold Recursively shortcut
+    {
+        "command": "-editor.unfoldRecursively",
+        "key": "ctrl+k ctrl+]"
+    },
+    // Free Ctrl+Shift+O so it can be Open File
+    {
+        "command": "-workbench.action.gotoSymbol",
+        "key": "ctrl+shift+o"
+    },
+    // Remove the default Search in Files shortcut
+    {
+        "command": "-workbench.action.findInFiles",
+        "key": "ctrl+shift+f"
+    },
+    // Stop Enter jumping to the next match
+    {
+        "command": "-editor.action.nextMatchFindAction",
+        "key": "enter"
+    },
+    // Stop Shift+Enter jumping to the previous match
+    {
+        "command": "-editor.action.previousMatchFindAction",
+        "key": "shift+enter"
+    },
+    // Remove the default Find References shortcut
+    {
+        "command": "-references-view.findReferences",
+        "key": "shift+alt+f12"
+    },
+    // Remove a default Go Forward shortcut
+    {
+        "command": "-workbench.action.navigateForward",
+        "key": "alt+right"
+    },
+    // Free Ctrl+N so it can be Go to Symbol in Workspace
+    {
+        "command": "-workbench.action.files.newUntitledFile",
+        "key": "ctrl+n"
+    },
+    // Clear the unbound default for Push To
+    {
+        "command": "-git.pushTo",
+        "key": ""
+    },
+    // Remove a default Command Palette shortcut
+    {
+        "command": "-workbench.action.showCommands",
+        "key": "f1"
+    },
+    // Remove a default Command Palette shortcut
+    {
+        "command": "-workbench.action.showCommands",
+        "key": "ctrl+shift+p"
+    },
+    // Free Ctrl+T so it can be Git Sync
+    {
+        "command": "-workbench.action.showAllSymbols",
+        "key": "ctrl+t"
+    },
+    // Remove a default Quick Open shortcut
+    {
+        "command": "-workbench.action.quickOpen",
+        "key": "ctrl+p"
+    },
+    // Remove a default Quick Open shortcut
+    {
+        "command": "-workbench.action.quickOpen",
+        "key": "ctrl+r"
+    },
+    // Remove the default Go to Implementation shortcut
+    {
+        "command": "-editor.action.goToImplementation",
+        "key": "ctrl+f12"
+    },
+    // Remove the default next-problem shortcut
+    {
+        "command": "-editor.action.marker.next",
+        "key": "alt+f8"
+    },
+    // Remove the default previous-problem shortcut
+    {
+        "command": "-editor.action.marker.prev",
+        "key": "shift+alt+f8"
+    },
+    // Clear the unbound default for Go to Type Definition
+    {
+        "command": "-editor.action.goToTypeDefinition",
+        "key": ""
+    },
+    // Free Ctrl+B so vim can use it to page up
+    {
+        "command": "-workbench.action.toggleSidebarVisibility",
+        "key": "ctrl+b"
+    },
+    // Clear the unbound default for Maximise Editor
+    {
+        "command": "-workbench.action.maximizeEditor",
+        "key": ""
+    },
+    // Remove the default Last Edit Location shortcut
+    {
+        "command": "-workbench.action.navigateToLastEditLocation",
+        "key": "ctrl+k ctrl+q"
+    },
+    // Remove the default Move Line Down shortcut
+    {
+        "command": "-editor.action.moveLinesDownAction",
+        "key": "alt+down"
+    },
+    // Remove the default Move Line Up shortcut
+    {
+        "command": "-editor.action.moveLinesUpAction",
+        "key": "alt+up"
+    },
+    // Remove the default Next Difference shortcut
+    {
+        "command": "-workbench.action.compareEditor.nextChange",
+        "key": "alt+f5"
+    },
+    // Remove the default Next Tab shortcut
+    {
+        "command": "-workbench.action.nextEditor",
+        "key": "ctrl+pagedown"
+    },
+    // Remove the default Organize Imports shortcut
+    {
+        "command": "-editor.action.organizeImports",
+        "key": "shift+alt+o"
+    },
+    // Remove the default parameter hints shortcut
+    {
+        "command": "-editor.action.triggerParameterHints",
+        "key": "ctrl+shift+space"
+    },
+    // Remove the default Previous Difference shortcut
+    {
+        "command": "-workbench.action.compareEditor.previousChange",
+        "key": "shift+alt+f5"
+    },
+    // Remove the default Previous Tab shortcut
+    {
+        "command": "-workbench.action.previousEditor",
+        "key": "ctrl+pageup"
+    },
+    // Clear the unbound default for Peek Definition
+    {
+        "command": "-editor.action.previewDeclaration",
+        "key": ""
+    },
+    // Remove the default Format Document shortcut
+    {
+        "command": "-editor.action.formatDocument",
+        "key": "shift+alt+f"
+    },
+    // Free F2 from Rename (it is Next Error here)
+    {
+        "command": "-editor.action.rename",
+        "key": "f2"
+    },
+    // Remove the default Replace shortcut
+    {
+        "command": "-editor.action.startFindReplaceAction",
+        "key": "ctrl+h"
+    },
+    // Remove the default Replace in Files shortcut
+    {
+        "command": "-workbench.action.replaceInFiles",
+        "key": "ctrl+shift+h"
+    },
+    // Free F5 from Continue
+    {
+        "command": "-workbench.action.debug.continue",
+        "key": "f5"
+    },
+    // Clear the unbound default for Rerun Task
+    {
+        "command": "-workbench.action.tasks.reRunTask",
+        "key": ""
+    },
+    // Clear the unbound default for Run to Cursor
+    {
+        "command": "-editor.debug.action.runToCursor",
+        "key": ""
+    },
+    // Remove the default Save All shortcut
+    {
+        "command": "-workbench.action.files.saveAll",
+        "key": "ctrl+k s"
+    },
+    // Remove the default Select All Occurrences shortcut
+    {
+        "command": "-editor.action.selectHighlights",
+        "key": "ctrl+shift+l"
+    },
+    // Remove the default Add Next Occurrence shortcut
+    {
         "command": "-editor.action.addSelectionToNextFindMatch",
-        "when": "editorTextFocus && vim.active && !inDebugRepl"
+        "key": "ctrl+d"
     },
+    // Clear the unbound default for Show Errors and Warnings
     {
-        "key": "ctrl+w",
-        "command": "-extension.vim_ctrl+w",
-        "when": "editorTextFocus && vim.active && vim.use<C-w> && !inDebugRepl"
+        "command": "-workbench.action.showErrorsWarnings",
+        "key": ""
     },
+    // Remove the default quick fix shortcut
     {
-        "key": "ctrl+w j",
-        "command": "-extension.vim_navigateDown",
-        "when": "vim.active && vim.use<C-w> && !editorTextFocus"
+        "command": "-editor.action.quickFix",
+        "key": "ctrl+."
     },
+    // Clear the unbound default for Configure Tasks
     {
-        "key": "ctrl+w ctrl+w",
-        "command": "-extension.vim_navigateGroups",
-        "when": "vim.active && vim.use<C-w> && !editorTextFocus"
+        "command": "-workbench.action.tasks.configureTaskRunner",
+        "key": ""
     },
+    // Clear the unbound default for Settings
     {
-        "key": "ctrl+w h",
-        "command": "-extension.vim_navigateLeft",
-        "when": "vim.active && vim.use<C-w> && !editorTextFocus"
+        "command": "-workbench.action.openGlobalSettings",
+        "key": ""
     },
+    // Clear the unbound default for Peek References
     {
-        "key": "ctrl+w l",
-        "command": "-extension.vim_navigateRight",
-        "when": "vim.active && vim.use<C-w> && !editorTextFocus"
+        "command": "-editor.action.referenceSearch.trigger",
+        "key": ""
     },
+    // Remove the default Step Into shortcut
     {
-        "key": "ctrl+w k",
-        "command": "-extension.vim_navigateUp",
-        "when": "vim.active && vim.use<C-w> && !editorTextFocus"
+        "command": "-workbench.action.debug.stepInto",
+        "key": "f11"
     },
+    // Remove the default Step Out shortcut
     {
-        "key": "ctrl+k",
-        "command": "-extension.vim_ctrl+k",
-        "when": "editorTextFocus && vim.active && vim.use<C-k> && !inDebugRepl && vim.mode != 'Insert'"
+        "command": "-workbench.action.debug.stepOut",
+        "key": "shift+f11"
     },
+    // Remove the default Step Over shortcut
     {
-        "key": "ctrl+shift+s",
-        "command": "-workbench.action.files.saveAs"
+        "command": "-workbench.action.debug.stepOver",
+        "key": "f10"
     },
+    // Free F9 so it can be Continue
     {
-        "key": "ctrl+shift+s",
-        "command": "workbench.action.files.saveAll"
+        "command": "-editor.debug.action.toggleBreakpoint",
+        "key": "f9"
     },
+    // Clear the unbound default for Java Type Hierarchy
     {
-        "key": "ctrl+q",
-        "command": "-extension.vim_winCtrlQ",
-        "when": "editorTextFocus && vim.active && vim.use<C-q> && !inDebugRepl"
+        "command": "-java.action.showTypeHierarchy",
+        "key": ""
     },
+    // Remove the default Undo Cursor Position shortcut
     {
-        "key": "ctrl+q",
-        "command": "extension.vim_ctrl+v",
-        "when": "editorTextFocus && vim.active && vim.use<C-v> && !inDebugRepl"
+        "command": "-cursorUndo",
+        "key": "ctrl+u"
     },
+    // Remove the default Revert Selected Ranges shortcut
     {
-        "key": "ctrl+v",
-        "command": "-extension.vim_ctrl+v",
-        "when": "editorTextFocus && vim.active && vim.use<C-v> && !inDebugRepl"
+        "command": "-git.revertSelectedRanges",
+        "key": "ctrl+k ctrl+r"
     },
+    // Clear the unbound default for Sync
     {
-        "key": "ctrl+q",
-        "command": "-workbench.action.quickOpenNavigateNextInViewPicker",
-        "when": "inQuickOpen && inViewsPicker"
+        "command": "-git.sync",
+        "key": ""
     },
+    // Remove the default Previous Change shortcut
     {
-        "key": "ctrl+q",
-        "command": "-workbench.action.quickOpenView"
+        "command": "-editor.action.dirtydiff.previous",
+        "key": "shift+alt+f3"
     },
+    // Remove a default Fold All shortcut
     {
-        "key": "ctrl+q",
-        "command": "extension.vim_winCtrlQ"
+        "command": "-editor.foldAll",
+        "key": "shift+ctrl+-"
     },
+    // Remove a default line-comment shortcut
     {
-        "key": "ctrl+shift+o",
-        "command": "-workbench.action.gotoSymbol"
+        "command": "-editor.action.commentLine",
+        "key": "ctrl+numpad_divide"
     },
+    // Remove a default Unfold All shortcut
     {
-        "key": "ctrl+shift+o",
-        "command": "workbench.action.files.openFile",
-        "when": "true"
+        "command": "-editor.unfoldAll",
+        "key": "shift+ctrl+="
     },
+    // Remove a default Go Forward shortcut
     {
-        "key": "ctrl+o",
-        "command": "-workbench.action.files.openFile",
-        "when": "true"
+        "command": "-workbench.action.navigateForward",
+        "key": "ctrl+alt+right"
     },
+    // Remove a default hover shortcut
     {
-        "key": "ctrl+shift+o",
-        "command": "workbench.action.files.openFolderViaWorkspace",
-        "when": "!openFolderWorkspaceSupport && workbenchState == 'workspace'"
+        "command": "-editor.action.showHover",
+        "key": "ctrl+q"
     },
-    {
-        "key": "ctrl+o",
-        "command": "-workbench.action.files.openFolderViaWorkspace",
-        "when": "!openFolderWorkspaceSupport && workbenchState == 'workspace'"
-    },
-    {
-        "key": "ctrl+shift+o",
-        "command": "workbench.action.files.openFileFolder",
-        "when": "isMacNative && openFolderWorkspaceSupport"
-    },
-    {
-        "key": "ctrl+o",
-        "command": "-workbench.action.files.openFileFolder",
-        "when": "isMacNative && openFolderWorkspaceSupport"
-    },
-    {
-        "key": "ctrl+shift+o",
-        "command": "workbench.action.files.openLocalFile",
-        "when": "remoteFileDialogVisible"
-    },
-    {
-        "key": "ctrl+o",
-        "command": "-workbench.action.files.openLocalFile",
-        "when": "remoteFileDialogVisible"
-    },
-    {
-        "key": "ctrl+c",
-        "command": "-extension.vim_ctrl+c",
-        "when": "editorTextFocus && vim.active && vim.overrideCtrlC && vim.use<C-c> && !inDebugRepl"
-    },
-    {
-        "key": "ctrl+f",
-        "command": "-extension.vim_ctrl+f",
-        "when": "editorTextFocus && vim.active && vim.use<C-f> && !inDebugRepl && vim.mode != 'Insert'"
-    },
-    {
-        "key": "ctrl+n",
-        "command": "-extension.vim_ctrl+n",
-        "when": "editorTextFocus && vim.active && vim.use<C-n> && !inDebugRepl || vim.active && vim.use<C-n> && !inDebugRepl && vim.mode == 'CommandlineInProgress' || vim.active && vim.use<C-n> && !inDebugRepl && vim.mode == 'SearchInProgressMode'"
-    },
-    {
-        "key": "ctrl+y",
-        "command": "-extension.vim_ctrl+y",
-        "when": "editorTextFocus && vim.active && vim.use<C-y> && !inDebugRepl"
-    },
-    {
-        "key": "ctrl+shift+a",
-        "command": "-notification.acceptPrimaryAction",
-        "when": "notificationFocus || notificationToastsVisible"
-    },
-    {
-        "key": "ctrl+b",
-        "command": "-workbench.action.toggleSidebarVisibility"
-    },
+    // Remove a default hover shortcut
     {
         "key": "ctrl+k ctrl+i",
         "command": "-editor.action.showHover",
         "when": "editorTextFocus"
     },
+    // Free Ctrl+Shift+A from notifications so it can open the Command Palette
     {
-        "key": "alt+\\",
-        "command": "workbench.action.gotoSymbol"
+        "key": "ctrl+shift+a",
+        "command": "-notification.acceptPrimaryAction",
+        "when": "notificationFocus || notificationToastsVisible"
     },
-    {
-        "key": "ctrl+k ctrl+q",
-        "command": "-workbench.action.navigateToLastEditLocation"
-    },
-    {
-        "key": "ctrl+shift+backspace",
-        "command": "workbench.action.navigateToLastEditLocation"
-    },
-    {
-        "key": "shift+alt+l",
-        "command": "-bookmarks.expandSelectionToNext",
-        "when": "editorTextFocus"
-    },
-    {
-        "key": "shift+alt+l",
-        "command": "workbench.files.action.showActiveFileInExplorer"
-    },
-    {
-        "key": "ctrl+`",
-        "command": "-workbench.action.terminal.toggleTerminal",
-        "when": "terminal.active"
-    },
-    {
-        "key": "ctrl+j",
-        "command": "-workbench.action.togglePanel"
-    },
-    {
-        "key": "ctrl+j",
-        "command": "-extension.vim_ctrl+j",
-        "when": "editorTextFocus && vim.active && vim.use<C-j> && !inDebugRepl"
-    },
-    {
-        "key": "ctrl+alt+j",
-        "command": "workbench.action.togglePanel"
-    },
-    {
-        "key": "ctrl+alt+h",
-        "command": "workbench.action.toggleSidebarVisibility"
-    },
+    // Free Ctrl+Alt+B so it can be Go to Implementation
     {
         "key": "ctrl+alt+b",
         "command": "-workbench.action.toggleAuxiliaryBar"
     },
     {
-        "key": "ctrl+alt+l",
-        "command": "workbench.action.toggleAuxiliaryBar"
+        "key": "ctrl+shift+c",
+        "command": "-workbench.action.terminal.openNativeConsole",
+        "when": "!isSessionsWindow && !terminalFocus"
     },
     {
-        "key": "ctrl+f1",
-        "command": "editor.action.showHover"
-    },
-    {
-        "key": "ctrl+`",
-        "command": "workbench.action.terminal.toggleTerminal"
+        "key": "ctrl+shift+alt+x",
+        "command": "workbench.action.terminal.openNativeConsole"
     }
 ]
