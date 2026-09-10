@@ -936,12 +936,6 @@
     },
     // Open the current file in a new window
     {
-        "command": "workbench.action.files.showOpenedFileInNewWindow",
-        "key": "shift+f4",
-        "when": "emptyWorkspaceSupport"
-    },
-    // Free Shift+Alt+L from the Bookmarks extension
-    {
         "key": "shift+alt+l",
         "command": "-bookmarks.expandSelectionToNext",
         "when": "editorTextFocus"
@@ -1005,11 +999,6 @@
         "key": "shift+ctrl+f12"
     },
     // Open the Command Palette
-    {
-        "command": "workbench.action.openGlobalSettings",
-        "key": "ctrl+alt+s"
-    },
-    // Edit the task configuration
     {
         "command": "workbench.action.tasks.configureTaskRunner",
         "key": "shift+ctrl+alt+s"
@@ -1664,5 +1653,17 @@
     {
         "key": "ctrl+shift+alt+x",
         "command": "workbench.action.terminal.openNativeConsole"
+    },
+    {
+        "key": "ctrl+k ctrl+s",
+        "command": "-workbench.action.openGlobalKeybindings"
+    },
+    {
+        "key": "ctrl+alt+s",
+        "command": "workbench.action.openGlobalKeybindings"
+    },
+    {
+        "key": "shift+f12",
+        "command": "-workbench.action.resetViewLocations"
     }
 ]

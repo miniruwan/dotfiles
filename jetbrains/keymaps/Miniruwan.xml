@@ -133,7 +133,9 @@
     <keyboard-shortcut first-keystroke="ctrl t" second-keystroke="f" />
     <keyboard-shortcut first-keystroke="ctrl t" second-keystroke="ctrl f" />
   </action>
-  <action id="SearchEverywhere" />
+  <action id="SearchEverywhere">
+    <keyboard-gesture-shortcut keystroke="shift shift" modifier="dblClick" />
+  </action>
   <action id="ShowReformatFileDialog" />
   <action id="SilentCodeCleanup" />
   <action id="Terminal.NewTab" />
