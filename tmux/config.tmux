@@ -1,6 +1,6 @@
 # Set back tick as the prefix
 unbind C-b
-set -g prefix `
+set -g prefix C-a
 bind-key ` send-prefix
 
 # Start windows and panes at 1, not 0
